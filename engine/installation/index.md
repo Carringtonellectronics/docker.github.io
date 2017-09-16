@@ -1,85 +1,60 @@
 ---
 description: Lists the installation methods
-keywords: docker, installation, install, docker ce, docker ee, docker editions, stable, edge
+keywords: Docker install
 redirect_from:
 - /installation/
-- /engine/installation/linux/
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/
-- /engine/installation/linux/other/
-- /engine/installation/linux/archlinux/
-- /engine/installation/linux/cruxlinux/
-- /engine/installation/linux/gentoolinux/
-- /engine/installation/linux/docker-ce/
-- /engine/installation/linux/docker-ee/
-title: Install Docker
+title: Install Docker Engine
 ---
 
-Docker is available in two editions: **Community Edition (CE)** and **Enterprise
-Edition (EE)**.
+Docker Engine is supported on Linux, Cloud, Windows, and macOS. Installation
+instructions are available for the following:
 
-Docker Community Edition (CE) is ideal for developers and small
-teams looking to get started with Docker and experimenting with container-based
-apps. Docker CE has two update channels, **stable** and **edge**:
+## On Linux
+* [CentOS](linux/centos.md)
+* [Debian](linux/debian.md)
+* [Fedora](linux/fedora.md)
+* [Oracle Linux](linux/oracle.md)
+* [Red Hat Enterprise Linux](linux/rhel.md)
+* [openSUSE and SUSE Linux Enterprise](linux/SUSE.md)
+* [Ubuntu](linux/ubuntulinux.md)
+* [Other Linux distributions](linux/other.md)
 
-* **Stable** gives you reliable updates every quarter
-* **Edge** gives you new features every month
+If your linux distribution is not listed above, don't give up yet. To try out
+Docker on a different Linux distribution, consider
+[installing from binaries](binaries.md).
 
-For more information about Docker CE, see
-[Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
+## On macOS and Windows
 
-Docker Enterprise Edition (EE) is designed for enterprise
-development and IT teams who build, ship, and run business critical
-applications in production at scale. For more information about Docker EE,
-including purchasing options, see
-[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
+* [Docker for Mac](/docker-for-mac/)
+* [Docker for Windows](/docker-for-windows/)
 
-{% include docker_ce_ee.md %}
+## On Cloud
 
-## Supported platforms
+You can use Docker Cloud to automatically provision and manage your cloud
+instances:
 
-Docker CE and EE are available on multiple platforms, on cloud and on-premises.
-Use the following tables to choose the best installation path for you.
-
-### Desktop
-
-{% include docker_desktop_matrix.md %}
-
-### Cloud
-
-{% include docker_cloud_matrix.md %}
-
-See also [Docker Cloud](#docker-cloud) for setup instructions for
-Digital Ocean, Packet, SoftLink, or Bring Your Own Cloud.
-
-### Server
-
-{% include docker_platform_matrix.md %}
-
-## Time-based release schedule
-
-Starting with Docker 17.03, Docker uses a time-based release schedule, outlined
-below.
-
-{% include docker_schedule_matrix.md %}
-
-### Prior releases
-
-Instructions for installing prior releases of Docker can be found in the
-[Docker archives](/docsarchive/).
-
-## Docker Cloud
-
-You can use Docker Cloud to automatically provision and manage your cloud instances.
-
-* [Amazon Web Services setup guide](/docker-cloud/cloud-swarm/link-aws-swarm.md)
-* [Microsoft Azure setup guide](/docker-cloud/cloud-swarm/link-azure-swarm.md)
+* [Amazon Web Services setup guide](/docker-cloud/infrastructure/link-aws.md)
 * [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md)
+* [Microsoft Azure setup guide](/docker-cloud/infrastructure/link-azure.md)
 * [Packet setup guide](/docker-cloud/infrastructure/link-packet.md)
 * [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md)
 * [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md)
 
+You can also use our official Docker Editions if you'd like to manually manage
+your cloud instances:
+
+* [Docker for AWS](/docker-for-aws/)
+* [Docker for Azure](/docker-for-azure/)
+
+## Prior releases
+
+Instructions for installing prior releases of Docker can be found in the
+[Docker archives](/docsarchive/).
+
 ## Get started
 
 After setting up Docker, try learning the basics over at
-[Getting started with Docker](/get-started/).
+[Getting started with Docker](/engine/getstarted/), then learn how to deploy
+full-blown applications in our [app tutorial](/engine/getstarted-voting-app/).

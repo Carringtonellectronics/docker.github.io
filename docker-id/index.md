@@ -43,13 +43,15 @@ to Docker services.
 
 For Docker Cloud, Hub, and Store, log in using the web interface.
 
-![Login using the web interface](/docker-id/images/login-cloud.png)
+![Login using the web interface](images/login-cloud.png)
 
-You can also log in using the `docker login` command. (You can read more about `docker login` [here](/engine/reference/commandline/login.md).)
+You can also log in using the `docker login` command. (You can read more about `docker login` [here](../engine/reference/commandline/login/).)
 
-> **Warning**:
-> When you use the `docker login` command, your credentials are
+> **Warning:** When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64
 encoded in this file. If you require secure storage for this password, use the
 [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
-{:.warning}
+
+## The Accounts API
+
+Once you create and verify your Docker ID, you can also update it using the [Docker Accounts API](../engine/reference/api/docker_io_accounts_api/).

@@ -43,7 +43,8 @@ users can see the containers they deploy in the cluster.
 
 ## Team permission levels
 
-Teams and labels give the administrator fine-grained control over permissions. Each team can have multiple labels. Each label has a key of `com.docker.ucp.access.label`. The label is then applied to the containers, services, networks, secrets and volumes. Labels are not currently available for nodes and images. DTR has its own permissions.
+Teams allow you to define fine-grain permissions to services, containers, and
+networks that have the label `com.docker.ucp.access.label` applied to them.
 
 There are four permission levels:
 

@@ -1,6 +1,6 @@
 ---
 description: Describes Docker's testing infrastructure
-keywords: make test, make docs, Go tests, gofmt, contributing, running tests
+keywords: make test, make docs, Go tests, gofmt, contributing,  running tests
 title: Run tests and test documentation
 ---
 
@@ -31,7 +31,7 @@ target="_blank">go test help</a>.
 
 You are responsible for _unit testing_ your contribution when you add new or
 change existing Docker code. A unit test is a piece of code that invokes a
-single, small piece of code (_unit of work_) to verify the unit works as
+single, small piece of code ( _unit of work_ ) to verify the unit works as
 expected.
 
 Depending on your contribution, you may need to add _integration tests_. These
@@ -48,7 +48,7 @@ change an existing one.
 ## Run tests on your local host
 
 Before submitting a pull request with a code change, you should run the entire
-Docker Engine test suite. The `Makefile` contains a target for the entire test
+Docker Engine test suite.  The `Makefile` contains a target for the entire test
 suite, named `test`. Also, it contains several targets for
 testing:
 
@@ -64,7 +64,7 @@ hour. To run the test suite, do the following:
 
 1.  Open a terminal on your local host.
 
-2.  Change to the root of your Docker repository.
+2.  Change to the root your Docker repository.
 
     ```bash
     $ cd docker-fork
@@ -91,11 +91,11 @@ hour. To run the test suite, do the following:
 
     It can take approximate one hour to run all the tests. The time depends
     on your host performance. The default timeout is 60 minutes, which is
-    defined in `hack/make.sh` (`${TIMEOUT:=60m}`). You can modify the timeout
+    defined in hack/make.sh(${TIMEOUT:=60m}). You can modify the timeout
     value on the basis of your host performance. When they complete
     successfully, you see the output concludes with something like this:
 
-    ```none
+    ```no-highlight
     Ran 68 tests in 79.135s
     ```
 
@@ -116,13 +116,13 @@ Try this now.
     `dry-run-test` image.
 
     ```bash
-    $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/moby/moby dry-run-test /bin/bash
+    $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
     ```
 
 3.  Run the tests using the `hack/make.sh` script.
 
     ```bash
-    root@5f8630b873fe:/go/src/github.com/moby/moby# hack/make.sh dynbinary binary cross test-unit test-integration-cli test-docker-py
+    root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit test-integration-cli test-docker-py
     ```
 
     The tests run just as they did within your local host.
@@ -131,7 +131,7 @@ Try this now.
     just the unit tests:
 
     ```bash
-    root@5f8630b873fe:/go/src/github.com/moby/moby# hack/make.sh dynbinary binary cross test-unit
+    root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit
     ```
 
     Most test targets require that you build these precursor targets first:
@@ -179,15 +179,15 @@ $ TESTFLAGS='-check.f DockerSuite.TestBuild*' make test-integration-cli
 To run the same test inside your Docker development container, you do this:
 
 ```bash
-root@5f8630b873fe:/go/src/github.com/moby/moby# TESTFLAGS='-check.f TestBuild*' hack/make.sh binary test-integration-cli
+root@5f8630b873fe:/go/src/github.com/docker/docker# TESTFLAGS='-check.f TestBuild*' hack/make.sh binary test-integration-cli
 ```
 
 ## Test the Windows binary against a Linux daemon
 
 This explains how to test the Windows binary on a Windows machine set up as a
-development environment. The tests will be run against a docker daemon
-running on a remote Linux machine. You'll use **Git Bash** that came with the
-Git for Windows installation. **Git Bash**, just as it sounds, allows you to
+development environment.  The tests will be run against a docker daemon
+running on a remote Linux machine. You'll use  **Git Bash** that came with the
+Git for Windows installation.  **Git Bash**, just as it sounds, allows you to
 run a Bash terminal on Windows.
 
 1.  If you don't have one open already, start a Git Bash terminal.
@@ -197,7 +197,7 @@ run a Bash terminal on Windows.
 2.  Change to the `docker` source directory.
 
     ```bash
-    $ cd /c/gopath/src/github.com/moby/moby
+    $ cd /c/gopath/src/github.com/docker/docker
     ```
 
 3.  Set `DOCKER_REMOTE_DAEMON` as follows:
@@ -242,7 +242,7 @@ make any changes, just run these commands again.
 
 The Docker documentation source files are in a centralized repository at
 [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io). The content is
-written using extended Markdown, which you can edit in a plain text editor such as
+written using extended Markdown, which you can edit in a plain text editor such
 Atom or Notepad. The docs are built using [Jekyll](https://jekyllrb.com/).
 
 Most documentation is developed in the centralized repository. The exceptions are
@@ -282,7 +282,7 @@ which will build an image named `docs/docstage` and launch a container with Jeky
 correctly. The container uses Jekyll to incrementally build and serve the site using the
 files in the local repository.
 
-Go to `http://localhost:4000/` in your web browser to view the documentation.
+Go to [http://localhost:4000/](http://localhost:4000/) in your web browser to view the documentation.
 
 The container runs in the foreground. It will continue to run and incrementally build the site when changes are
 detected, even if you change branches.

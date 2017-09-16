@@ -12,4 +12,3 @@ options:
 - option: disable-content-trust
   default_value: "true"
   description: Skip image verification
-

@@ -98,8 +98,8 @@ on the separate [Release Notes page](/release-notes)
 As changes are made to Docker there may be times when existing features
 will need to be removed or replaced with newer features. Before an existing
 feature is removed it will be labeled as "deprecated" within the documentation
-and will remain in Docker for at least 3 stable releases (roughly 9 months).
-After that time it may be removed.
+and will remain in Docker for, usually, at least 3 releases. After that time
+it may be removed.
 
 Users are expected to take note of the list of deprecated features each
 release and plan their migration away from those features, and (if applicable)
@@ -111,5 +111,5 @@ The complete list of deprecated features can be found on the
 ## Licensing
 
 Docker is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
+[LICENSE](https://github.com/docker/docker/blob/master/LICENSE) for the full
 license text.

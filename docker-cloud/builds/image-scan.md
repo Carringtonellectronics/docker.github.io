@@ -26,11 +26,13 @@ You can also view scan results for Official Images on Docker Hub if you are logg
 
 ## Opt in to Docker Security Scanning
 
+> **Note**: Docker Hub can display Security Scan results for organizations and teams, however Security Scanning can only be enabled on Docker Cloud individual accounts at this time.
+
 To opt in:
 
 1. Log in to Docker Cloud or Docker Hub.
 
-2. Go to the **Plan** details for your account.
+2. Go to the **Plan** details for your account
 
     On Docker Cloud these are located in the **Cloud Settings** in the lower left. On Docker Hub, these are in the **Billing and Plans** tab of the **Settings** menu.
 
@@ -54,16 +56,13 @@ To view scan results:
 
 3. Click **Tags**.
 
-    The Tag view displays a summarized view of each tag scan, and the
-    age of the scan.
+    The Tag view displays a summarized view of each tag scan, and the age of the scan.
 
     ![Scanned tags](images/scan-tags.png)
 
     A solid green bar indicates a clean scan without known vulnerabilities.
-    Colored stripes in yellow, orange, and red indicate minor, major, and
-    critical vulnerabilities respectively.
-
-    >**Tip:** Vulnerability scores are defined by the entity that issues the vulnerability (e.g., [NVD](https://nvd.nist.gov/)), and are based on a [Qualitative Severity Rating Scale](https://www.first.org/cvss/specification-document#5-Qualitative-Severity-Rating-Scale) defined as part of the [Common Vulnerability Scoring System (CVSS) specification](https://www.first.org/cvss/specification-document).
+    Colored stripes in yellow, orange, and red indicate minor, major, critical
+    vulnerabilities respectively.
 
 4. Click a scan summary to see more detailed results for the specific tag.
 

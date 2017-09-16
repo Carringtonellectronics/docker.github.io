@@ -1,6 +1,6 @@
 command: docker container
 short: Manage containers
-long: Manage containers.
+long: Manage containers
 usage: docker container
 pname: docker
 plink: docker.yaml
@@ -56,4 +56,3 @@ clink:
 - docker_container_unpause.yaml
 - docker_container_update.yaml
 - docker_container_wait.yaml
-

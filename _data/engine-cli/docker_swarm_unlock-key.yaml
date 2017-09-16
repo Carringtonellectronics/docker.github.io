@@ -12,4 +12,3 @@ options:
 - option: rotate
   default_value: "false"
   description: Rotate unlock key
-

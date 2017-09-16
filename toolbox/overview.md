@@ -2,7 +2,7 @@
 advisory: toolbox
 description: Documentation that provides an overview of Toolbox
 keywords: docker, documentation, about, technology, kitematic, gui, toolbox
-title: Docker Toolbox overview
+title: Docker Toolbox Overview
 ---
 
 Docker Toolbox is an installer for quick setup and launch of a Docker environment on older Mac and Windows systems that do not meet the requirements of the new [Docker for Mac](/docker-for-mac/index.md) and [Docker for Windows](/docker-for-windows/index.md) apps.
@@ -25,8 +25,6 @@ Toolbox includes these Docker tools:
 
 * Oracle VirtualBox
 
-You can find various versions of the tools on [Toolbox Releases](https://github.com/docker/toolbox/releases) or run them with the `--version` flag in the terminal, for example, `docker-compose --version`.
-
 
 ## Ready to get started?
 
@@ -41,10 +39,10 @@ You can find various versions of the tools on [Toolbox Releases](https://github.
       </tr>
       <tr valign="top">
         <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
-        <a class="button outline-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
+        <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
         </td>
         <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
-        <a class="button outline-btn" href="https://download.docker.com/win/stable/DockerToolbox.exe">Get Docker Toolbox for Windows</a>
+        <a class="button darkblue-btn" href="https://download.docker.com/win/stable/DockerToolbox.exe">Get Docker Toolbox for Windows</a>
         </td>
       </tr>
     </table>
@@ -55,9 +53,9 @@ You can find various versions of the tools on [Toolbox Releases](https://github.
 
     * [Install Docker Toolbox for Windows](toolbox_install_windows.md)
 
-## Next steps
+## Next Steps
 
-* Try the [Get started](/get-started/) tutorial.
+* Try out the examples in the [Getting Started](/engine/getstarted/index.md) tutorial.
 
 * Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 

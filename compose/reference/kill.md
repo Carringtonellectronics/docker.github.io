@@ -2,7 +2,6 @@
 description: Forces running containers to stop.
 keywords: fig, composition, compose, docker, orchestration, cli,  kill
 title: docker-compose kill
-notoc: true
 ---
 
 ```

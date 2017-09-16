@@ -85,7 +85,7 @@ href="https://www.consul.io/" target="blank">Consul</a> container.
    372ffcbc96ed        progrium/consul     ...       53/tcp, 53/udp, 8300-8302/tcp, 8400/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp   dreamy_ptolemy
    ```
 
-4. Use a `curl` command to test the server by listing the nodes.
+4. Use a `curl` command test the server by listing the nodes.
 
    ```bash
    $ curl $(docker-machine ip keystore):8500/v1/catalog/nodes
@@ -201,8 +201,8 @@ to the file:
 
    [[Extensions]]
    Name = "nginx"
-   ConfigPath = "/etc/nginx/nginx.conf"
-   PidPath = "/var/run/nginx.pid"
+   ConfigPath = "/etc/conf/nginx.conf"
+   PidPath = "/etc/conf/nginx.pid"
    MaxConn = 1024
    Port = 80
    ```

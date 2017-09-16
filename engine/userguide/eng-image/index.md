@@ -1,6 +1,6 @@
 ---
 description: The Docker user guide home page
-keywords: introduction, images, dockerfile
+keywords: docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro
 title: Work with images
 ---
 

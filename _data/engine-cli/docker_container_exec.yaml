@@ -13,6 +13,7 @@ options:
   description: Override the key sequence for detaching a container
 - option: env
   shorthand: e
+  default_value: '[]'
   description: Set environment variables
 - option: interactive
   shorthand: i
@@ -28,4 +29,3 @@ options:
 - option: user
   shorthand: u
   description: 'Username or UID (format: <name|uid>[:<group|gid>])'
-

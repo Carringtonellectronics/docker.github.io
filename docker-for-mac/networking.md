@@ -78,10 +78,11 @@ There are two scenarios that the above limitations will affect:
 
 #### I want to connect from a container to a service on the host
 
-The Mac has a changing IP address (or none if you have no network access). From
-17.06 onwards our recommendation is to connect to the special Mac-only DNS
-name `docker.for.mac.localhost` which will resolve to the internal IP address
-used by the host.
+The Mac has a changing IP address (or none if you have no network access). Our
+current recommendation is to attach an unused IP to the `lo0` interface on the
+Mac; for example: `sudo ifconfig lo0 alias 10.200.10.1/24`, and make sure that
+your service is listening on this address or `0.0.0.0` (ie not `127.0.0.1`).
+Then containers can connect to this address.
 
 #### I want to connect to a container from the Mac
 
@@ -93,30 +94,25 @@ container. Note that this is what you have to do even on Linux if the container
 is on an overlay network, not a bridge network, as these are not routed.
 
 The command to run the `nginx` webserver shown in [Getting
-Started](/docker-for-mac/index.md#explore-the-application-and-run-examples) is an example of this.
+Started](index.md#explore) is an example of this.
 
-```bash
-$ docker run -d -p 80:80 --name webserver nginx
+```shell
+docker run -d -p 80:80 --name webserver nginx
 ```
 
 To clarify the syntax, the following two commands both expose port `80` on the
 container to port `8000` on the host:
 
-```bash
-$ docker run --publish 8000:80 --name webserver nginx
-
-$ docker run --p 8000:80 --name webserver nginx
-```
+		docker run --publish 8000:80 --name webserver nginx
+		docker run --p 8000:80 --name webserver nginx
 
 To expose all ports, use the `-P` flag. For example, the following command
 starts a container (in detached mode) and the `-P` exposes all ports on the
 container to random ports on the host.
 
-```bash
-$ docker run -d -P --name webserver nginx
-```
+		docker run -d -P --name webserver nginx
 
-See the [run command](/engine/reference/commandline/run.md) for more details on
+See the [run commmand](/engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.
 
 #### A view into implementation

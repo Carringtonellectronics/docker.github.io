@@ -1,5 +1,4 @@
 command: docker checkpoint rm
-aliases: remove
 short: Remove a checkpoint
 long: Remove a checkpoint
 usage: docker checkpoint rm [OPTIONS] CONTAINER CHECKPOINT
@@ -8,4 +7,3 @@ plink: docker_checkpoint.yaml
 options:
 - option: checkpoint-dir
   description: Use a custom checkpoint storage directory
-

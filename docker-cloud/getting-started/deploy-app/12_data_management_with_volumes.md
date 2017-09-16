@@ -12,21 +12,18 @@ the container crashed, the data would be lost. To save the data so it persists
 beyond the life of a container, or share data from one container to another,
 you'll need to define a volume.
 
-## Data persistence
+### Data persistence
 
-In order to persist, data in Docker Cloud must be stored in a volume. The volume
-can be defined on the image (for example in the Dockerfile), or specified when
-you create a new service in the Docker Cloud web UI. Learn more about volumes in
-Docker Cloud [here](/docker-cloud/apps/volumes.md).
+In order to persist, data in Docker Cloud must be stored in a volume. The volume can be defined on the image (for example in the Dockerfile), or specified when you create a new service in the Docker Cloud web UI. Learn more about volumes in Docker Cloud [here](../../apps/volumes.md).
 
-### Test for lack of persistence
+#### Test for lack of persistence
 
 If you `redeploy` the Redis service you created earlier, you'll see that the counter resets.
 
 Let's try that. First, redeploy the redis service to reset the counter.
 
 ```bash
-$ docker-cloud service redeploy redis --not-reuse-volumes
+$ docker-cloud service redeploy redis
 ```
 
 Check the container status using the `container ps` command, and wait until the new container is running again. In the example below you can see the original container in the "Terminated" state, and the new container that is "Starting".
@@ -47,7 +44,7 @@ $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
 
 The Redis cache service redeployment caused the counter to reset.
 
-### Enabling persistence
+#### Enabling persistence
 
 The specific Redis image (*redis*) in this tutorial supports data persistence.
 This is not a common requirement for a Redis cache and it's not enabled by
@@ -65,7 +62,7 @@ redis --redeploy
 
 This command defines two new environment variables in the **redis** service and
 then redeploys the service so they take effect. You can learn more about our
-open source `redis` image [here](https://github.com/docker-library/redis/){: target="_blank" class="_"}.
+open source `redis` image <a href="https://github.com/docker-library/redis/" target ="_blank">here</a>.
 
 With these settings, Redis can create and store its data in a volume. The volume is in `/data`.
 
@@ -108,14 +105,14 @@ $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
 
 Congratulations! You've set up data persistence in Docker Cloud!
 
-## Sharing/reusing data volumes between services
+### Sharing/reusing data volumes between services
 
 A service's volume can be accessed by another service. To do this you use the `--volumes-from` flag when creating the new service.
 
 You might use this functionality to share data between two services, or to back
 up, restore, or migrate a volume to a local host or a cloud storage provider.
 
-## Download volume data for backup
+### Download volume data for backup
 
 In this next step, you'll download the `/data` volume from Redis to your local host using SCP (secure copy).
 
@@ -133,7 +130,7 @@ $ scp -r -P 2222 root@downloader-1.$DOCKER_ID_USER.svc.dockerapp.io:/data .
 
 You now have a backup copy of the Redis data on your local host machine!
 
-## What's Next?
+## Where to next?
 
 Congratulations! You've completed the tutorials! You can now push an image to
 Docker Cloud, deploy an app to your Cloud nodes, set environment variables,
@@ -141,14 +138,5 @@ scale the service, view logs, set up a load balancer and a data back end, and
 set up a volume to save the data.
 
 There's lots more to learn about Docker Cloud, so check out [the rest of our documentation](/docker-cloud/), the [API and CLI Documentation](../../../apidocs/docker-cloud.md), and our [Knowledge Hub](https://success.docker.com/Cloud) and [Docker Cloud Forums](https://forums.docker.com/c/docker-cloud).
-
-You might also want to delete or remove all of your hello world Stacks, Services, and Nodes running in Docker Cloud. To clean up when you're finished with the tutorial:
-
-- Click **Stacks** in the left navigation, hover over the stack you created and click the selection box that appears, then click **Terminate**.
-- Once the Stack has terminated, click **Services** in the left navigation, hover over each service you created, click the selection box that appears, then click **Terminate**.
-- Click **Node Clusters** in the left navigation, hover over the node cluster you created, click the selection box that appears, then click **Terminate**.
-
-Objects (Stacks, Services, Node Clusters, and Containers and nodes) still appear
-in the list in Docker Cloud for about five minutes after they are terminated.
 
 Happy Docking!

@@ -1,6 +1,6 @@
 command: docker stack
 short: Manage Docker stacks
-long: Manage stacks.
+long: Manage Docker stacks
 usage: docker stack
 pname: docker
 plink: docker.yaml
@@ -16,4 +16,3 @@ clink:
 - docker_stack_ps.yaml
 - docker_stack_rm.yaml
 - docker_stack_services.yaml
-

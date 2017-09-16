@@ -5,32 +5,23 @@ keywords: documentation, docs,  docker, compose, bundles, stacks
 title: Docker stacks and distributed application bundles (experimental)
 ---
 
-> **Note**: This is a modified copy of the [Docker Stacks and Distributed Application
-> Bundles](https://github.com/moby/moby/blob/v1.12.0-rc4/experimental/docker-stacks-and-bundles.md)
-> document in the [docker/docker repo](https://github.com/moby/moby). It's been updated to accurately reflect newer releases.
+> **Note**: This is a copy of the [Docker Stacks and Distributed Application
+> Bundles](https://github.com/docker/docker/blob/v1.12.0-rc4/experimental/docker-stacks-and-bundles.md)
+> document in the [docker/docker repo](https://github.com/docker/docker).
 
 ## Overview
 
+Docker Stacks and Distributed Application Bundles are experimental features
+introduced in Docker 1.12 and Docker Compose 1.8, alongside the concept of
+swarm mode, and Nodes and Services in the Engine API.
+
 A Dockerfile can be built into an image, and containers can be created from
-that image. Similarly, a `docker-compose.yml` can be built into a **distributed
+that image. Similarly, a docker-compose.yml can be built into a **distributed
 application bundle**, and **stacks** can be created from that bundle. In that
 sense, the bundle is a multi-services distributable image format.
 
-Docker Stacks and Distributed Application Bundles started as experimental
-features introduced in Docker 1.12 and Docker Compose 1.8, alongside the concept
-of swarm mode, and nodes and services in the Engine API. Neither Docker Engine
-nor the Docker Registry support distribution of bundles, and the concept of a
-`bundle` is not the emphasis for new releases going forward.
-
-However, [swarm mode](/engine/swarm/index.md), multi-service applications, and
-stack files now are fully supported. A stack file is a particular type of
-[version 3 Compose file](/compose/compose-file/index.md).
-
-If you are just getting started with Docker and want to learn the best way to
-deploy multi-service applications, a good place to start is the [Get Started
-walkthrough](/get-started/). This shows you how to define
-a service configuration in a Compose file, deploy the app, and use
-the relevant tools and commands.
+As of Docker 1.12 and Compose 1.8, the features are experimental. Neither
+Docker Engine nor the Docker Registry support distribution of bundles.
 
 ## Producing a bundle
 
@@ -59,7 +50,7 @@ Wrote bundle to vossibility-stack.dab
 > [Docker for Mac](/docker-for-mac/) or
 > [Docker for Windows](/docker-for-windows/) to install
 > it. If you're on Linux, follow the instructions in the
-> [experimental build README](https://github.com/moby/moby/blob/master/experimental/README.md).
+> [experimental build README](https://github.com/docker/docker/blob/master/experimental/README.md).
 
 A stack is created using the `docker deploy` command:
 
@@ -207,13 +198,5 @@ A service has the following fields:
     </dd>
 </dl>
 
-> **Note**: Some configuration options are not yet supported in the DAB format,
+> **Note:** Some configuration options are not yet supported in the DAB format,
 > including volume mounts.
-
-## Related topics
-
-* [Get started walkthrough](/get-started/)
-
-* [docker stack deploy](/engine/reference/commandline/stack_deploy/) command
-
-* [deploy](/compose/compose-file/index.md#deploy) option in [Compose files](/compose/compose-file/index.md)

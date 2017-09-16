@@ -1,5 +1,4 @@
 command: docker image ls
-aliases: images, list
 short: List images
 long: List images
 usage: docker image ls [OPTIONS] [REPOSITORY[:TAG]]
@@ -25,4 +24,3 @@ options:
   shorthand: q
   default_value: "false"
   description: Only show numeric IDs
-

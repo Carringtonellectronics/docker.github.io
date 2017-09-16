@@ -4,7 +4,6 @@ cname:
 - docker build
 - docker checkpoint
 - docker commit
-- docker config
 - docker container
 - docker cp
 - docker create
@@ -59,7 +58,6 @@ clink:
 - docker_build.yaml
 - docker_checkpoint.yaml
 - docker_commit.yaml
-- docker_config.yaml
 - docker_container.yaml
 - docker_cp.yaml
 - docker_create.yaml
@@ -109,4 +107,3 @@ clink:
 - docker_version.yaml
 - docker_volume.yaml
 - docker_wait.yaml
-

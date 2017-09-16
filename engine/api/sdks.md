@@ -32,15 +32,14 @@ import "github.com/docker/docker/client"
 
 To see how to start using it, [head to the getting started guide](getting-started.md).
 
-[A full reference is available on GoDoc.](https://godoc.org/github.com/moby/moby/client)
+[A full reference is available on GoDoc.](https://godoc.org/github.com/docker/docker/client)
 
 ## Other languages
 
-There are a number of community supported libraries available for other languages. They have not been tested by the Docker maintainers for compatibility, so if you run into any issues, file them with the library maintainers.
+There a number of community supported libraries available for other languages. They have not been tested by the Docker maintainers for compatibility, so if you run into any issues, file them with the library maintainers.
 
 | Language      | Library |
 | ------------- |---------|
-| C             | [libdocker](https://github.com/danielsuo/libdocker) |
 | C#            | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet) |
 | C++           | [lasote/docker_client](https://github.com/lasote/docker_client) |
 | Dart          | [bwu_docker](https://github.com/bwu-dart/bwu_docker) |
@@ -56,6 +55,6 @@ There are a number of community supported libraries available for other language
 | PHP           | [Docker-PHP](https://github.com/docker-php/docker-php) |
 | Ruby          | [docker-api](https://github.com/swipely/docker-api) |
 | Rust          | [docker-rust](https://github.com/abh1nav/docker-rust) |
-| Rust          | [shiplift](https://github.com/softprops/shiplift) |
+| Rust          | [shiplist](https://github.com/softprops/shiplift) |
 | Scala         | [tugboat](https://github.com/softprops/tugboat) |
 | Scala         | [reactive-docker](https://github.com/almoehi/reactive-docker) |

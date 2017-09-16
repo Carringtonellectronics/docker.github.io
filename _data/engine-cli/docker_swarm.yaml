@@ -1,11 +1,10 @@
 command: docker swarm
 short: Manage Swarm
-long: Manage the swarm.
+long: Manage Swarm
 usage: docker swarm
 pname: docker
 plink: docker.yaml
 cname:
-- docker swarm ca
 - docker swarm init
 - docker swarm join
 - docker swarm join-token
@@ -14,7 +13,6 @@ cname:
 - docker swarm unlock-key
 - docker swarm update
 clink:
-- docker_swarm_ca.yaml
 - docker_swarm_init.yaml
 - docker_swarm_join.yaml
 - docker_swarm_join-token.yaml
@@ -22,4 +20,3 @@ clink:
 - docker_swarm_unlock.yaml
 - docker_swarm_unlock-key.yaml
 - docker_swarm_update.yaml
-

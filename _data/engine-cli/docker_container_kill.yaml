@@ -9,4 +9,3 @@ options:
   shorthand: s
   default_value: KILL
   description: Signal to send to the container
-

@@ -2,7 +2,6 @@
 description: Create a distributed application bundle from the Compose file.
 keywords: fig, composition, compose, docker, orchestration, cli, bundle
 title: docker-compose bundle
-notoc: true
 ---
 
 ```

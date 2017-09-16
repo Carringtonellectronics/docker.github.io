@@ -8,15 +8,15 @@ redirect_from:
 title: Deploy the application
 ---
 
-You've
-[deployed the load balancer, the discovery backend, and a Swarm cluster](deploy-infra.md)
-so now you can build and deploy the voting application itself. You do this by
-starting a number of "Dockerized applications" running in containers.
+You've [deployed the load balancer, the discovery backend, and a Swarm
+cluster](deploy-infra.md) so now you can build and deploy the voting application
+itself. You do this by starting a number of "Dockerized applications" running in
+containers.
 
 The diagram below shows the final application configuration including the overlay
 container network, `voteapp`.
 
-![](/swarm/images/final-result.png)
+![](../images/final-result.png)
 
 In this procedure you will connect containers to this network. The `voteapp`
 network is available to all Docker hosts using the Consul discovery backend.
@@ -217,7 +217,7 @@ allow you to take advantage of the loadbalancer.
     frontend node. Requests to `http://results.myenterprise.example.com` go just to the
     single `dbstore` node where the `example-voting-app-result-app` is running.
 
-3. On your local host, edit `/etc/hosts` file to add the resolution for both these
+3. On your local host, edit `/etc/hosts` file add the resolution for both these
 sites.
 
 4. Save and close the `/etc/hosts` file.
@@ -239,7 +239,7 @@ Now, you can test your application.
 
     You should see something similar to the following:
 
-    ![](/swarm/images/vote-app-test.png)
+    ![](../images/vote-app-test.png)
 
 2. Click on one of the two voting options.
 3. Navigate to the `http://results.myenterprise.example.com` site to see the results.
@@ -247,12 +247,12 @@ Now, you can test your application.
 
     You'll see both sides change as you switch your vote.
 
-    ![](/swarm/images/votes.gif)
+    ![](../images/votes.gif)
 
 ## Extra Credit: Deployment with Docker Compose
 
 Up to this point, you've deployed each application container individually. This
-can be cumbersome especially because there are several different containers and
+can be cumbersome especially because their are several different containers and
 starting them is order dependent. For example, that database should be running
 before the worker.
 
@@ -301,8 +301,8 @@ the containers at once. This extra credit
     service in the file.  This application relies on a volume and a network,
     declare those at the bottom of the file.
 
-3. Check your work against
-   [this file](/swarm/swarm_at_scale/docker-compose.yml){: target="_blank" class="_"}.
+3. Check your work against <a href="../docker-compose.yml" target="_blank">this
+result file</a>
 
 4. When you are satisfied, save the `docker-compose.yml` file to your system.
 

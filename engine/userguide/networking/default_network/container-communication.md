@@ -47,9 +47,9 @@ Docker will never make changes to your system `iptables` rules if you set
 `--iptables=false` when the daemon starts.  Otherwise the Docker server will
 append forwarding rules to the `DOCKER` filter chain.
 
-Docker will flush any pre-existing rules from the `DOCKER` and `DOCKER-ISOLATION`
-filter chains, if they exist. For this reason, any rules needed to further
-restrict access to containers need to be added after Docker has started.
+Docker will not delete or modify any pre-existing rules from the `DOCKER` filter
+chain. This allows the user to create in advance any rules required to further
+restrict access to the containers.
 
 Docker's forward rules permit all external source IPs by default. To allow only
 a specific IP or network to access the containers, insert a negated rule at the
@@ -87,7 +87,7 @@ container can connect to the ports exposed by the other container -- the ports
 that it mentioned in the `EXPOSE` lines of its `Dockerfile`.
 
 > **Note**: The value `CONTAINER_NAME` in `--link=` must either be an
-auto-assigned Docker name like `stupefied_pare` or the name you assigned
+auto-assigned Docker name like `stupefied_pare` or else the name you assigned
 with `--name=` when you ran `docker run`.  It cannot be a hostname, which Docker
 will not recognize in the context of the `--link=` option.
 
@@ -127,39 +127,3 @@ ACCEPT     tcp  --  172.17.0.3           172.17.0.2           tcp dpt:80
 containers to each other's raw IP addresses, so connections from one container
 to another should always appear to be originating from the first container's own
 IP address.
-
-## Container communication between hosts
-
-For security reasons, Docker configures the `iptables` rules to prevent containers
-from forwarding traffic from outside the host machine, on Linux hosts. Docker sets
-the default policy of the `FORWARD` chain to `DROP`.
-
-To override this default behavior you can manually change the default policy:
-
-```bash
-$ sudo iptables -P FORWARD ACCEPT
-```
-The `iptables` settings are lost when the system reboots. If you want
-the change to be permanent, refer to your Linux distribution's documentation.
-
-> **Note**: In Docker 1.12 and earlier, the default `FORWARD` chain policy was
-> `ACCEPT`. When you upgrade to Docker 1.13 or higher, this default is
-> automatically changed for you.
->
-> If you had a previously working configuration with multiple containers
-> spanned over multiple hosts, this change may cause the existing setup
-> to stop working if you do not intervene.
-
-### Why would you need to change the default `DROP` to `ACCEPT`?
-
-Suppose you have two hosts and each has the following configuration
-
-```none
-host1: eth0/192.168.7.1, docker0/172.17.0.0/16
-host2: eth0/192.168.8.1, docker0/172.18.0.0/16
-```
-If the container running on `host1` needs the ability to communicate directly
-with a container on `host2`, you need a route from `host1` to `host2`. After
-the route exists, `host2` needs to be able to accept packets destined for its
-running container, and forward them along. Setting the policy to `ACCEPT`
-accomplishes this.

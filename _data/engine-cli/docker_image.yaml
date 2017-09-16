@@ -1,6 +1,6 @@
 command: docker image
 short: Manage images
-long: Manage images.
+long: Manage images
 usage: docker image
 pname: docker
 plink: docker.yaml
@@ -30,4 +30,3 @@ clink:
 - docker_image_rm.yaml
 - docker_image_save.yaml
 - docker_image_tag.yaml
-

@@ -4,25 +4,21 @@ keywords: fig, composition, compose, docker, orchestration, environment, env fil
 title: Declare default environment variables in file
 ---
 
-Compose supports declaring default environment variables in an environment file
-named `.env` placed in the folder where the `docker-compose` command is executed
+Compose supports declaring default environment variables in an environment
+file named `.env` placed in the folder `docker-compose` command is executed from
 *(current working directory)*.
 
-## Syntax Rules
+Compose expects each line in an env file to be in `VAR=VAL` format. Lines
+beginning with `#` (i.e. comments) are ignored, as are blank lines.
 
-These syntax rules apply to the `.env` file:
+> Note: Values present in the environment at runtime will always override
+> those defined inside the `.env` file. Similarly, values passed via
+> command-line arguments take precedence as well.
 
-* Compose expects each line in an `env` file to be in `VAR=VAL` format.
-* Lines beginning with `#` (i.e. comments) are ignored.
-* Blank lines are ignored.
-* There is no special handling of quotation marks (i.e. **they will be part of the VAL**, you have been warned ;) ).
-
-## Compose file and CLI variables
-
-The environment variables you define here will be used for [variable
-substitution](compose-file/index.md#variable-substitution) in your Compose file,
-and can also be used to define the following [CLI
-variables](reference/envvars.md):
+Those environment variables will be used for
+[variable substitution](compose-file.md#variable-substitution) in your Compose
+file, but can also be used to define the following
+[CLI variables](reference/envvars.md):
 
 - `COMPOSE_API_VERSION`
 - `COMPOSE_CONVERT_WINDOWS_PATHS`
@@ -33,19 +29,6 @@ variables](reference/envvars.md):
 - `DOCKER_CERT_PATH`
 - `DOCKER_HOST`
 - `DOCKER_TLS_VERIFY`
-
-> **Notes**
->
-> * Values present in the environment at runtime will always override
-those defined inside the `.env` file. Similarly, values passed via command-line
-arguments take precedence as well.
->
-> * Environment variables defined in the `.env` file are not
-automatically visible inside containers. To set container-applicable
-environment variables, follow the guidelines in the topic [Environment variables
-in Compose](/compose/environment-variables.md), which describes how to pass
-shell environment variables through to containers, define environment variables
-in Compose files, and more.
 
 ## More Compose documentation
 

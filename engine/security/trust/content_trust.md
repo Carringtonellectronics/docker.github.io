@@ -19,8 +19,8 @@ ability to use digital signatures for data sent to and received from remote
 Docker registries. These signatures allow client-side verification of the
 integrity and publisher of specific image tags.
 
-Currently, content trust is disabled by default. To enable it, set
-the `DOCKER_CONTENT_TRUST` environment variable to `1`. Refer to the
+Currently, content trust is disabled by default. You must enable it by setting
+the `DOCKER_CONTENT_TRUST` environment variable. Refer to the
 [environment variables](../../reference/commandline/cli.md#environment-variables)
 and [Notary](../../reference/commandline/cli.md#notary) configuration
 for the docker client for more options.
@@ -66,7 +66,7 @@ the unsigned version of an image before officially signing it.
 Image consumers can enable content trust to ensure that images they use were
 signed. If a consumer enables content trust, they can only pull, run, or build
 with trusted images. Enabling content trust is like wearing a pair of
-rose-colored glasses. Consumers "see" only signed image tags and the less
+rose-colored glasses. Consumers "see" only signed images tags and the less
 desirable, unsigned image tags are "invisible" to them.
 
 ![Trust view](images/trust_view.png)
@@ -109,13 +109,11 @@ The following image depicts the various signing keys and their relationships:
 
 ![Content trust components](images/trust_components.png)
 
->**WARNING**:
-> Loss of the root key is **very difficult** to recover from.
+>**WARNING**: Loss of the root key is **very difficult** to recover from.
 >Correcting this loss requires intervention from [Docker
 >Support](https://support.docker.com) to reset the repository state. This loss
 >also requires **manual intervention** from every consumer that used a signed
 >tag from this repository prior to the loss.
-{:.warning}
 
 You should backup the root key somewhere safe. Given that it is only required
 to create new repositories, it is a good idea to store it offline in hardware.
@@ -154,7 +152,7 @@ In an environment where `DOCKER_CONTENT_TRUST` is set, you can use the
 `--disable-content-trust` flag to run individual operations on tagged images
 without content trust on an as-needed basis.
 
-Consider the following Dockerfile that uses an untrusted parent image:
+Consider the following Dockerfile that uses an untrusted base image:
 
 ```
 $  cat Dockerfile
@@ -221,7 +219,7 @@ client recognizes this is your first push and:
  - requests a passphrase for the root key
  - generates a root key in the `~/.docker/trust` directory
  - requests a passphrase for the repository key
- - generates a repository key in the `~/.docker/trust` directory
+ - generates a repository key for in the `~/.docker/trust` directory
 
 The passphrase you chose for both the root key and your repository key-pair
 should be randomly generated and stored in a *password manager*.
@@ -269,6 +267,7 @@ you signed and pushed earlier:
 
 ```
 $  docker pull <username>/trusttest:testing
+Using default tag: latest
 Pull (1 of 1): <username>/trusttest:testing@sha256:d149ab53f871
 ...
 Tagging <username>/trusttest@sha256:d149ab53f871 as docker/trusttest:testing

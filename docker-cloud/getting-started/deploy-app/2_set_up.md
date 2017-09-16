@@ -7,7 +7,7 @@ redirect_from:
 title: Set up your environment
 ---
 
-In this step you install the Docker Cloud CLI to interact with the service using your command shell. This tutorial uses CLI commands to complete actions.
+In this step you install the Docker Cloud CLI so interact with the service using your command shell. This tutorial uses CLI commands to complete actions.
 
 ## Install the Docker Cloud CLI
 
@@ -36,12 +36,6 @@ package manager, which is a package manager for
 `setuptools`, but will need to upgrade per the instructions
 [here](https://packaging.python.org/installing/).
 
-  > The Docker Cloud CLI does not currently support Python 3.x.
-  >
-  > We recommend using Python 2.x with Docker Cloud. To learn more,
-  see the Python and CLI issues described in
-  [Known issues in Docker Cloud](/docker-cloud/docker-errors-faq.md).
-
 * If you do not have Python or `pip` installed, you can either [install
 Python](https://wiki.python.org/moin/BeginnersGuide/Download) or use this
 [standalone pip
@@ -64,7 +58,7 @@ Once Homebrew is installed, open Terminal and run the following command:
 $ brew install docker-cloud
 ```
 
-> **Note**: You can also use [pip](https://pip.pypa.io/en/stable/) to install on macOS, but we suggest Homebrew since it is a package manager designed for the Mac.
+> **Note:** You can also use [pip](https://pip.pypa.io/en/stable/) to install on macOS, but we suggest Homebrew since it is a package manager designed for the Mac.
 
 ## Validate the CLI installation
 Check that the CLI installed correctly, using the `docker-cloud -v` command. (This command is the same for every platform.)

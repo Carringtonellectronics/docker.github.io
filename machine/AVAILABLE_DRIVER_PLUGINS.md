@@ -70,20 +70,6 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
-      <td>Aruba Cloud</td>
-      <td>
-        <a href=
-        "https://github.com/Arubacloud/docker-machine-driver-arubacloud">https://github.com/Arubacloud/docker-machine-driver-arubacloud</a>
-      </td>
-      <td>
-        <a href="https://github.com/nicolaeusebi">Nicola Eusebi</a>
-        <a href="https://github.com/Arubacloud">Aruba Cloud</a>
-      </td>
-      <td>
-        <a href="mailto:cloudsdk@staff.aruba.it">cloudsdk@staff.aruba.it</a>
-      </td>
-    </tr>
-    <tr>
       <td>BrightBox</td>
       <td>
         <a href=
@@ -126,19 +112,6 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
-      <td>cloud.ca</td>
-      <td>
-        <a href=
-        "https://github.com/cloud-ca/docker-machine-driver-cloudca">https://github.com/cloud-ca/docker-machine-driver-cloudca</a>
-      </td>
-      <td>
-        <a href="https://github.com/cloud-ca">cloud.ca</a>
-      </td>
-      <td>
-        <a href="mailto:cloudmc@cloudops.com">cloudmc@cloudops.com</a>
-      </td>
-    </tr>
-    <tr>
       <td>Docker-In-Docker</td>
       <td>
         <a href=
@@ -150,20 +123,6 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       <td>
         <a href=
         "mailto:nathan.leclaire@gmail.com">nathan.leclaire@gmail.com</a>
-      </td>
-    </tr>
-    <tr>
-      <td>GleSYS Internet Services</td>
-      <td>
-        <a href="https://github.com/glesys/docker-machine-driver-glesys">
-          https://github.com/glesys/docker-machine-driver-glesys
-        </a>
-      </td>
-      <td>
-        <a href="https://github.com/glesys">GleSYS</a>
-      </td>
-      <td>
-        <a href="mailto:support@glesys.com">support@glesys.com</a>
       </td>
     </tr>
     <tr>
@@ -206,20 +165,6 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       <td>
         <a href=
         "mailto:daniel.hiltgen@docker.com">daniel.hiltgen@docker.com</a>
-      </td>
-    </tr>
-    <tr>
-      <td>NTT Communications Enterprise Cloud</td>
-      <td>
-        <a href="https://github.com/mittz/docker-machine-driver-ecl">
-          https://github.com/mittz/docker-machine-driver-ecl
-        </a>
-      </td>
-      <td>
-        <a href="https://github.com/mittz">Hayahito Kawamitsu</a>
-      </td>
-      <td>
-        <a href="mailto:halation3@gmail.com">halation3@gmail.com</a>
       </td>
     </tr>
     <tr>
@@ -352,6 +297,7 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       <td>
         <a href=
         "mailto:justin.canington@nobistech.net">justin.canington@nobistech.net</a><br>
+
         <a href=
         "mailto:andrew.ayers@nobistech.net">andrew.ayers@nobistech.net</a>
       </td>

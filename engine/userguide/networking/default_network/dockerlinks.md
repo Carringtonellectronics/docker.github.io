@@ -8,36 +8,37 @@ title: Legacy container links
 
 The information in this section explains legacy container links within the Docker default `bridge` network which is created automatically when you install Docker.
 
-Before the [Docker networks feature](/engine/userguide/networking/index.md), you could use the
+Before the [Docker networks feature](../index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
 transfer information about one container to another container. With the
 introduction of the Docker networks feature, you can still create links but they
 behave differently between default `bridge` network and
-[user defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks).
+[user defined networks](../work-with-networks.md#linking-containers-in-user-defined-networks)
 
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
 
->**Warning**:
->The `--link` flag is a deprecated legacy feature of Docker. It may eventually
+>**Warning**: The `--link` flag is a deprecated legacy feature of Docker. It may eventually
 be removed. Unless you absolutely need to continue using it, we recommend that you use
 user-defined networks to facilitate communication between two containers instead of using
 `--link`. One feature that user-defined networks do not support that you can do
 with `--link` is sharing environmental variables between containers. However,
 you can use other mechanisms such as volumes to share environment variables
 between containers in a more controlled way.
-{:.warning}
 
 ## Connect using network port mapping
 
-Let's say you used this command to run a simple Python Flask application:
+In [Run a simple application](../../../tutorials/usingdocker.md), you created a
+container that ran a Python Flask application:
 
     $ docker run -d -P training/webapp python app.py
 
-> **Note**:
-> Containers have an internal network and an IP address.
+> **Note:**
+> Containers have an internal network and an IP address
+> (as we saw when we used the `docker inspect` command to show the container's
+> IP address in [Run a simple application](../../../tutorials/usingdocker.md) section).
 > Docker can have a variety of network configurations. You can see more
-> information on Docker networking [here](/engine/userguide/networking/index.md).
+> information on Docker networking [here](../index.md).
 
 When that container was created, the `-P` flag was used to automatically map
 any network port inside it to a random high port within an *ephemeral port
@@ -94,14 +95,14 @@ configurations. For example, if you've bound the container port to the
 
     127.0.0.1:49155
 
-> **Note**:
+> **Note:**
 > The `-p` flag can be used multiple times to configure multiple ports.
 
 ## Connect with the linking system
 
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
-> Please refer to [linking containers in user-defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
+> Please refer to [linking containers in user-defined networks](../work-with-networks.md#linking-containers-in-user-defined-networks)
 > for more information on links in user-defined networks.
 
 Network port mappings are not the only way Docker containers can connect to one
@@ -142,7 +143,7 @@ name the container `web`. You can see the container's name using the
 You can also use `docker inspect` to return the container's name.
 
 
-> **Note**:
+> **Note:**
 > Container names have to be unique. That means you can only call
 > one container `web`. If you want to re-use a container name you must delete
 > the old container (with `docker rm`) before you can create a new
@@ -218,11 +219,11 @@ recipient container in two ways:
 
 Docker creates several environment variables when you link containers. Docker
 automatically creates environment variables in the target container based on
-the `--link` parameters. It will also expose all environment variables
+the `--link` parameters.  It will also expose all environment variables
 originating from Docker from the source container. These include variables from:
 
 * the `ENV` commands in the source container's Dockerfile
-* the `-e`, `--env`, and `--env-file` options on the `docker run`
+* the `-e`, `--env` and `--env-file` options on the `docker run`
 command when the source container is started
 
 These environment variables enable programmatic discovery from within the
@@ -233,7 +234,6 @@ target container of information related to the source container.
 > from Docker within a container are made available to *any* container
 > that links to it. This could have serious security implications if sensitive
 > data is stored in them.
-{:.warning}
 
 Docker sets an `<alias>_NAME` environment variable for each target container
 listed in the `--link` parameter. For example, if a new container called
@@ -241,7 +241,7 @@ listed in the `--link` parameter. For example, if a new container called
 then Docker creates a `WEBDB_NAME=/web/webdb` variable in the `web` container.
 
 Docker also defines a set of environment variables for each port exposed by the
-source container. Each variable has a unique prefix in the form:
+source container.  Each variable has a unique prefix in the form:
 
 `<name>_PORT_<port>_<protocol>`
 
@@ -266,8 +266,8 @@ that Docker creates 12 environment variables, 3 for each port.
 
 Additionally, Docker creates an environment variable called `<alias>_PORT`.
 This variable contains the URL of the source container's first exposed port.
-The 'first' port is defined as the exposed port with the lowest number.
-For example, consider the `WEBDB_PORT=tcp://172.17.0.82:5432` variable. If
+The  'first' port is defined as the exposed port with the lowest number.
+For example, consider the `WEBDB_PORT=tcp://172.17.0.82:5432` variable.  If
 that port is used for both tcp and udp, then the tcp one is specified.
 
 Finally, Docker also exposes each Docker originated environment variable
@@ -343,7 +343,7 @@ that host now via any of these entries:
     56 bytes from 172.17.0.5: icmp_seq=1 ttl=64 time=0.250 ms
     56 bytes from 172.17.0.5: icmp_seq=2 ttl=64 time=0.256 ms
 
-> **Note**:
+> **Note:**
 > In the example, you'll note you had to install `ping` because it was not included
 > in the container initially.
 
@@ -351,7 +351,7 @@ Here, you used the `ping` command to ping the `db` container using its host entr
 which resolves to `172.17.0.5`. You can use this host entry to configure an application
 to make use of your `db` container.
 
-> **Note**:
+> **Note:**
 > You can link multiple recipient containers to a single source. For
 > example, you could have multiple (differently named) web containers attached to your
 >`db` container.

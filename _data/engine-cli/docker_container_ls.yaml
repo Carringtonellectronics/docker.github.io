@@ -1,5 +1,4 @@
 command: docker container ls
-aliases: ps, list
 short: List containers
 long: List containers
 usage: docker container ls [OPTIONS]
@@ -34,4 +33,3 @@ options:
   shorthand: s
   default_value: "false"
   description: Display total file sizes
-
