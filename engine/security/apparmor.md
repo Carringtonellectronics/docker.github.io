@@ -15,12 +15,12 @@ this profile in `tmpfs` and then loads it into the kernel. On Docker versions
 earlier than `1.13.0`, this profile is generated in `/etc/apparmor.d/docker`
 instead. 
 
-> **Note:** This profile is used on containers, _not_ on the Docker Daemon.
+> **Note**: This profile is used on containers, _not_ on the Docker Daemon.
 
 A profile for the Docker Engine daemon exists but it is not currently installed
 with the `deb` packages. If you are interested in the source for the daemon
 profile, it is located in
-[contrib/apparmor](https://github.com/docker/docker/tree/master/contrib/apparmor)
+[contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
 in the Docker Engine source repository.
 
 ## Understand the policies
@@ -28,7 +28,7 @@ in the Docker Engine source repository.
 The `docker-default` profile is the default for running containers. It is
 moderately protective while providing wide application compatibility. The
 profile is generated from the following
-[template](https://github.com/docker/docker/blob/master/profiles/apparmor/template.go).
+[template](https://github.com/moby/moby/blob/master/profiles/apparmor/template.go).
 
 When you run a container, it uses the `docker-default` policy unless you
 override it with the `security-opt` option. For example, the following
@@ -155,48 +155,48 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 1. Save the custom profile to disk in the
 `/etc/apparmor.d/containers/docker-nginx` file.
 
-    The file path in this example is not a requirement. In production, you could
-    use another.
+   The file path in this example is not a requirement. In production, you could
+   use another.
 
 2. Load the profile.
 
-    ```bash
-    $ sudo apparmor_parser -r -W /etc/apparmor.d/containers/docker-nginx
-    ```
+   ```bash
+   $ sudo apparmor_parser -r -W /etc/apparmor.d/containers/docker-nginx
+   ```
 
 3. Run a container with the profile.
 
-    To run nginx in detached mode:
+   To run nginx in detached mode:
 
-    ```bash
-    $ docker run --security-opt "apparmor=docker-nginx" \
+   ```bash
+   $ docker run --security-opt "apparmor=docker-nginx" \
         -p 80:80 -d --name apparmor-nginx nginx
-    ```
+   ```
 
-4. Exec into the running container
+4. Exec into the running container.
 
-    ```bash
-    $ docker exec -it apparmor-nginx bash
-    ```
+   ```bash
+   $ docker exec -it apparmor-nginx bash
+   ```
 
 5. Try some operations to test the profile.
 
-    ```bash
-    root@6da5a2a930b9:~# ping 8.8.8.8
-    ping: Lacking privilege for raw socket.
+   ```bash
+   root@6da5a2a930b9:~# ping 8.8.8.8
+   ping: Lacking privilege for raw socket.
 
-    root@6da5a2a930b9:/# top
-    bash: /usr/bin/top: Permission denied
+   root@6da5a2a930b9:/# top
+   bash: /usr/bin/top: Permission denied
 
-    root@6da5a2a930b9:~# touch ~/thing
-    touch: cannot touch 'thing': Permission denied
+   root@6da5a2a930b9:~# touch ~/thing
+   touch: cannot touch 'thing': Permission denied
 
-    root@6da5a2a930b9:/# sh
-    bash: /bin/sh: Permission denied
+   root@6da5a2a930b9:/# sh
+   bash: /bin/sh: Permission denied
 
-    root@6da5a2a930b9:/# dash
-    bash: /bin/dash: Permission denied
-    ```
+   root@6da5a2a930b9:/# dash
+   bash: /bin/dash: Permission denied
+   ```
 
 
 Congrats! You just deployed a container secured with a custom apparmor profile!
@@ -221,7 +221,7 @@ looks like the following:
 In the above example, you can see `profile=/usr/bin/docker`. This means the
 user has the `docker-engine` (Docker Engine Daemon) profile loaded.
 
-> **Note:** On version of Ubuntu > 14.04 this is all fine and well, but Trusty
+> **Note**: On version of Ubuntu > 14.04 this is all fine and well, but Trusty
 > users might run into some issues when trying to `docker exec`.
 
 Look at another log line:
@@ -283,8 +283,8 @@ Trusty, where some interesting behaviors are enforced.)
 
 Advanced users and package managers can find a profile for `/usr/bin/docker`
 (Docker Engine Daemon) underneath
-[contrib/apparmor](https://github.com/docker/docker/tree/master/contrib/apparmor)
+[contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
 in the Docker Engine source repository.
 
 The `docker-default` profile for containers lives in
-[profiles/apparmor](https://github.com/docker/docker/tree/master/profiles/apparmor).
+[profiles/apparmor](https://github.com/moby/moby/tree/master/profiles/apparmor).

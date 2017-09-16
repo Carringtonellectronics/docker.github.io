@@ -35,7 +35,7 @@ hugo converts them to paragraphs, causing the styles to be ignored
 </style>
 
 As a contributor, you can work on any open issue you want. You can view
-issues in the Issues tab in every repository. If you are new to
+issues in the **Issues** tab in every repository. If you are new to
 contributing, use the filter option to find suitable issues. You can
 filter issues by Author, Labels, Milestones, and Assignee or sort by
 time such as newest and oldest.
@@ -43,7 +43,7 @@ time such as newest and oldest.
 ## Understand the issue types
 To help you identify the different types of issues, our maintainers
 assign labels to issues. Labels are color-coded and help you categorize
-and filter issues. There are four labels categories; kind, area,
+and filter issues. There are four labels categories: kind, area,
 experience, and priority. You can filter using one or more labels. The
 kind and experience labels are useful for new contributors.
 
@@ -147,15 +147,15 @@ class="gh-label expert">exp/expert</strong> issue.
 To claim an issue:
 
 1. Go to the `docker/docker` <a
-	href="https://github.com/docker/docker" target="_blank">repository</a>.
+	href="https://github.com/moby/moby" target="_blank">repository</a>.
 
-2. Click the "Issues" tab.
+2. Click the **Issues**  tab.
 
     A list of the open issues appears.
 
     ![Open issues](images/issue_list.png)
 
-3. From the "Labels" drop-down, select <strong class="gh-label beginner">exp/beginner</strong>.
+3. From the **Labels** drop-down, select <strong class="gh-label beginner">exp/beginner</strong>.
 
     The system filters to show only open <strong class="gh-label beginner">exp/beginner</strong> issues.
 
@@ -207,12 +207,12 @@ To sync your repository:
         $ git remote -v
         origin	https://github.com/moxiegirl/docker.git (fetch)
         origin	https://github.com/moxiegirl/docker.git (push)
-        upstream	https://github.com/docker/docker.git (fetch)
-        upstream	https://github.com/docker/docker.git (push)
+        upstream	https://github.com/moby/moby.git (fetch)
+        upstream	https://github.com/moby/moby.git (push)
 
     If the `upstream` is missing, add it.
 
-        $ git remote add upstream https://github.com/docker/docker.git
+        $ git remote add upstream https://github.com/moby/moby.git
 
 5. Fetch all the changes from the `upstream master` branch.
 
@@ -234,7 +234,7 @@ To sync your repository:
     This command applies all the commits from the upstream master to your local
     master.
 
-8.  Check the status of your local branch.
+8. Check the status of your local branch.
 
         $ git status
         On branch master
@@ -266,10 +266,10 @@ To sync your repository:
         Switched to a new branch '11038-fix-rhel-link'
 
     Your branch should be up-to-date with the `upstream/master`. Why? Because you
-    branched off a freshly synced master.  Let's check this anyway in the next
+    branched off a freshly synced master. Let's check this anyway in the next
     step.
 
-9. Rebase your branch from upstream/master.
+9. Rebase your branch from `upstream/master`.
 
         $ git rebase upstream/master
         Current branch 11038-fix-rhel-link is up to date.
@@ -282,5 +282,5 @@ To sync your repository:
 ## Where to go next
 
 At this point, you know what you want to work on and you have a branch to do
-your work in.  Go onto the next section to learn [how to work on your
+your work in. Go onto the next section to learn [how to work on your
 changes](work-issue.md).

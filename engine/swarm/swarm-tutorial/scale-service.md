@@ -2,18 +2,19 @@
 description: Scale the service running in the swarm
 keywords: tutorial, cluster management, swarm mode, scale
 title: Scale the service in the swarm
+notoc: true
 ---
 
 Once you have [deployed a service](deploy-service.md) to a swarm, you are ready
-to use the Docker CLI to scale the number of service ps in
-the swarm.
+to use the Docker CLI to scale the number of containers in
+the service. Containers running in a service are called "tasks."
 
-1. If you haven't already, open a terminal and ssh into the machine where you
-run your manager node. For example, the tutorial uses a machine named
-`manager1`.
+1.  If you haven't already, open a terminal and ssh into the machine where you
+    run your manager node. For example, the tutorial uses a machine named
+    `manager1`.
 
-2. Run the following command to change the desired state of the
-service running in the swarm:
+2.  Run the following command to change the desired state of the
+    service running in the swarm:
 
     ```bash
     $ docker service scale <SERVICE-ID>=<NUMBER-OF-TASKS>
@@ -27,9 +28,9 @@ service running in the swarm:
     helloworld scaled to 5
     ```
 
-3. Run `docker service ps <SERVICE-ID>` to see the updated task list:
+3.  Run `docker service ps <SERVICE-ID>` to see the updated task list:
 
-    ```
+    ```bash
     $ docker service ps helloworld
 
     NAME                                    IMAGE   NODE      DESIRED STATE  CURRENT STATE
@@ -44,17 +45,17 @@ service running in the swarm:
     running instances of Alpine Linux. The tasks are distributed between the
     three nodes of the swarm. One is running on `manager1`.
 
-4. Run `docker ps` to see the containers running on the node where you're
-connected. The following example shows the tasks running on `manager1`:
+4.  Run `docker ps` to see the containers running on the node where you're
+    connected. The following example shows the tasks running on `manager1`:
 
-    ```
+    ```bash
     $ docker ps
 
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
     528d68040f95        alpine:latest       "ping docker.com"   About a minute ago   Up About a minute                       helloworld.4.auky6trawmdlcne8ad8phb0f1
     ```
 
-    If you want to see the containers running on other nodes, you can ssh into
+    If you want to see the containers running on other nodes, ssh into
     those nodes and run the `docker ps` command.
 
 ## What's next?

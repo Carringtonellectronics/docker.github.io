@@ -2,9 +2,47 @@
 description: Smoketest page
 title: Testing page
 hide_from_sitemap: true
+toc_min: 1
 ---
 
 # Heading 1
+
+Most pages don't actually have a H1 heading. The page title from the metadata is
+automatically inserted. We have included it here to show all heading levels, and
+set front matter as `toc_min: 1` so that it shows in the navigation bar (on-page
+topics).
+
+## Heading 2
+
+By default, this is the highest heading included in the right navigation bar. To
+include more heading levels, set `toc_min: 1` in the page's front-matter (as is
+done on this `test.md` page). You can go all the way to 6, but if `toc_min` is
+geater than `toc_max` then no headings will show.
+
+### Heading 3
+
+This is the lowest heading included in the right-nav, by default. To include
+more heading levels, set `toc_max: 4` in the page's front-matter. You can go all
+the way to 6.
+
+#### Heading 4
+
+This heading is not included in the right-nav. To include it set `toc_max: 4` in
+the page's front-matter.
+
+##### Heading 5
+
+This heading is not included in the right-nav. To include it set `toc_max: 5` in
+the page's front-matter.
+
+###### Heading 6
+
+This is probably too many headings. Try to avoid it.
+
+This heading is not included in the right-nav. To include it set `toc_max: 6` in
+the page's front-matter.
+
+## Typography
 
 Plain block of text.
 
@@ -15,173 +53,494 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 culpa qui officia deserunt mollit anim id est laborum.
 
-## Heading 2
+**Inline text styles**:
 
-Text with various styles, basic markdown formatting. You should **not** see a single line comment below this line.
+- **bold**
+- _italic_
+- ***bold italic***
+- ~~strikethrough~~
+- <u>underline</u>
+- _<u>underline italic</u>_
+- **<u>underline bold</u>**
+- ***<u>underline bold italic</u>***
+- `monospace text`
+- **`monospace bold`**
 
-<!-- This is a comment. You should not see it rendered in the page. -->
+## Links and images
 
-Once you create or link to a repository in Docker Cloud, you can set up [automated testing](/docker-cloud/builds/automated-testing.md) and [automated builds](/docker-cloud/builds/automated-build.md).
+### Links
 
-![a small cute image](/images/footer_moby_icon.png)
+- [a markdown link](https://docker.com/)
+https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
+- [a markdown link that opens in a new window](https://docker.com/){: target="_blank" class="_" }
+  (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 
-> **Note**: This is a note. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+- <a href="https://docker.com/">an HTML link</a>
 
-![a pretty wide image](/images/banner_image_24512.png)
+- <a href="https://docker.com/" target="_blank" class="_">an HTML link that opens in a new window</a>
 
-<center>
-This line is centered with HTML.
-</center>
+- A link to a Github PR in `docker/docker`: {% include github-pr.md pr=28199 %}
 
-This line is centered with curly-brace injection.
-{: style="text-align:center" }
+- A link to a Github PR in `docker/docker.github.io`: {% include github-pr.md repo=docker.github.io pr=9999 %}
 
-Some Lorem ipsum text with formatting and styling.
-
-**Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt** ut labore `et dolore magna aliqua`. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo _consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore_ eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt _**in culpa quiofficia deserunt mollit anim id est laborum.**_
+(you can also specify `org=foo` to use a Github organization other than Docker).
 
 
-### Heading 3
+### Images
 
-A selection of lists, ordered and unordered, with indented sub elements.
+- A small cute image: ![a small cute image](/images/footer_moby_icon.png)
 
-> **Note**: This is some note text.
+- A small cute image that is a link. The extra newline here makes it not show
+  inline:
 
-1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
+  [![a small cute image](/images/footer_moby_icon.png)](https://www.docker.com/)
 
-   > **Note**: This is indented note text with followon image
+- A big wide image: ![a pretty wide image](/images/banner_image_24512.png)
 
-   ![a small cute image](/images/footer_moby_icon.png)
+- The same as above but using HTML: <img src="/images/banner_image_24512.png" alt="a pretty wide image using HTML"/>
 
-2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
+[Some Bootstrap image classes](https://v4-alpha.getbootstrap.com/content/images/)
+might be interesting. You can use them with Markdown or HTML images.
 
-    1. A second level ordered list
-       1. A third level ordered list
-       2. A second third level ordered list
-       3. A second third level ordered list
+- An image using the Bootstrap "thumbnail" class: ![an image as a thumbnail](/images/footer_moby_icon.png){: class="img-thumbnail" }
 
-    2. A second second level ordered list.
+- The same one, but using HTML: <img class="img-thumbnail" src="/images/footer_moby_icon.png" alt="a pretty wide image as a thumbnail, using HTML"/>
 
-       > **Tip**: this is doubly indented note text
+## Videos
 
-    3. A third second level ordered list.
+You can add a link to a YouTube video like this:
 
-       ```
-       with code block
-       ```
+[![Deploying Swarms on Microsoft Azure with Docker Cloud](/docker-cloud/cloud-swarm/images/video-azure-docker-cloud.png)](https://www.youtube.com/watch?v=LlpyiGAVBVg "Deploying Swarms on Microsoft Azure with Docker Cloud"){:target="_blank" class="_"}
 
-3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
+To make the `.png` shown above, first take a screen snap of the YouTube video
+you want to use, then use a graphics app to overlay a play button onto the
+image.
 
-   ![a small cute image](/images/footer_moby_icon.png)
+For the overlay, you can use the play button at
+[/docker-cloud/images/](https://github.com/docker/docker.github.io/tree/master/docker-cloud/images).
 
-4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
-5. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
+## Lists
 
-    * A second level unordered list.
+- Bullet list item 1
+- Bullet list item 2
+* Bullet list item 3
 
-      * A third level unordered list.
+1.  Numbered list item 1. Two spaces between the period and the first letter
+    helps with alignment.
 
-        * A fourth level unordered list.
-        * A second line of fourth level unordered list.
-        * A third line of fourth level unordered list.
+2.  Numbered list item 2. Let's put a note in it.
 
-      * A second line of third level unordered list.
-      * A third line of third level unordered list.
+    >**Note**: We did it!
 
-    * A second second level unordered list.
+3.  Numbered list item 3 with a code block in it. You need the blank line before
+    the code block happens.
 
-       > **Note**: this is indented note text
-
-    * A third second level unordered list.
-
-      ```
-      with codeblock
-      ```
-
-6. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
-7. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. eu fugiat nulla pariatur.
-8. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
-
-   ![a pretty wide image](/images/banner_image_24512.png)
-
-9. proident, sunt in culpa qui
-10. officia deserunt mollit anim id
-
-    ```none
-    This is unstyled (none) text. This tells us if the Kramdown gotcha about indenting the exact number of spaces works or not.
+    ```bash
+    $ docker run hello-world
     ```
-11. est laborum.
-12. And another line, because reasons.
+
+4.  Numbered list item 4 with a bullet list inside it and a numbered list
+    inside that.
+
+    - Sub-item 1
+    - Sub-item 2
+      1.  Sub-sub-item 1
+      2.  Sub-sub-item-2 with a table inside it because we like to party!
+          Indentation is super important.
+
+          |Header 1 | Header 2 |
+          |---------|----------|
+          | Thing 1 | Thing 2  |
+          | Thing 3 | Thing 4  |
 
 
-> **Well**: This is a Note block with a nested code block in it.
->
-> ```json
-> "server": {
->   "http_addr": ":4443",
->   "tls_key_file": "./fixtures/notary-server.key",
->   "tls_cert_file": "./fixtures/notary-server.crt"
-> }
-> ```
-
-#### Heading 4
-
-> **Note**: This is the lowest heading included in the right-nav.
+## Tables
 
 Some tables in markdown and html.
 
-| Permission level | Access |
-| ------------- | ------------- |
-| **Subheading (boring old bold styling)** | |
-| Read | Pull |
-| Read/Write | Pull, push |
-| Admin | All of the above, plus update description, create and delete |
+| Permission level                                                         | Access                                                       |
+|:-------------------------------------------------------------------------|:-------------------------------------------------------------|
+| **Bold** or _italic_ within a table cell. Next cell is empty on purpose. |                                                              |
+|                                                                          | Previous cell is empty. A `--flag` in mono text.             |
+| Read                                                                     | Pull                                                         |
+| Read/Write                                                               | Pull, push                                                   |
+| Admin                                                                    | All of the above, plus update description, create and delete |
 
+The alignment of the cells in the source doesn't really matter. The ending pipe
+character is optional (unless the last cell is supposed to be empty). The header
+row and separator row are optional.
 
-<table style="width:100%">
+If you need block-level HTML within your table cells, such as multiple
+paragraphs, lists, sub-tables, etc, then you need to make a HTML table.
+This is also the case if you need to use rowspans or colspans. Try to avoid
+setting styles directly on your tables! If you set the width on a `<td>`, you
+only need to do it on the first one. If you have a `<th>`, set it there.
+
+> **Note**: If you need to have **markdown** in a **HTML** table, add
+> `markdown="1"` to the HTML for the `<td>` cells that contain the Markdown.
+
+<table>
   <tr>
-    <th style="font-size: x-large; font-family: arial">Left channel</th>
-    <th style="font-size: x-large; font-family: arial">Right channel</th>
+    <th width="50%">Left channel</th>
+    <th>Right channel</th>
   </tr>
-  <tr valign="top">
-    <td width="50%">This is some test text. <br><br>This is more text on a new line. <br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  <tr>
+  <td>This is some test text. <br><br>This is more <b>text</b> on a new line. <br><br>Lorem ipsum dolor <tt>sit amet</tt>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </td>
-    <td width="50%">This is some more text about the right hand side. There is a <a href="https://github.com/docker/docker/tree/master/experimental" target="_blank">link here to the Docker Experimental Features README</a> on GitHub.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+    <td>This is some more text about the right hand side. There is a <a href="https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md" target="_blank" class="_">link here to the Docker Experimental Features README</a> on GitHub. In tables, links need to be `<a href="..."></a>`. <br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
   </tr>
-  <tr valign="top">
-  <td width="50%">
-  <a class="button darkblue-btn" href="/">Go to the docs!</a><br><br>
-  <a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
+  <tr>
+  <td>
+  <p><a class="button outline-btn" href="/">Go to the docs!</a></p>
+  <p><a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a></p>
   </td>
-  <td width="50%">
-  <a class="button darkblue-btn" href="/">Go to the docs!</a><br><br>
-  <a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
+  <td>
+  <p><a class="button outline-btn" href="/">Go to the docs!</a></p>
+  <p><a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a></p>
   </td>
   </tr>
 </table>
 
-##### Heading 5
+## Glossary links and content
 
-This heading is not included in the right-nav.
+The glossary source lives in the documentation repository
+[docker.github.io](https://github.com/docker/docker.github.io) in
+`_data/glossary.yaml`. The glossary publishes to
+[https://docs.docker.com/glossary/](https://docs.docker.com/glossary/).
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+To update glossary content, edit `_data/glossary.yaml`.
 
-###### Heading 6?!
+To link to a glossary term, link to `glossary.md?term=YourGlossaryTerm` (for
+example, [swarm](glossary.md?term=swarm)).
 
-This heading is not included in the right-nav.
-Probably not the most useful thing, but nice to know it exists.
+## Mixing Markdown and HTML
 
-## Some code block samples
+You can use <b>span-level</b> HTML tags within Markdown.
 
-#### Rawstyle
+You can use a `<br />` tag to impose an extra newline like here:<br />
+
+You can use entities like `&nbsp;` to keep a&nbsp;bunch&nbsp;of&nbsp;words&nbsp;together&nbsp;.
+
+<center>
+You can use block-level HTML tags too. This paragraph is centered.
+</center>
+
+Keep reading for more examples, such as creating tabbed content within the
+page or displaying content as "cards".
+
+## Jekyll / Liquid tricks
+
+This paragraph is centered and colored green by setting CSS directly on the element.
+**Even though you can do this and it's sometimes the right way to go, remember that if
+we re-skin the site, any inline styles will need to be dealt with manually!**
+{: style="text-align:center; color: green" }
+
+{% assign my-text="foo" %}
+
+The Liquid assignment just before this line fills in the following token {{ my-text }}.
+This will be effective for the rest of this file unless the token is reset.
+
+{% capture my-other-text %}foo{% endcapture %}
+Here is another way: {{ my-other-text }}
+
+You can nest captures within each other to represent more complex logic with Liquid.
+
+### Liquid variable scope
+
+- Things set in the top level of `_config.yml` are available as site variables, like `{{ site.debug }}`.
+- Things set in the page's metadata, either via the defaults in `_config.yml` or per page, are available as page variables, like `{{ page.title }}`.
+- In-line variables set via `assign` or `capture` are available for the remainder of the page after they are set.
+- If you include a file, you can pass key-value pairs at the same time. These are available as include variables, like `{{ include.toc_min }}`.
+
+## Bootstrap and CSS tricks
+
+Here are cool components you can include on Docs pages using
+[Bootstrap](http://getbootstrap.com/) and [CSS](https://www.w3schools.com/css/).
+
+### Tabs
+
+Here are some tabs:
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#tab1">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
+</ul>
+<div class="tab-content">
+  <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT<hr></div>
+  <div id="tab2" class="tab-pane fade">TAB 2 CONTENT<hr></div>
+</div>
+
+You need to adjust the `id` and `data-target` values to match your use case.
+
+The `<hr>`'s are included simply to add visual separation between tabbed content
+and the other topics on the page.
+
+If you have Markdown inside the content of the `<div>`, just add `markdown="1"`
+as an attribute in the HTML for the `<div>` and Kramdown will render it.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#tab3">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" data-target="#tab4">TAB 2 HEADER</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab3" class="tab-pane fade in active" markdown="1">
+#### A Markdown header
+
+- list item 1
+- list item 2
+<hr>
+</div>
+<div id="tab4" class="tab-pane fade" markdown="1">
+#### Another Markdown header
+
+- list item 3
+- list item 4
+<hr>
+</div>
+</div>
+
+#### Synchronizing multiple tab groups
+
+Consider an example where you have something like one tab per language, and
+you have multiple tab sets like this on a page. You might want them to all
+toggle together. We have Javascript that loads on every page that lets you
+do this by setting the `data-group` attributes to be the same. Note that the
+`data-target` attributes still need to point to unique div IDs.
+
+In this example, selecting `Go` or `Python` in one tab set will toggle the
+other tab set to match.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#go" data-group="go">Go</a></li>
+  <li><a data-toggle="tab" data-target="#python" data-group="python">Python</a></li>
+</ul>
+<div class="tab-content">
+  <div id="go" class="tab-pane fade in active">Go content here<hr></div>
+  <div id="python" class="tab-pane fade in">Python content here<hr></div>
+</div>
+
+And some content between the two sets, just for fun...
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#go-2" data-group="go">Go</a></li>
+  <li><a data-toggle="tab" data-target="#python-2" data-group="python">Python</a></li>
+</ul>
+<div class="tab-content">
+  <div id="go-2" class="tab-pane fade in active">Go content here<hr></div>
+  <div id="python-2" class="tab-pane fade in">Python content here<hr></div>
+</div>
+
+
+### Cards
+
+In a Bootstrap row, your columns need to add up to 12. Here are three cards in
+a row, each of which takes up 1/3 (4/12) of the row. You need a couple `<br />`s
+to clear the row before.<br /><br />
+
+<div class="row">
+  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
+then it will take up the whole row.</div>
+  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
+then it will take up the whole row.</div>
+  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
+then it will take up the whole row.</div>
+</div>
+
+### Expand/Collapse accordions
+
+You can use the Bootstrap and CSS to add expand/collapse accordions. This
+implementation makes use of the `.panel-heading` classes in
+[`_utilities.scss`](/_scss/_utilities.scss), along with [FontAwesome
+icons](http://fontawesome.io/cheatsheet/){: target="_blank" class="_" }
+<i class="fa fa-caret-down" aria-hidden="true"></i> (fa-caret-down) and
+<i class="fa fa-caret-up" aria-hidden="true"></i> (fa-caret-up).
+
+Adding `block` to the `div` class `collapse` gives you some padding around the
+sample content. This works nicely for standard text. If you have a code sample,
+the padding renders as white space around the code block grey background. If we
+don't like this effect, we can remove `block` for code samples.
+
+The `style="cursor: pointer"` tag enables the expand/collapse functionality to
+work on mobile. (You can use the [Xcode iPhone simulator](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator/GettingStartedwithiOSSimulator.html#//apple_ref/doc/uid/TP40012848-CH5-SW4){: target="_blank" class="_" } to test on mobile.)
+
+There are a lot of samples out there for Bootstrap accordions. This is the model
+we used: [PPxOJX accordion sample with HTML and
+CSS](https://codepen.io/anon/pen/PPxOJX){: target="_blank" class="_" }. (Here is
+another example, but it uses Javascript, whereas the implementation shown
+[here](https://www.bootply.com/89084){: target="_blank" class="_" } is Bootstrap
+and CSS only.)
+
+> Make sure `data-target`'s and `id`'s match, and are unique
+>
+>For each drop-down, the value for `data-target` and
+`collapse` `id` must match, and id's must be unique per page. In this example,
+we name these `collapseSample1` and `collapseSample2`. Check out the
+[Compose file structure example](/compose/compose-file/index.md#compose-file-structure-and-examples)
+to see another example.
+{: .important-vanilla}
+
+<div class="panel panel-default">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
+    Docker hello-world example
+    <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapseSample1">
+<pre><code>
+$ docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+b04784fba78d: Pull complete
+Digest: sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://cloud.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+
+</code></pre>
+    </div>
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Another Sample <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapseSample2">
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</div>
+
+### Columnar text
+
+You can use the CSS `column-count` to flow your text into multiple columns.
+You need a couple `<br />`s to clear the row before.<br /><br />
+
+<div style="column-count: 3">
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+This example uses a HTML div. This example uses a HTML div. This example uses a HTML div.
+</div>
+
+This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up. This example does it with Markdown. You can't have any blank lines or it will
+break the Markdown block up.
+{: style="column-count: 3 "}
+
+## Running in-page Javascript
+
+If you need to run custom Javascript within a page, and it depends upon JQuery
+or Bootstrap, make sure the `<script>` tags are at the very end of the page,
+after all the content. Otherwise the script may try to run before JQuery and
+Bootstrap JS are loaded.
+
+> **Note**: In general, this is a bad idea.
+
+## Admonitions (notes)
+
+Current styles for admonitions in
+[`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
+support these broad categories of admonitions:
+
+- Notes in the old style (no Liquid tag required)
+- Notes with a prefixed icon (no Liquid tag required)
+- Important and Warning admonitions, which take `{: .important}` and `{: .warning}` tags, respectively
+
+The new styles include prepended icons, color sidebars, and bold color titles
+for multi-paragraph notes, but no auto-prepended text. These are defined in a
+way that will not impact admonitions formatted with the original styles, so
+notes in your published documents won't be adversely affected.
+
+Examples of both styles are shown below.
+
+### Examples (original styles, prefix words)
+
+Admonitions with prefixed icons use the following class tags, as shown in the examples.
+
+* **Note:** No class tag is needed for standard notes.
+* **Important:** Use the `important` class.
+* **Warning:** Use the `warning` class.
+
+
+> **Note**: This is a note using the old note style
+
+> Pssst, wanna know something?
+>
+> You include a small description here telling users to be on the lookout
+
+> It's not safe out there, take this Moby with you
+>
+> Add the `important` class to your blockquotes if you want to tell users
+ to be careful about something.
+{: .important}
+
+> Ouch, don't do that!
+>
+> Use the `warning` class to let people know this is dangerous or they
+ should pay close attention to this part of the road.
+>
+> You can also add more paragraphs here if your explanation is
+ super complex.
+{: .warning}
+
+>**This is a crazy note**
+>
+> This note has tons of content in it:
+>
+> - List item 1
+> - List item 2
+>
+> |Table column 1  | Table column 2 |
+> |----------------|----------------|
+> | Row 1 column 1 | Row 2 column 2 |
+> | Row 2 column 1 | Row 2 column 2 |
+>
+> And another sentence to top it all off.
+
+> **Important**: Single paragraph important note with the prefix word "important" manually typed in as bold at the beginning.
+{: .important}
+
+> **Warning**: Single paragraph warning with the prefix word "warning" manually typed in as bold at the beginning.
+{: .warning}
+
+## Code blocks
+
+Rouge provides lots of different code block "hints". If you leave off the hint,
+it tries to guess and sometimes gets it wrong. These are just a few hints that
+we use often.
+
+### Raw, no highlighting
+
+The raw markup is needed to keep Liquid from interperting the things with double
+braces as templating language.
 
 ```none
 none with raw
@@ -191,6 +550,8 @@ $ some other command
 {% endraw %}
 ```
 
+### Raw, Bash
+
 ```bash
 bash with raw
 {% raw %}
@@ -199,13 +560,13 @@ $ some other command
 {% endraw %}
 ```
 
-#### Bash
+### Bash
 
 ```bash
 $ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
 ```
 
-#### GO
+### Go
 
 ```go
 incoming := map[string]interface{}{
@@ -218,38 +579,28 @@ incoming := map[string]interface{}{
         "tyui",
     },
 }
-
-canonical, err := json.Marshal(incoming)
-if err != nil {
-  // ... handle error
-}
 ```
 
-#### Python
+### Python
 
 ```python
 return html.format(name=os.getenv('NAME', "world"), hostname=socket.gethostname(), visits=visits)
 ```
 
-#### Ruby
+### Ruby
 
 ```ruby
 docker_service 'default' do
   action [:create, :start]
 end
-
-docker_image 'busybox' do
-  action :pull
-end
-
-docker_container 'an echo server' do
-  repo 'busybox'
-  port '1234:1234'
-  command "nc -ll -p 1234 -e /bin/cat"
-end
 ```
 
-#### JSON
+### JSON
+
+Warning: Syntax highlighting breaks easily for JSON if the code you present is
+not a valid JSON document. Try running your snippet through [this
+linter](http://jsonlint.com/) to make sure it's valid, and remember: there is no
+syntax for comments in JSON!
 
 ```json
 "server": {
@@ -259,7 +610,7 @@ end
 }
 ```
 
-#### HTML
+### HTML
 
 ```html
 <!DOCTYPE html>
@@ -270,13 +621,13 @@ end
 </html>
 ```
 
-#### Markdown
+### Markdown
 
 ```md
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=<repo_url>)
 ```
 
-#### ini
+### ini
 
 ```ini
 [supervisord]
@@ -284,66 +635,47 @@ nodaemon=true
 
 [program:sshd]
 command=/usr/sbin/sshd -D
-
-[program:apache2]
-command=/bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
 ```
 
-#### Dockerfile
+### Dockerfile
 
-```dockerfile
+To enable syntax highlighting for Dockerfiles, use the `conf` lexer, for now.
+In the future, native Dockerfile support is coming to Rouge.
+
+```conf
 #
 # example Dockerfile for https://docs.docker.com/examples/postgresql_service/
 #
 
 FROM ubuntu
-MAINTAINER SvenDowideit@docker.com
 
-# Add the PostgreSQL PGP key to verify their Debian packages.
-# It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
 
-# Add PostgreSQL's repository. It contains the most recent stable release
-#     of PostgreSQL, ``9.3``.
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 
-# Install ``python-software-properties``, ``software-properties-common`` and PostgreSQL 9.3
-#  There are some warnings (in red) that show up during the build. You can hide
-#  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
 
 # Note: The official Debian and Ubuntu images automatically ``apt-get clean``
 # after each ``apt-get``
 
-# Run the rest of the commands as the ``postgres`` user created by the ``postgres-9.3`` package when it was ``apt-get installed``
 USER postgres
 
-# Create a PostgreSQL role named ``docker`` with ``docker`` as the password and
-# then create a database `docker` owned by the ``docker`` role.
-# Note: here we use ``&&\`` to run commands one after the other - the ``\``
-#       allows the RUN command to span multiple lines.
 RUN    /etc/init.d/postgresql start &&\
     psql --command "CREATE USER docker WITH SUPERUSER PASSWORD 'docker';" &&\
     createdb -O docker docker
 
-# Adjust PostgreSQL configuration so that remote connections to the
-# database are possible.
 RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.conf
 
-# And add ``listen_addresses`` to ``/etc/postgresql/9.3/main/postgresql.conf``
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
 
-# Expose the PostgreSQL port
 EXPOSE 5432
 
-# Add VOLUMEs to allow backup of config, logs and databases
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 
-# Set the default command to run when starting the container
 CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
 ```
 
-#### YAML
+### YAML
 
 ```yaml
 authorizedkeys:

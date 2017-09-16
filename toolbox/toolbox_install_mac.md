@@ -11,13 +11,7 @@ minimal system requirements for [Docker for Mac](/docker-for-mac/index.md).
 
 If you have not done so already, download the installer here:
 
-<table style="width:50%; border: 0">
-  <tr valign="top">
-    <td width="100%" style="font-size: medium; font-family: arial;  text-align: center; background-color: #F9FAFB">
-    <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
-    </td>
-  </tr>
-</table>
+[Get Docker Toolbox for Mac](https://download.docker.com/mac/stable/DockerToolbox.pkg){: class="button outline-btn" }
 
 ## What you get and how it works
 
@@ -33,11 +27,11 @@ Docker Toolbox includes the following Docker tools:
 Because the Docker Engine daemon uses Linux-specific
 kernel features, you can't run Docker Engine natively on
 macOS with Docker Toolbox. Instead, you must use the
-Docker Machine command,  `docker-machine`,  to create and
+Docker Machine command, `docker-machine`, to create and
 attach to a small Linux VM on your machine. This VM hosts
 Docker Engine for you on your Mac.
 
->**Tip:** One of the advantages of the newer
+>**Tip**: One of the advantages of the newer
 [Docker for Mac](/docker-for-mac/index.md) solution is that
 it uses native virtualization and does not require
 VirtualBox to run Docker.
@@ -202,7 +196,7 @@ Removing Toolbox involves removing all the Docker components it includes.
 
 A full uninstall also includes removing the local and remote machines you created with Docker Machine. In some cases, you might want to keep machines created with Docker Machine.
 
-For example, if you plan to re-install Docker Machine as a part of Docker for Mac you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them.  So the step to remove machines is described here as optional.
+For example, if you plan to re-install Docker Machine as a part of Docker for Mac you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
 
 To uninstall Toolbox on a Mac, do the following:
 
@@ -230,7 +224,13 @@ To uninstall Toolbox on a Mac, do the following:
 
 3.  Remove the Docker Quickstart Terminal and Kitematic from your "Applications" folder.
 
-4.  Remove the `docker`, `docker-compose`, and `docker-machine` commands from the `/usr/local/bin` folder.
+4.  Run the following in a command shell to fully remove Kitematic:
+
+    ```
+    rm -fr ~/Library/Application\ Support/Kitematic
+    ```
+
+5.  Remove the `docker`, `docker-compose`, and `docker-machine` commands from the `/usr/local/bin` folder.
 
     ```
     $ rm /usr/local/bin/docker
@@ -238,7 +238,7 @@ To uninstall Toolbox on a Mac, do the following:
     $ rm /usr/local/bin/docker-machine
     ```
 
-5. Optionally, remove the `~/.docker` directory.
+6. Optionally, remove the `~/.docker` directory.
 
     If you want to remove Docker entirely, you
     can remove the `~/.docker` directory
@@ -248,12 +248,13 @@ To uninstall Toolbox on a Mac, do the following:
     as certificates). Removing this directory
     is typically not necessary.
 
-6. Uninstall Oracle VirtualBox, which is
+
+7. Uninstall Oracle VirtualBox, which is
 installed as a part of the Toolbox install.
 
-## Next Steps
+## Next steps
 
-* Try out the examples in the [Getting Started](/engine/getstarted/index.md) tutorial.
+* Try the [Get started](/get-started/) tutorial.
 
 * Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 

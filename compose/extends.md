@@ -24,14 +24,14 @@ contains your base configuration. The override file, as its name implies, can
 contain configuration overrides for existing services or entirely new
 services.
 
-If a service is defined in both files Compose merges the configurations using
+If a service is defined in both files, Compose merges the configurations using
 the rules described in [Adding and overriding
 configuration](extends.md#adding-and-overriding-configuration).
 
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
 the order they're specified on the command line. See the [`docker-compose`
-command reference](./reference/overview.md) for more information about
+command reference](/compose/reference/overview.md) for more information about
 using `-f`.
 
 When you use multiple configuration files, you must make sure all paths in the
@@ -159,18 +159,30 @@ backup, include the `docker-compose.admin.yml` as well.
 
 ## Extending services
 
+> **Note**: The `extends` keyword is supported in earlier Compose file formats
+up to Compose file version 2.1 (see [extends in
+v1](/compose/compose-file/compose-file-v1.md#extends) and [extends in
+v2](/compose/compose-file/compose-file-v2.md#extends)), but is not supported in
+Compose version 3.x. See the [Version 3
+summary](/compose/compose-file/compose-versioning.md#version-3) of keys added
+and removed, along with information on [how to
+upgrade](/compose/compose-file/compose-versioning.md#upgrading). See
+[moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
+discussion thread on possibility of adding support for `extends` in some form in
+future versions.
+
 Docker Compose's `extends` keyword enables sharing of common configurations
 among different files, or even different projects entirely. Extending services
 is useful if you have several services that reuse a common set of configuration
 options. Using `extends` you can define a common set of service options in one
 place and refer to it from anywhere.
 
-> **Note:** `links`, `volumes_from`, and `depends_on` are never shared between
-> services using `extends`. These exceptions exist to avoid
-> implicit dependencies&mdash;you always define `links` and `volumes_from`
-> locally. This ensures dependencies between services are clearly visible when
-> reading the current file. Defining these locally also ensures changes to the
-> referenced file don't result in breakage.
+Keep in mind that `links`, `volumes_from`, and `depends_on` are never shared
+between services using `extends`. These exceptions exist to avoid implicit
+dependencies; you always define `links` and `volumes_from` locally. This ensures
+dependencies between services are clearly visible when reading the current file.
+Defining these locally also ensures that changes to the referenced file don't
+break anything.
 
 ### Understand the extends configuration
 
@@ -282,7 +294,9 @@ replaces the old value.
     # result
     command: python otherapp.py
 
-> **Note:** In the case of `build` and `image`, when using
+>  `build` and `image` in Compose file version 1
+>
+> In the case of `build` and `image`, when using
 > [version 1 of the Compose file format](compose-file.md#version-1), using one
 > option in the local service causes Compose to discard the other option if it
 > was defined in the original service.

@@ -2,6 +2,7 @@
 description: Microsoft Hyper-V driver for machine
 keywords: machine, Microsoft Hyper-V, driver
 title: Microsoft Hyper-V
+toc_max: 4
 ---
 
 Creates a Boot2Docker virtual machine locally on your Windows machine
@@ -20,7 +21,7 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 > driver. Hyper-V can share an external network interface (aka
 > bridging), see [this blog](http://blogs.technet.com/b/canitpro/archive/2014/03/11/step-by-step-enabling-hyper-v-for-use-on-windows-8-1.aspx).
 > If you would like to use NAT, create an internal network, and use
-> [Internet Connection  Sharing](http://www.packet6.com/allowing-windows-8-1-hyper-v-vm-to-work-with-wifi/).
+> [Internet Connection Sharing](http://www.packet6.com/allowing-windows-8-1-hyper-v-vm-to-work-with-wifi/).
 >
 > * This reference page includes an [example](hyper-v.md#example) that shows how to use an elevated (Administrator-level) PowerShell and how to create and use an external network switch.
 
@@ -54,9 +55,11 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 
 #### 1. Make sure Hyper-V is enabled
 
-  Hyper-V is automatically enabled on a Docker for Windows install. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
+ Hyper-V is automatically enabled on a Docker for Windows install. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
 
-#### 2. Set up a new external network switch
+#### 2. Set up a new external network switch (Optional)
+
+> **Note**: If you already have an external network switch you can skip this setup and use that one.
 
 Make sure you have Ethernet connectivity while you are doing this.
 
@@ -66,7 +69,7 @@ Select the Virtual Switch Manager on the left-side **Actions** panel.
 
 ![Hyper-V manager](../img/hyperv-manager.png)
 
-Set up a new external network switch to use instad of DockerNAT network switch (for Moby), which is set up by default when you install Docker for Windows. (Or if you already have another network switch set up, you can use that one.)
+Set up a new **external network switch** to use instead of DockerNAT network switch (for Moby), which is set up by default when you install Docker for Windows. (Or if you already have another network switch set up, you can use that one, but it must be an **external** switch.)
 
 For this example, we created a virtual switch called `Primary Virtual Switch`.
 
@@ -123,7 +126,7 @@ you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
       PS C:\WINDOWS\system32>
       ```
 
-*   Use the same process, driver and network switch to create the other nodes.
+*   Use the same process, driver, and network switch to create the other nodes.
 
     For our example, the commands will look like this:
 

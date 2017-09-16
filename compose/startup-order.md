@@ -1,13 +1,14 @@
 ---
 description: How to control service startup order in Docker Compose
-keywords: documentation, docs,  docker, compose, startup, order
+keywords: documentation, docs, docker, compose, startup, order
 title: Controlling startup order in Compose
+notoc: true
 ---
 
 You can control the order of service startup with the
 [depends_on](compose-file.md#depends-on) option. Compose always starts
 containers in dependency order, where dependencies are determined by
-`depends_on`, `links`, `volumes_from` and `network_mode: "service:..."`.
+`depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
 However, Compose will not wait until a container is "ready" (whatever that means
 for your particular application) - only until it's running. There's a good
@@ -27,12 +28,13 @@ startup and whenever a connection is lost for any reason. However, if you don't
 need this level of resilience, you can work around the problem with a wrapper
 script:
 
--   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it)
-    or [dockerize](https://github.com/jwilder/dockerize). These are small
+-   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
+    [dockerize](https://github.com/jwilder/dockerize) or sh-compatible
+    [wait-for](https://github.com/Eficode/wait-for). These are small
     wrapper scripts which you can include in your application's image and will
     poll a given host and port until it's accepting TCP connections.
 
-    For example, to use `wait-for-it.sh` to wrap your service's command:
+    For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
 
         version: "2"
         services:
@@ -45,6 +47,8 @@ script:
             command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
           db:
             image: postgres
+
+    >**Tip**: There are limitations to this first solution; e.g., it doesn't verify when a specific service is really ready. If you add more arguments to the command, you'll need to use the `bash shift` command with a loop, as shown in the next example.
 
 -   Alternatively, write your own wrapper script to perform a more application-specific health
     check. For example, you might want to wait until Postgres is definitely
@@ -67,8 +71,11 @@ script:
         >&2 echo "Postgres is up - executing command"
         exec $cmd
 
-    You can use this as a wrapper script as in the previous example, by setting
-    `command: ["./wait-for-postgres.sh", "db", "python", "app.py"]`.
+    You can use this as a wrapper script as in the previous example, by setting:
+
+    ```none
+    command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
+    ```
 
 
 ## Compose documentation

@@ -9,21 +9,10 @@ Sorry, but the contents of this page are automatically generated from
 Docker's source code. If you want to suggest a change to the text that appears
 here, you'll need to find the string by searching this repo:
 
-https://www.github.com/docker/docker
+https://www.github.com/docker/cli
 -->
 
-{% include cli.md %}
-
-## Examples
-
-# EXAMPLES
-
-```bash
-$ docker run -d fedora sleep 99
-
-079b83f558a2bc52ecad6b2a5de13622d584e6bb1aea058c11b36511e85e7622
-
-$ docker container wait 079b83f558a2bc
-
-0
-```
+{% if page.datafolder contains '-edge' %}
+  {% include edge_only.md section="cliref" %}
+{% endif %}
+{% include cli.md datafolder=page.datafolder datafile=page.datafile %}

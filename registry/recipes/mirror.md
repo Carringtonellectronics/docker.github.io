@@ -2,6 +2,8 @@
 description: Setting-up a local mirror for Docker Hub images
 keywords: registry, on-prem, images, tags, repository, distribution, mirror, Hub, recipe, advanced
 title: Registry as a pull through cache
+redirect_from:
+- /engine/admin/registry_mirror/
 ---
 
 ## Use-case
@@ -54,7 +56,7 @@ remote fetch and local re-caching.
 To ensure best performance and guarantee correctness the Registry cache should
 be configured to use the `filesystem` driver for storage.
 
-## Running a Registry as a pull through cache
+## Run a Registry as a pull-through cache
 
 The easiest way to run a registry as a pull through cache is to run the official
 Registry image.
@@ -63,7 +65,7 @@ Multiple registry caches can be deployed over the same back-end.  A single
 registry cache will ensure that concurrent requests do not pull duplicate data,
 but this property will not hold true for a registry cache cluster.
 
-### Configuring the cache
+### Configure the cache
 
 To configure a Registry to run as a pull through cache, the addition of a
 `proxy` section is required to the config file.
@@ -71,26 +73,96 @@ To configure a Registry to run as a pull through cache, the addition of a
 In order to access private images on the Docker Hub, a username and password can
 be supplied.
 
-    proxy:
-      remoteurl: https://registry-1.docker.io
-      username: [username]
-      password: [password]
+```yaml
+proxy:
+  remoteurl: https://registry-1.docker.io
+  username: [username]
+  password: [password]
+```
 
-> :warn: if you specify a username and password, it's very important to understand that private resources that this user has access to on the Hub will be made available on your mirror. It's thus paramount that you secure your mirror by implementing authentication if you expect these resources to stay private!
+> **Warning**: If you specify a username and password, it's very important to
+> understand that private resources that this user has access to Docker Hub will
+> be made available on your mirror. **You must secure your mirror** by
+> implementing authentication if you expect these resources to stay private!
 
-> :warn: in order for the scheduler to clean up old entries, delete must be enabled in the registry configuration.  See the [Registry Configuration Reference](../configuration.md) for more details.
+> **Warning**: In order for the scheduler to clean up old entries, `delete` must
+> be enabled in the registry configuration. See
+> [Registry Configuration](/registry/configuration.md) for more details.
 
-### Configuring the Docker daemon
+### Configure the Docker daemon
 
-You will need to pass the `--registry-mirror` option to your Docker daemon on
-startup:
+Either pass the `--registry-mirror` option when starting `dockerd` manually,
+or edit `/etc/docker/daemon.json` and add the `registry-mirrors` key and value,
+to make the change persistent.
 
-    docker --registry-mirror=https://<my-docker-mirror-host> daemon
+```json
+{
+  "registry-mirrors": ["https://<my-docker-mirror-host>"]
+}
+```
 
-For example, if your mirror is serving on `http://10.0.0.2:5000`, you would run:
+Save the file and restart Docker for the change to take effect.
 
-    docker --registry-mirror=https://10.0.0.2:5000 daemon
+> Some log messages that appear to be errors are actually informational messages.
+>
+> Check the `level` field to determine whether
+> the message is warning you about an error or is giving you information.
+> For example, this log message is informational:
+>
+> ```conf
+> `time="2017-06-02T15:47:37Z" level=info msg="error statting local store, serving from upstream: unknown blob" go.version=go1.7.4`
+> ```
+>
+> It's telling you that the file doesn't exist yet in the local cache and is
+> being pulled from upstream. 
 
-> NOTE: Depending on your local host setup, you may be able to add the
-`--registry-mirror` option to the `DOCKER_OPTS` variable in
-`/etc/default/docker`.
+
+## Use case: the China registry mirror
+
+The URL of the registry mirror for China is `registry.docker-cn.com`. You can
+pull images from this mirror just like you do for other registries by
+specifying the full path, including the registry, in your `docker pull`
+command, for example:
+
+```bash
+$ docker pull registry.docker-cn.com/library/ubuntu
+```
+
+You can configure the Docker daemon with the `--registry-mirror` startup
+parameter:
+
+```bash
+$ docker --registry-mirror=https://registry.docker-cn.com -d
+```
+
+Or you can add "https://registry.docker-cn.com" to the `registry-mirrors`
+array in `/etc/docker/daemon.json` to pull from the China registry mirror
+by default.  
+
+```json
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```
+
+Save the file and restart Docker for the change to take effect.
+
+## Use case: the China registry mirror
+
+The URL of the registry mirror for China is `registry.docker-cn.com`. You can
+pull images from this mirror just like you do for other registries by 
+specifying the full path, including the registry, in your `docker pull` command,
+for example: 
+
+```bash
+$ docker pull registry.docker-cn.com/library/ubuntu
+```
+
+Or you can add "https://registry.docker-cn.com" to the `registry-mirrors` array
+in `/etc/docker/daemon.json` to pull from the China registry mirror by default.
+
+```json
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+```

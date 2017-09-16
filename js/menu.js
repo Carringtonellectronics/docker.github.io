@@ -1,4 +1,4 @@
-var metadata;
+var metadata, glossary;
 var autoCompleteShowing = false;
 var displayingAutcompleteResults = new Array();
 var autoCompleteShowingID = 0;
@@ -25,16 +25,18 @@ function loadPage(url)
   window.location.replace(url);
   window.location.href = url;
 }
+
 $(document).on("keypress", function(event) {
     if (event.keyCode == 13) {
       if(autoCompleteShowing) event.preventDefault();
     }
 });
+
 function highlightMe(inputTxt,keyword)
 {
   inputTxt = String(inputTxt);
   simpletext = new RegExp("(" + keyword + ")","gi");
-  return inputTxt.replace(simpletext, "<span style='background-color:yellow'>$1</span>")
+  return inputTxt.replace(simpletext, "<span>$1</span>")
 }
 function matches(inputTxt,searchTxt)
 {
@@ -44,7 +46,7 @@ function matches(inputTxt,searchTxt)
 function hookupTOCEvents()
 {
   // do after tree render
-  $('.expand-menu').on('mouseup touchend', function(elem) {
+  $('.expand-menu').on('click', function(elem) {
 //      menu = elem.currentTarget.nextElementSibling
     menu = elem.currentTarget.parentElement
     if (menu.classList.contains("menu-closed")) {
@@ -55,9 +57,6 @@ function hookupTOCEvents()
       menu.classList.remove("menu-open")
     }
     return false;
-  });
-  $(".currentPage").each(function(){
-    $(this).parentsUntil($('.docsidebarnav_section')).addClass("active").removeClass("menu-closed").addClass("menu-open");
   });
   $(".left-off-canvas-menu").css("display","block");
   // console.log(metadata);
@@ -194,57 +193,77 @@ function hookupTOCEvents()
   });
 }
 
-jQuery(document).ready(function(){
-    $.getJSON( "/metadata.txt", function( data ) {
-      metadata = data;
-      hookupTOCEvents();
-    });
-    $("#TableOfContents ul").empty();
+function queryString()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
 
-    var prevH2Item = null;
-    var prevH2List = null;
-
-    var index = 0;
-    var currentHeader = 0, lastHeader = 0;
-    var output = "<ul>";
-    $("h1, h2, h3, h4").each(function() {
-        var li= "<li><a href='" + window.location + "#" + $(this).attr('id') + "'>" + $(this).text().replace("¶","") + "</a></li>";
-        if( $(this).is("h2") ){
-          // h2
-          currentHeader = 2;
-        } else if( $(this).is("h3") ){
-          // h3
-          currentHeader = 3;
-        } else if( $(this).is("h4") ) {
-          // h4
-          currentHeader = 4;
+function renderTopicsByTagTable(tagToLookup,divID)
+{
+  var matchingPages = new Array();
+  for (i=0;i<metadata.pages.length;i++)
+  {
+    thisPage = metadata.pages[i];
+    if (thisPage.keywords)
+    {
+      var keywordArray = thisPage.keywords.toString().split(",");
+      for (n=0;n<keywordArray.length;n++)
+      {
+        if (keywordArray[n].trim().toLowerCase()==tagToLookup.toLowerCase())
+        {
+          matchingPages.push(i); // log the id of the page w/matching keyword
         }
-        //console.log("currentHeader ",currentHeader, "lastHeader ",lastHeader, "text ", $(this).text());
-        if (currentHeader > lastHeader) {
-            // nest further
-            output += "<ul>"
-        }
-        if (currentHeader < lastHeader && lastHeader > 0) {
-            // close nesting
-            //console.log("Closing nesting because ", lastHeader, "is <", currentHeader);
-            for (i=0; i < (lastHeader - currentHeader); i++)
-            {
-              output += "</ul>"
-            }
-        }
-        output += li;
-        lastHeader = currentHeader;
-        /*
-        if( $(this).is("h2") ){
-            prevH2List = $("<ul></ul>");
-            prevH2Item = $(li);
-            prevH2Item.append(prevH2List);
-            prevH2Item.appendTo("#TableOfContents ul");
-        } else {
-            prevH2List.append(li);
-        }
-        index++;*/
-    });
-    output += "</ul>";
-    $("#TableOfContents").html(output);
-});
+      }
+    }
+  }
+  var pagesOutput = new Array();
+  if (matchingPages.length > 0)
+  {
+    pagesOutput.push("<h2>Pages tagged with: " + tagToLookup + "</h2>");
+    pagesOutput.push("<table><thead><tr><td>Page</td><td>Description</td></tr></thead><tbody>");
+    for(i=0;i<matchingPages.length;i++) {
+      thisPage = metadata.pages[matchingPages[i]];
+      pagesOutput.push("<tr><td><a href='" + thisPage.url + "'>" + thisPage.title + "</a></td><td>" + thisPage.description + "</td></tr>");
+    }
+    pagesOutput.push("</tbody></table>");
+  }
+  $("#" + divID).html(pagesOutput.join(""));
+}
+function renderTagsPage()
+{
+  if(window.location.pathname.indexOf("/glossary/")>-1 || window.location.pathname.indexOf("/search/")>-1)
+  {
+    var tagToLookup;
+    if (window.location.pathname.indexOf("/glossary/")>-1)
+    {
+      // Get ?term=<value>
+      tagToLookup = decodeURI(queryString().term);
+      $("#keyword").html(tagToLookup);
+    }
+    else
+    {
+      // Get ?q=<value>
+      tagToLookup = decodeURI(queryString().q);
+    }
+    // Get the term and definition
+    for (i=0;i<glossary.terms.length;i++)
+    {
+      if (glossary.terms[i].term.toLowerCase()==tagToLookup.toLowerCase())
+      {
+        var glossaryOutput = glossary.terms[i].def;
+      }
+    }
+    if (glossaryOutput) {
+      $("#glossaryMatch").html("<h2>Definition of: " + tagToLookup + "</h2>" + glossaryOutput);
+    }
+    renderTopicsByTagTable(tagToLookup,"topicMatch",true);
+  }
+}

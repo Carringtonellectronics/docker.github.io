@@ -3,7 +3,9 @@ description: Docker documentation search results
 keywords: Search, Docker, documentation, manual, guide, reference, api
 noratings: true
 notoc: true
-title: Search results
+notags: true
+title: "Docs search <span id='searchTerm'></span>"
+tree: false
 ---
 
 <style type='text/css'>
@@ -19,7 +21,11 @@ title: Search results
 #gscb_a, .gscb_a { padding: 3px 0px 0px 0px !important;}
 .gsc-control-cse, .gsc-control-cse-en { padding: 0px !important; }
 .gsc-result-info { padding-bottom: 0px !important; }
+.gsc-adBlock { display: none; }
 </style>
+
+<div id="glossaryMatch"></div>
+
 <div id="my-cse1">
 <script>
   (function() {
@@ -32,5 +38,18 @@ title: Search results
     s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-<gcse:search></gcse:search>
+
+<gcse:searchresults-only></gcse:searchresults-only>
 </div>
+
+<script defer>
+setTimeout(function(){
+  $(document).ready(function() {
+    if (decodeURI(queryString().q) != "undefined" && decodeURI(queryString().q) && decodeURI(queryString().q).length > 0) {
+      $("#st-search-input").val(decodeURI(queryString().q));
+      $("#st-search-input").focus();
+      $("#searchTerm").html("results for: " + decodeURI(queryString().q))
+    }
+  });
+}, 1);
+</script>

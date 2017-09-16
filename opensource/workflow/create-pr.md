@@ -8,7 +8,7 @@ A pull request (PR) sends your changes to the Docker maintainers for review. You
 create a pull request on GitHub. A pull request "pulls" changes from your forked
 repository into the `docker/docker` repository.
 
-You can see <a href="https://github.com/docker/docker/pulls" target="_blank">the
+You can see <a href="https://github.com/moby/moby/pulls" target="_blank">the
 list of active pull requests to Docker</a> on GitHub.
 
 ## Check your work
@@ -31,11 +31,7 @@ Before you create a pull request, check your work.
 	All the tests should pass. If they don't, find out why and correct the
 	situation.
 
-4. Optionally, if modified the documentation, build the documentation:
-
-		$ make docs
-
-5. Commit and push any changes that result from your checks.
+4. Commit and push any changes that result from your checks.
 
 ## Rebase your branch
 

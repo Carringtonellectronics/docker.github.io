@@ -20,13 +20,12 @@ This PostgreSQL setup is for development-only purposes. Refer to the
 PostgreSQL documentation to fine-tune these settings so that it is
 suitably secure.
 
-```dockerfile
+```conf
 #
 # example Dockerfile for https://docs.docker.com/examples/postgresql_service/
 #
 
 FROM ubuntu
-MAINTAINER SvenDowideit@docker.com
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc

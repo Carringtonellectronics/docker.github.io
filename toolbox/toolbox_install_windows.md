@@ -12,13 +12,7 @@ Windows](/docker-for-windows/index.md) app.
 
 If you have not done so already, download the installer here:
 
-<table style="width:50%; border:0">
-  <tr valign="top">
-    <td width="100%" style="font-size: medium; font-family: arial;  text-align: center; background-color: #F9FAFB">
-    <a class="button darkblue-btn" href="https://download.docker.com/win/stable/DockerToolbox.exe">Get Docker Toolbox for Windows</a>
-    </td>
-  </tr>
-</table>
+[Get Docker Toolbox for Windows](https://download.docker.com/win/stable/DockerToolbox.exe){: class="button outline-btn" }
 
 ## What you get and how it works
 
@@ -34,11 +28,11 @@ Docker Toolbox includes the following Docker tools:
 Because the Docker Engine daemon uses Linux-specific
 kernel features, you can't run Docker Engine natively
 on Windows. Instead, you must use the Docker Machine
-command,  `docker-machine`, to create and attach to a
+command, `docker-machine`, to create and attach to a
 small Linux VM on your machine. This VM hosts Docker Engine
 for you on your Windows system.
 
->**Tip:** One of the advantages of the newer
+>**Tip**: One of the advantages of the newer
 [Docker for
 Windows](/docker-for-windows/index.md) solution is that
 it uses native virtualization and does not require
@@ -147,7 +141,7 @@ In this step, you start Docker Toolbox and run a simple Docker command.
 
     The terminal runs a special `bash` environment instead of the standard Windows command prompt. The `bash` environment is required by Docker.
 
-3.  Make the terminal active by click your mouse next to the `$` prompt.
+3.  Make the terminal active by clicking your mouse next to the `$` prompt.
 
     If you aren't familiar with a terminal window, here are some quick tips.
 
@@ -201,7 +195,7 @@ Removing Toolbox involves removing all the Docker components it includes.
 
 A full uninstall also includes removing the local and remote machines you created with Docker Machine. In some cases, you might want to keep machines created with Docker Machine.
 
-For example, if you plan to re-install Docker Machine as a part of Docker for Windows you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them.  So the step to remove machines is described here as optional.
+For example, if you plan to re-install Docker Machine as a part of Docker for Windows you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
 
 To uninstall Toolbox on Windows, do the following:
 
@@ -229,9 +223,9 @@ To uninstall Toolbox on Windows, do the following:
     continue to manage those machines
     through Docker.
 
-3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel.
+3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel (programs and features).
 
-    >**Note:** This process does not remove the `docker-install.exe` file. You must delete that file yourself.
+    >**Note**: This process does not remove the `docker-install.exe` file. You must delete that file yourself.
 
 5. Optionally, remove the
 `C:\Users\<your-user>\.docker` directory.
@@ -249,9 +243,9 @@ To uninstall Toolbox on Windows, do the following:
 6. Uninstall Oracle VirtualBox, which is
   installed as a part of the Toolbox install.
 
-## Next Steps
+## Next steps
 
-* Try out the examples in the [Getting Started](/engine/getstarted/index.md) tutorial.
+* Try out the [Get started](/get-started/) tutorial.
 
 * Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 

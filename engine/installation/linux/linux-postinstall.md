@@ -8,11 +8,6 @@ title: Post-installation steps for Linux
 This section contains optional procedures for configuring Linux hosts to work
 better with Docker.
 
-* [Manage Docker as a non-root user](#manage-docker-as-a-non-root-user)
-* [Configure Docker to start on boot](#configure-docker-to-start-on-boot)
-* [Allow access to the remote API through a firewall](#allow-access-to-the-remote-api-through-a-firewall)
-* [Troubleshooting](#troubleshooting)
-
 ## Manage Docker as a non-root user
 
 The `docker` daemon binds to a Unix socket instead of a TCP port. By default
@@ -23,13 +18,16 @@ If you don't want to use `sudo` when you use the `docker` command, create a Unix
 group called `docker` and add users to it. When the `docker` daemon starts, it
 makes the ownership of the Unix socket read/writable by the `docker` group.
 
-> **Warning**: The `docker` group grants privileges equivalent to the `root`
+> **Warning**:
+> The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
-> [*Docker Daemon Attack Surface*](../../security/security.md#docker-daemon-attack-surface).
+> [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
+{:.warning}
 
 To create the `docker` group and add your user:
 
 1.  Create the `docker` group.
+
     ```bash
     $ sudo groupadd docker
     ```
@@ -42,7 +40,11 @@ To create the `docker` group and add your user:
 
 3.  Log out and log back in so that your group membership is re-evaluated.
 
-4.  Verify that you can `docker` commands without `sudo`.
+    If testing on a virtual machine, it may be necessary to restart the virtual machine for changes to take affect.
+
+    On a desktop Linux environment such as X Windows, log out of your session completely and then log back in.
+
+4.  Verify that you can run `docker` commands without `sudo`.
 
     ```bash
     $ docker run hello-world
@@ -55,8 +57,7 @@ To create the `docker` group and add your user:
 
 Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher)
 use [`systemd`](#systemd) to manage which services start when the system boots.
-Ubuntu 14.10 and below use [`upstart`](#upstart). Oracle Linux 6 uses
-`chkconfig`.
+Ubuntu 14.10 and below use [`upstart`](#upstart).
 
 ### `systemd`
 
@@ -72,7 +73,7 @@ $ sudo systemctl disable docker
 
 If you need to add an HTTP Proxy, set a different directory or partition for the
 Docker runtime files, or make other customizations, see
-[customize your systemd Docker daemon options](../../admin/systemd.md).
+[customize your systemd Docker daemon options](/engine/admin/systemd.md).
 
 ### `upstart`
 
@@ -92,11 +93,26 @@ $ sudo chkconfig docker on
 ## Use a different storage engine
 
 For information about the different storage engines, see
-[Storage drivers](../userguide/storagedriver/index.md). The default storage
-engine and the list of supported storage engines depend on your host's
-Linux distribution and available kernel drivers.
+[Storage drivers](/engine/userguide/storagedriver/imagesandcontainers.md).
+The default storage engine and the list of supported storage engines depend on
+your host's Linux distribution and available kernel drivers.
 
 ## Troubleshooting
+
+### Kernel compatibility
+
+Docker will not run correctly if your kernel is older than version 3.10 or if it
+is missing some modules. To check kernel compatibility, you can download and
+run the [`check-compatibility.sh`](https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh)
+script.
+
+```bash
+$ curl https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh > check-config.sh
+
+$ bash ./check-config.sh
+```
+
+The script will only work on Linux, not macOS.
 
 ### `Cannot connect to the Docker daemon`
 
@@ -111,7 +127,6 @@ Cannot connect to the Docker daemon. Is 'docker daemon' running on this host?
 To see which host your client is configured to connect to, check the value of
 the `DOCKER_HOST` variable in your environment.
 
-
 ```bash
 $ env | grep DOCKER_HOST
 ```
@@ -120,7 +135,6 @@ If this command returns a value, the Docker client is set to connect to a
 Docker daemon running on that host. If it is unset, the Docker client is set to
 connect to the Docker daemon running on the local host. If it is set in error,
 use the following command to unset it:
-
 
 ```bash
 $ unset DOCKER_HOST
@@ -204,16 +218,17 @@ can change the location of the configuration file using the `--config-file`
 daemon flag. The documentation below assumes the configuration file is located
 at `/etc/docker/daemon.json`.
 
-1. .  Create or edit the Docker daemon configuration file, which defaults to
+1.  Create or edit the Docker daemon configuration file, which defaults to
     `/etc/docker/daemon.json` file, which controls the Docker daemon
     configuration.
 
     ```bash
-    sudo nano /etc/docker/daemon.json
+    $ sudo nano /etc/docker/daemon.json
     ```
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
     existing contents, you only need to add or edit the `dns` line.
+
     ```json
     {
     	"dns": ["8.8.8.8", "8.8.4.4"]
@@ -291,7 +306,7 @@ To disable `dnsmasq` on RHEL, CentOS, or Fedora:
     ```
 
 2.  Configure the DNS servers manually using the
-    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){ :target="_blank" class="_"}.
+    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" class="_"}.
 
 ### Allow access to the remote API through a firewall
 
@@ -314,7 +329,7 @@ hosts, to prevent remote privilege-escalation attacks.
 
 To configure UFW and allow incoming connections on the Docker port:
 
-1.   Verify that UFW is enabled.
+1.  Verify that UFW is enabled.
 
     ```bash
     $ sudo ufw status
@@ -323,7 +338,7 @@ To configure UFW and allow incoming connections on the Docker port:
     If `ufw` is not enabled, the remaining steps will not be helpful.
 
 2.  Edit the UFW configuration file, which is usually `/etc/default/ufw` or
-`/etc/sysconfig/ufw`. Set the `DEFAULT_FORWARD_POLICY` policy to `ACCEPT`.
+    `/etc/sysconfig/ufw`. Set the `DEFAULT_FORWARD_POLICY` policy to `ACCEPT`.
 
     ```none
     DEFAULT_FORWARD_POLICY="ACCEPT"
@@ -334,13 +349,14 @@ To configure UFW and allow incoming connections on the Docker port:
 3.  If you need to enable access to the Docker Remote API from external hosts
     and understand the security implications (see the section before this
     procedure), then configure UFW to allow incoming connections on the Docker port,
-    which is 2375 if you do not use TLS, and 2376 if you do.
+    which is `2375` if you do not use TLS, and `2376` if you do.
 
     ```bash
     $ sudo ufw allow 2376/tcp
     ```
 
 4.  Reload UFW.
+
     ```bash
     $ sudo ufw reload
     ```
@@ -377,29 +393,12 @@ memory and a 10% overall performance degradation, even if Docker is not running.
     $ sudo update-grub
     ```
 
-     If your GRUB configuration file has incorrect syntax, an error will occur.
-     In this case, steps 3 and 4.
+    If your GRUB configuration file has incorrect syntax, an error will occur.
+    In this case, repeat steps 3 and 4.
 
 6.  Reboot your system. Memory and swap accounting are enabled and the warning
     does not occur.
 
-
-### Troubleshooting Oracle Linux
-
-#### Docker unmounts `btrfs` filesystem on shutdown
-
-If you're running Docker using the `btrfs` storage engine and you stop the Docker
-service, it unmounts the `btrfs` filesystem during the shutdown process. Ensure
-that the filesystem is mounted properly before restarting the Docker service.
-
-On Oracle Linux 7, you can use a `systemd.mount` definition and modify the
-Docker `systemd.service` to depend on the `btrfs` mount defined in `systemd`.
-
-#### SElinux support on Oracle Linux 7
-
-SElinux must be set to `Permissive` or `Disabled` in `/etc/sysconfig/selinux` to
-use the `btrfs` storage engine on Oracle Linux 7.
-
 ## Next steps
 
-- Continue with the [User Guide](../../userguide/index.md).
+- Continue with the [User Guide](/engine/userguide/index.md).

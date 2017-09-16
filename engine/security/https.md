@@ -21,18 +21,20 @@ it will only connect to servers with a certificate signed by that CA.
 > **Warning**:
 > Using TLS and managing a CA is an advanced topic. Please familiarize yourself
 > with OpenSSL, x509 and TLS before using it in production.
+{:.warning}
 
 > **Warning**:
 > These TLS commands will only generate a working set of certificates on Linux.
 > macOS comes with a version of OpenSSL that is incompatible with the
 > certificates that Docker requires.
+{:.warning}
 
 ## Create a CA, server and client keys with OpenSSL
 
 > **Note**: replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
-First generate CA private and public keys:
+First, on the **Docker daemon's host machine**, generate CA private and public keys:
 
     $ openssl genrsa -aes256 -out ca-key.pem 4096
     Generating RSA private key, 4096 bit long modulus
@@ -90,6 +92,9 @@ using `10.10.10.20` and `127.0.0.1`:
 For client authentication, create a client key and certificate signing
 request:
 
+> **Note:** for simplicity of the next couple of steps, you may perform this 
+> step on the Docker daemon's host machine as well.
+
     $ openssl genrsa -out key.pem 4096
     Generating RSA private key, 4096 bit long modulus
     .........................................................++
@@ -102,7 +107,7 @@ config file:
 
     $ echo extendedKeyUsage = clientAuth > extfile.cnf
 
-Now sign the public key:
+Now sign the private key:
 
     $ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
       -CAcreateserial -out cert.pem -extfile extfile.cnf
@@ -138,6 +143,10 @@ providing a certificate trusted by our CA:
 To be able to connect to Docker and validate its certificate, you now
 need to provide your client keys, certificates and trusted CA:
 
+> **Note**: This step should be run on your Docker client machine. As such, you 
+> need to copy your CA certificate, your server certificate, and your client 
+> certificate to that machine.
+
 > **Note**: replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
@@ -153,6 +162,7 @@ need to provide your client keys, certificates and trusted CA:
 > That means anyone with the keys can give any instructions to your Docker
 > daemon, giving them root access to the machine hosting the daemon. Guard
 > these keys as you would a root password!
+{:.warning}
 
 ## Secure by default
 

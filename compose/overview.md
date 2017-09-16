@@ -1,8 +1,10 @@
 ---
 description: Introduction and Overview of Compose
-keywords: documentation, docs,  docker, compose, orchestration, containers
+keywords: documentation, docs, docker, compose, orchestration, containers
 title: Overview of Docker Compose
 ---
+
+>**Looking for Compose file reference?** [Find the latest version here](/compose/compose-file/index.md).
 
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a Compose file to configure your application's services.
@@ -27,7 +29,7 @@ so they can be run together in an isolated environment.
 
 A `docker-compose.yml` looks like this:
 
-    version: '2'
+    version: '3'
     services:
       web:
         build: .
@@ -44,7 +46,7 @@ A `docker-compose.yml` looks like this:
       logvolume01: {}
 
 For more information about the Compose file, see the
-[Compose file reference](compose-file.md)
+[Compose file reference](compose-file/index.md).
 
 Compose has commands for managing the whole lifecycle of your application:
 
@@ -62,7 +64,7 @@ Compose has commands for managing the whole lifecycle of your application:
 - [Get started with WordPress](wordpress.md)
 - [Frequently asked questions](faq.md)
 - [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Compose file reference](compose-file/index.md)
 
 ## Features
 
@@ -96,8 +98,8 @@ the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
 
 If you use `docker-compose` on a Windows machine, see
-[Environmentvariables](reference/envvars.md) and adjust the necessary environment
-variables for you specific needs.
+[Environment variables](reference/envvars.md) and adjust the necessary environment
+variables for your specific needs.
 
 
 ### Only recreate containers that have changed
@@ -127,7 +129,7 @@ below.
 ### Development environments
 
 When you're developing software, the ability to run an application in an
-isolated environment and interact with it is crucial.  The Compose command
+isolated environment and interact with it is crucial. The Compose command
 line tool can be used to create the environment and interact with it.
 
 The [Compose file](compose-file.md) provides a way to document and configure
@@ -137,7 +139,7 @@ and start one or more containers for each dependency with a single command
 (`docker-compose up`).
 
 Together, these features provide a convenient way for developers to get
-started on a project.  Compose can reduce a multi-page "developer getting
+started on a project. Compose can reduce a multi-page "developer getting
 started guide" to a single machine readable Compose file and a few commands.
 
 ### Automated testing environments
@@ -156,7 +158,7 @@ and destroy isolated testing environments for your test suite. By defining the f
 Compose has traditionally been focused on development and testing workflows,
 but with each release we're making progress on more production-oriented features. You can use Compose to deploy to a remote Docker Engine. The Docker Engine may be a single instance provisioned with
 [Docker Machine](/machine/overview.md) or an entire
-[Docker Swarm](/swarm/overview.md) cluster.
+[Docker Swarm](/engine/swarm/index.md) cluster.
 
 For details on using production-oriented features, see
 [compose in production](production.md) in this documentation.

@@ -21,7 +21,7 @@ A custom certificate is configured by creating a directory under
 `/etc/docker/certs.d` using the same name as the registry's hostname (e.g.,
 `localhost`). All `*.crt` files are added to this directory as CA roots.
 
-> **Note:**
+> **Note**:
 > As of docker 1.13, on Linux any root certificates authorities will be merged
 > in with the system defaults (i.e., host's root CA set). Prior to 1.13 and on
 > Windows, the system default certificates will only be used when there are no
@@ -31,7 +31,7 @@ The presence of one or more `<filename>.key/cert` pairs indicates to Docker
 that there are custom certificates required for access to the desired
 repository.
 
-> **Note:**
+> **Note**:
 > If there are multiple certificates, each will be tried in alphabetical
 > order. If there is an authentication error (e.g., 403, 404, 5xx, etc.), Docker
 > will continue to try with the next certificate.
@@ -43,7 +43,7 @@ The following illustrates a configuration with custom certificates:
     └── localhost:5000          <-- Hostname:port
        ├── client.cert          <-- Client certificate
        ├── client.key           <-- Client key
-       └── localhost.crt        <-- Certificate authority that signed
+       └── ca.crt               <-- Certificate authority that signed
                                     the registry certificate
 ```
 
@@ -60,20 +60,30 @@ key and then use the key to create the certificate.
     $ openssl genrsa -out client.key 4096
     $ openssl req -new -x509 -text -key client.key -out client.cert
 
-> **Note:**
+> **Note**:
 > These TLS commands will only generate a working set of certificates on Linux.
 > The version of OpenSSL in macOS is incompatible with the type of
 > certificate Docker requires.
 
 ## Troubleshooting tips
 
-The Docker daemon interprets ``.crt` files as CA certificates and `.cert` files
+The Docker daemon interprets `.crt` files as CA certificates and `.cert` files
 as client certificates. If a CA certificate is accidentally given the extension
 `.cert` instead of the correct `.crt` extension, the Docker daemon logs the
 following error message:
 
 ```
 Missing key KEY_NAME for client certificate CERT_NAME. Note that CA certificates should use the extension .crt.
+```
+
+If the Docker registry is accessed without a port number, do not add the port to the directory name.  The following shows the configuration for a registry on default port 443 which is accessed with `docker login my-https.registry.example.com`:
+
+```
+    /etc/docker/certs.d/
+    └── my-https.registry.example.com          <-- Hostname without port
+       ├── client.cert
+       ├── client.key
+       └── ca.crt
 ```
 
 ## Related Information

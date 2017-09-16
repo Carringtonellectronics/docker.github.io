@@ -2,15 +2,15 @@
 advisory: swarm-standalone
 hide_from_sitemap: true
 description: Swarm API
-keywords: docker, swarm, clustering,  api
+keywords: docker, swarm, clustering, api
 redirect_from:
 - /api/swarm-api/
 - /swarm/api/
 title: Docker Swarm API
 ---
 
-The Docker Swarm API is mostly compatible with the [Docker Remote
-API](/engine/reference/api/docker_remote_api/). This
+The Docker Swarm API is mostly compatible with the
+[Docker Remote API](/engine/api/index.md). This
 document is an overview of the differences between the Swarm API and the Docker
 Engine API.
 
@@ -105,7 +105,7 @@ The following two examples demonstrate how to utilize this using the existing Do
 
 ### Authenticate using registry tokens
 
-> **Note:** This example requires Docker Engine 1.10 with auth token support.
+> **Note**: This example requires Docker Engine 1.10 with auth token support.
 > For older Engine versions, refer to [authenticate using username and
 > password](swarm-api.md#authenticate-using-username-and-password)
 
@@ -144,7 +144,7 @@ Be aware that tokens are short-lived and will expire quickly.
 
 ### Authenticate using username and password
 
-> **Note:** this authentication method stores your credentials unencrypted
+> **Note**: This authentication method stores your credentials unencrypted
 > on the filesystem. Refer to [Authenticate using registry tokens](swarm-api.md#authenticate-using-registry-tokens)
 > for a more secure approach.
 

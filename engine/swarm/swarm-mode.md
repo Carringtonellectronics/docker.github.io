@@ -37,7 +37,7 @@ as follows:
 * designates the current node as a leader manager node for the swarm.
 * names the node with the machine hostname.
 * configures the manager to listen on an active network interface on port 2377.
-* sets the current node to `Active` availability, meanining it can receive tasks
+* sets the current node to `Active` availability, meaning it can receive tasks
 from the scheduler.
 * starts an internal distributed data store for Engines participating in the
 swarm to maintain a consistent view of the swarm and all services running on it.
@@ -84,7 +84,7 @@ reach the first manager node is not the same address the manager sees as its
 own. For instance, in a cloud setup that spans different regions, hosts have
 both internal addresses for access within the region and external addresses that
 you use for access from outside that region. In this case, specify the external
-address with `--advertise-addr` so that the node can propogate that information
+address with `--advertise-addr` so that the node can propagate that information
 to other nodes that subsequently connect to it.
 
 Refer to the `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md)
@@ -121,7 +121,7 @@ $ docker swarm join-token manager
 To add a worker to this swarm, run the following command:
 
     docker swarm join \
-    --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
+    --token SWMTKN-1-59egwe8qangbzbqb3ryawxzk3jn97ifahlsrw01yar60pmkr90-bdjfnkcflhooyafetgjod97sz \
     192.168.99.100:2377
 ```
 
@@ -156,13 +156,13 @@ token. Specify whether you want to rotate the token for `worker` or `manager`
 nodes:
 
 ```bash
-$docker swarm join-token  --rotate worker
+$ docker swarm join-token  --rotate worker
 
 To add a worker to this swarm, run the following command:
 
     docker swarm join \
     --token SWMTKN-1-2kscvs0zuymrsc9t0ocyy1rdns9dhaodvpl639j2bqx55uptag-ebmn5u927reawo27s3azntd44 \
-    172.17.0.2:2377
+    192.168.99.100:2377
 ```
 
 ## Learn More

@@ -15,7 +15,7 @@ If a question about syntactical, grammatical, or lexical practice comes up,
 refer to the AP guide first. If you don’t have a copy of (or online subscription
 to) the AP guide, you can almost always find an answer to a specific question by
 searching the web. If you can’t find an answer, please ask a
-[maintainer](https://github.com/docker/docker/blob/master/MAINTAINERS) and
+[maintainer](https://github.com/moby/moby/blob/master/MAINTAINERS) and
 we will find the answer.
 
 That said, please don't get too hung up on using correct style. We'd rather have
@@ -23,7 +23,7 @@ you submit good information that doesn't conform to the guide than no
 information at all. Docker's tech writers are always happy to help you with the
 prose, and we promise not to judge or use a red pen!
 
-> **Note:**
+> **Note**:
 > The documentation is written with paragraphs wrapped at 80 column lines to
 > make it easier for terminal use. You can probably set up your favorite text
 > editor to do this automatically for you.
@@ -43,8 +43,8 @@ prose is simple, clear, and straightforward it will translate readily.
 
 One way to think about this is to assume Docker’s users are generally university
 educated and read at least a "16th" grade level (meaning they have a
-university degree). You can use a [readability
-tester](https://readability-score.com/) to help guide your judgement. For
+university degree). You can use a
+[readability tester](https://readable.io/) to help guide your judgment. For
 example, the readability score for the phrase "Containers should be ephemeral"
 is around the 13th grade level (first year at university), and so is acceptable.
 
@@ -169,7 +169,7 @@ Use notes sparingly and only to bring things to the reader's attention that are
 critical or otherwise deserving of being called out from the body text. Please
 format all notes as follows:
 
-    > **Note:**
+    > **Note**:
     > One line of note text
     > another line of note text
 
@@ -203,11 +203,14 @@ Text from a CLI should be quoted verbatim, even if it contains errors or its
 style contradicts this guide. You can add "(sic)" after the quote to indicate
 the errors are in the quote and are not errors in our docs.
 
-Text taken from a GUI (e.g., menu text or button text) should appear in "double
-quotes". The text should take the exact same capitalisation, etc. as appears in
-the GUI. E.g., Click "Continue" to save the settings.
+Text taken from a GUI, such as menu text or button text, should be bold.
+Use the text exactly as it appears in the GUI. For example:
 
-Text that refers to a keyboard command or hotkey is capitalized (e.g., Ctrl-D).
+```none
+Click **Continue** to save the settings.
+```
+
+Text that refers to a keyboard command or hotkey should be capitalized and bold. For example: **Ctrl-D**.
 
 When writing CLI examples, give the user hints by making the examples resemble
 exactly what they see in their shell:

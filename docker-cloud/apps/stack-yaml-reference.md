@@ -1,12 +1,14 @@
 ---
-description: Stack YAML reference
-keywords: YAML, stack, reference
+description: Stack YAML reference for Docker Cloud
+keywords: YAML, stack, reference, docker cloud
 redirect_from:
 - /docker-cloud/feature-reference/stack-yaml-reference/
-title: Stack file YAML reference
+title: Docker Cloud stack file YAML reference
 ---
 
-A stack is a collection of services that make up an application in a specific environment. Learn more about stacks [here](stacks.md). A **stack file** is a file in YAML format that defines one or more services, similar to a `docker-compose.yml` file but with a few extensions. The default name for this file is `docker-cloud.yml`.
+A stack is a collection of services that make up an application in a specific environment. Learn more about stacks for Docker Cloud [here](stacks.md). A **stack file** is a file in YAML format that defines one or more services, similar to a `docker-compose.yml` file for Docker Compose but with a few extensions. The default name for this file is `docker-cloud.yml`.
+
+**Looking for information on stack files for Swarm?** A good place to start is the [Compose reference file](/compose/compose-file/index.md), particularly the section on `deploy` key and its sub-options, and the reference on [Docker stacks](/compose/bundles.md). Also, the new [Getting Started tutorial](/get-started/index.md) demos use of a stack file to deploy an application to a swarm.
 
 ## Stack file example
 
@@ -30,9 +32,9 @@ redis:
   image: redis
 ```
 
-Each key defined in `docker-cloud.yml` creates a service with that name in Docker Cloud. In the example above, three services are created: `lb`, `web` and `redis`. Each service is a dictionary whose possible keys are documented below.
+Each key defined in `docker-cloud.yml` creates a service with that name in Docker Cloud. In the example above, three services are created: `lb`, `web`, and `redis`. Each service is a dictionary whose possible keys are documented below.
 
- The `image` key is mandatory. Other keys are optional and are analogous to their [Docker Cloud Service API](/apidocs/docker-cloud.md#create-a-new-service) counterparts.
+The `image` key is mandatory. Other keys are optional and are analogous to their [Docker Cloud Service API](/apidocs/docker-cloud.md#create-a-new-service) counterparts.
 
 ## image (required)
 
@@ -221,7 +223,7 @@ ports:
 
 ## privileged
 
-Whether to start the containers with Docker Engine's privileged flag set or not (default: false).
+Whether to start the containers with Docker Engine's privileged flag set or not (default: `false`).
 
 ```yml
 privileged: true
@@ -268,7 +270,7 @@ tags:
 ```
 
 ## target_num_containers
-The number of containers to run for this service (default: 1).
+The number of containers to run for this service (default: `1`).
 
 ```yml
 target_num_containers: 3
@@ -285,7 +287,11 @@ volumes:
 ```
 
 ## volumes_from
-Mount all of the volumes from another service by specifying a service unique name. If the target service belongs to this stack its service unique name is its service name. If the target service does not belong to any stack its service unique name is its service name. If the target service belongs to another stack its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
+Mount all of the volumes from another service by specifying a service unique name. 
+
+- If the target service belongs to this stack its service unique name is its service name. 
+- If the target service does not belong to any stack its service unique name is its service name. 
+- If the target service belongs to another stack its service unique name is its service name plus the service stack name, separated by ".". Learn more [here](volumes.md).
 
 ```yml
 volumes_from:

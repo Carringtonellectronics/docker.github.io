@@ -14,7 +14,7 @@ review</a>.
 
 Now that you’ve had some practice, try adding another feature to Kitematic on your own.
 
-As you learned in the previous exercise, adding the container id to the container Settings tab is fairly simple.
+As you learned in the previous exercise, adding the container ID to the container **Settings** tab is fairly simple.
 
 Let's provide another missing piece of information for Kitematic users:
 
@@ -30,8 +30,8 @@ As an exercise, implement the code changes needed to display the current contain
 To learn more about contributing to Docker open source projects, see:
 
 * <a href="/opensource/project/who-written-for/" target="_blank">
- README First</a>
+ README first</a>
 
-* <a href="/opensource/code/" target="_blank"> Quick Start contribution </a>
+* <a href="/opensource/code/" target="_blank"> Quick start contribution </a>
 
 * <a href="/opensource/workflow/make-a-contribution/" target="_blank"> Understand how to contribute </a>

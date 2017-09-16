@@ -9,7 +9,7 @@ title: README first
 This section of the documentation contains a guide for Docker users who want to
 contribute code or documentation to the Docker Engine project. As a community, we
 share rules of behavior and interaction. Make sure you are familiar with the <a
-href="https://github.com/docker/docker/blob/master/CONTRIBUTING.md#docker-community-guidelines"
+href="https://github.com/moby/moby/blob/master/CONTRIBUTING.md#docker-community-guidelines"
 target="_blank">community guidelines</a> before continuing.
 
 ## Where and what you can contribute
@@ -49,7 +49,7 @@ predictably, and procedurally as possible.
 
 Users who are new to Engine development should start by setting up their
 environment. Then, they should try a simple code change. After that, you should
-find something to work on or propose at totally new change.
+find something to work on or propose a totally new change.
 
 If you are a programming prodigy, you still may find this documentation useful.
 Please feel free to skim past information you find obvious or boring.

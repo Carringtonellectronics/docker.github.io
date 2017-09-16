@@ -7,7 +7,7 @@ title: Deploy your app on Docker for Azure
 ## Connecting to your manager nodes
 
 This section will walk you through connecting to your installation and deploying
-applications.  Instructions are included for both AWS and Azure, so be sure to
+applications. Instructions are included for both AWS and Azure, so be sure to
 follow the instructions for the cloud provider of your choice in each section.
 
 First, you will obtain the public IP address for a manager node. Any manager
@@ -31,7 +31,7 @@ node) that you can use to log in to each manager node.
 #### Manager nodes
 
 Obtain the public IP and/or port for the manager node as instructed above and
-using the provided SSH key to begin administrating your swarm and the unique port associated with a manager:
+use the provided SSH key to begin administrating your swarm and the unique port associated with a manager:
 
     $ ssh -i <path-to-ssh-key> -p <ssh-port> docker@<ip>
     Welcome to Docker!
@@ -43,7 +43,7 @@ Once you are logged into the container you can run Docker commands on the swarm:
 
 You can also tunnel the Docker socket over SSH to remotely run commands on the cluster (requires [OpenSSH 6.7](https://lwn.net/Articles/609321/) or later):
 
-    $ ssh -NL localhost:2374:/var/run/docker.sock docker@<ssh-host> &
+    $ ssh -i <path-to-ssh-key> -p <ssh-port> -fNL localhost:2374:/var/run/docker.sock docker@<ssh-host>
     $ docker -H localhost:2374 info
 
 If you don't want to pass `-H` when using the tunnel, you can set the `DOCKER_HOST` environment variable to point to the localhost tunnel opening.
@@ -150,7 +150,7 @@ There are cases (such as installing a volume plugin) wherein a docker command ma
 
 Usage : `swarm-exec {Docker command}`
 
-The following will install a test plugin in all the nodes in the cluster
+The following will install a test plugin in all the nodes in the cluster.
 
 Example : `swarm-exec docker plugin install --grant-all-permissions mavenugo/test-docker-netplugin`
 
@@ -158,7 +158,7 @@ This tool internally makes use of docker global-mode service that runs a task on
 
 ### Distributed Application Bundles
 
-To deploy complex multi-container apps, you can use [distributed application bundles](https://github.com/docker/docker/blob/master/experimental/docker-stacks-and-bundles.md). You can either run `docker deploy` to deploy a bundle on your machine over an SSH tunnel, or copy the bundle (for example using `scp`) to a manager node, SSH into the manager and then run `docker deploy` (if you have multiple managers, you have to ensure that your session is on one that has the bundle file).
+To deploy complex multi-container apps, you can use [distributed application bundles](https://github.com/moby/moby/blob/master/experimental/docker-stacks-and-bundles.md). You can either run `docker deploy` to deploy a bundle on your machine over an SSH tunnel, or copy the bundle (for example using `scp`) to a manager node, SSH into the manager and then run `docker deploy` (if you have multiple managers, you have to ensure that your session is on one that has the bundle file).
 
 A good sample app to test application bundles is the [Docker voting app](https://github.com/docker/example-voting-app).
 

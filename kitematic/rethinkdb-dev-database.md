@@ -10,7 +10,7 @@ In this tutorial, you will:
 - Create a RethinkDB Container for Development
 - (Advanced) Clone a small Node.js application and write data into RethinkDB.
 
-### Setting up RethinkDB in Kitematic
+### Set up RethinkDB in Kitematic
 
 First, if you haven't yet done so, [download and start
 Kitematic](index.md). Once open, the app should look like
@@ -31,11 +31,11 @@ tab and then the `Ports` section:
 ![Rethink create button](images/rethink-ports.png)
 
 You can see there that for RethinkDB port `28015`, the container is listening on
-host `192.168.99.100` and port `49154` (in this example - ports may be different
+host `localhost` and port `32783` (in this example - ports may be different
 for you). This means you can now reach RethinkDB via a client driver at
-`192.168.99.100:49154`. Again, this IP address may be different for you.
+`127.0.0.1:32783`. Again, this IP address may be different for you.
 
-### (Advanced) Saving Data into RethinkDB with a local Node.js App
+### (Advanced) Save Data into RethinkDB with a local Node.js App
 
 Now, you'll create the RethinkDB example chat application running on your local
 macOS system to test drive your new containerized database.
@@ -43,13 +43,13 @@ macOS system to test drive your new containerized database.
 First, if you don't have it yet, [download and install
 Node.js](http://nodejs.org/).
 
-> **Note**: this example needs Xcode installed. We'll replace it with something
+> **Note**: This example needs Xcode installed. We'll replace it with something
 > with fewer dependencies soon.
 
 In your terminal, type:
 
-     $ export RDB_HOST=192.168.99.100 # replace with IP from above step
-     $ export RDB_PORT=49154 # replace with Port from above step
+     $ export RDB_HOST=127.0.0.1 # replace with IP from above step
+     $ export RDB_PORT=32783 # replace with Port from above step
      $ git clone https://github.com/rethinkdb/rethinkdb-example-nodejs-chat
      $ cd rethinkdb-example-nodejs-chat
      $ npm install
