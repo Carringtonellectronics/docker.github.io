@@ -109,32 +109,40 @@ To create the instances do the following:
 
 ## Step 3. Install Engine on each node
 
-1.  [Install Docker](/engine/installation/){: target="_blank" class="_"} on each
-    host, using the appropriate instructions for your operating system and
-    distribution.
+In this step, you install Docker Engine on each node. By installing Engine, you enable the Swarm manager to address the nodes via the Engine CLI and API.
 
-2.  Edit `/etc/docker/daemon.json`. Create it if it does not exist. Assuming the
-    file was empty, its contents should be:
+SSH to each node in turn and do the following.
 
-    ```json
-    {
-      "hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]
-    }
-    ```
+1. Update the yum packages.
 
-    Start or restart Docker for the changes to take effect.
+    Keep an eye out for the "y/n/abort" prompt:
 
-    ```bash
-    $ sudo systemctl start docker
-    ```
+        $ sudo yum update
 
-3.  Give the `ec2-user` root privileges:
+2. Run the installation script.
 
-    ```bash
-    $ sudo usermod -aG docker ec2-user
-    ```
+        $ curl -sSL https://get.docker.com/ | sh
 
-4. Log out of the host.
+3. Edit `/etc/sysconfig/docker` and add `"-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock"`
+   to the `OPTIONS` variable.
+
+4. Start Docker.
+
+       $ sudo /etc/init.d/docker start
+
+4. Verify that Docker Engine is installed correctly by running a container with the
+   `hello-world` image.
+
+       $ sudo docker run hello-world
+
+   The output should display a "Hello World" message and other text without any
+   error messages.
+
+5. Give the `ec2-user` root privileges:
+
+       $ sudo usermod -aG docker ec2-user
+
+6. Enter `logout`.
 
 #### Troubleshooting
 
@@ -293,7 +301,7 @@ They will display corresponding entries for the change in leadership.
 
 ## Additional Resources
 
-- [Installing Docker Engine on a cloud provider](/docker-for-aws/)
+- [Installing Docker Engine on a cloud provider](/engine/installation/cloud/cloud-ex-aws/)
 - [High availability in Docker Swarm](multi-manager-setup.md)
 - [Discovery](discovery.md)
 - [High-availability cluster using a trio of consul nodes](https://hub.docker.com/r/progrium/consul/)

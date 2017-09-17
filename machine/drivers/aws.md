@@ -42,36 +42,30 @@ You can use environment variables:
 
 ## Options
 
--   `--amazonec2-access-key`: Your access key ID for the Amazon Web Services API.
--   `--amazonec2-ami`: The AMI ID of the instance to use.
--   `--amazonec2-block-duration-minutes`: AWS spot instance duration in minutes (60, 120, 180, 240, 300, or 360).
--   `--amazonec2-device-name`: The root device name of the instance.
--   `--amazonec2-endpoint`: Optional endpoint URL (hostname only or fully qualified URI)
--   `--amazonec2-iam-instance-profile`: The AWS IAM role name to be used as the instance profile.
--   `--amazonec2-insecure-transport`: Disable SSL when sending requests
--   `--amazonec2-instance-type`: The instance type to run.
--   `--amazonec2-keypair-name`: AWS keypair to use; requires --amazonec2-ssh-keypath
--   `--amazonec2-monitoring`: Enable CloudWatch Monitoring.
--   `--amazonec2-open-port`: Make the specified port number accessible from the Internet.
--   `--amazonec2-private-address-only`: Use the private IP address only.
--   `--amazonec2-region`: The region to use when launching the instance.
--   `--amazonec2-request-spot-instance`: Use spot instances.
--   `--amazonec2-retries`: Set retry count for recoverable failures (use -1 to disable)
--   `--amazonec2-root-size`: The root disk size of the instance (in GB).
+-   `--amazonec2-access-key`: Your access key id for the Amazon Web Services API.
 -   `--amazonec2-secret-key`: Your secret access key for the Amazon Web Services API.
--   `--amazonec2-security-group`: AWS VPC security group name.
 -   `--amazonec2-session-token`: Your session token for the Amazon Web Services API.
--   `--amazonec2-spot-price`: Spot instance bid price (in dollars). Require the `--amazonec2-request-spot-instance` flag.
--   `--amazonec2-ssh-keypath`: Path to Private Key file to use for instance. Matching public key with .pub extension should exist
--   `--amazonec2-ssh-user`: The SSH Login username, which must match the default SSH user set in the ami used.
--   `--amazonec2-subnet-id`: AWS VPC subnet ID.
--   `--amazonec2-tags`: AWS extra tag key-value pairs (comma-separated, e.g. key1,value1,key2,value2).
--   `--amazonec2-use-ebs-optimized-instance`: Create an EBS Optimized Instance, instance type must support it.
--   `--amazonec2-use-private-address`: Use the private IP address for docker-machine, but still create a public IP address.
--   `--amazonec2-userdata`: Path to file with cloud-init user data.
--   `--amazonec2-volume-type`: The Amazon EBS volume type to be attached to the instance.
+-   `--amazonec2-ami`: The AMI ID of the instance to use.
+-   `--amazonec2-region`: The region to use when launching the instance.
 -   `--amazonec2-vpc-id`: Your VPC ID to launch the instance in.
 -   `--amazonec2-zone`: The AWS zone to launch the instance in (i.e. one of a,b,c,d,e).
+-   `--amazonec2-subnet-id`: AWS VPC subnet id.
+-   `--amazonec2-security-group`: AWS VPC security group name.
+-   `--amazonec2-tags`: AWS extra tag key-value pairs (comma-separated, e.g. key1,value1,key2,value2).
+-   `--amazonec2-instance-type`: The instance type to run.
+-   `--amazonec2-device-name`: The root device name of the instance.
+-   `--amazonec2-root-size`: The root disk size of the instance (in GB).
+-   `--amazonec2-volume-type`: The Amazon EBS volume type to be attached to the instance.
+-   `--amazonec2-iam-instance-profile`: The AWS IAM role name to be used as the instance profile.
+-   `--amazonec2-ssh-user`: The SSH Login username, which must match the default SSH user set in the ami used.
+-   `--amazonec2-request-spot-instance`: Use spot instances.
+-   `--amazonec2-spot-price`: Spot instance bid price (in dollars). Require the `--amazonec2-request-spot-instance` flag.
+-   `--amazonec2-use-private-address`: Use the private IP address for docker-machine, but still create a public IP address.
+-   `--amazonec2-private-address-only`: Use the private IP address only.
+-   `--amazonec2-monitoring`: Enable CloudWatch Monitoring.
+-   `--amazonec2-use-ebs-optimized-instance`: Create an EBS Optimized Instance, instance type must support it.
+-   `--amazonec2-ssh-keypath`: Path to Private Key file to use for instance. Matching public key with .pub extension should exist
+-   `--amazonec2-retries`:  Set retry count for recoverable failures (use -1 to disable)
 
 
 #### Environment variables and default values:
@@ -115,7 +109,7 @@ By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
 | ca-central-1   | ami-ca6ddfae |
 | cn-north-1     | ami-79eb2214 |
 | eu-west-1      | ami-8aa67cf9 |
-| eu-central-1   | ami-fe408091 |
+| eu-central-1   | ami-ab0210c7 |
 | sa-east-1      | ami-185de774 |
 | us-east-1      | ami-26d5af4c |
 | us-west-1      | ami-9cbcd2fc |
@@ -131,11 +125,11 @@ Note that a security group will be created and associated to the host. This secu
 -   swarm (3376/tcp), only if the node is a swarm master
 
 If you specify a security group yourself using the `--amazonec2-security-group` flag, the above ports will be checked and opened and the security group modified.
-If you want more ports to be opened, like application specific ports, use the AWS console and modify the configuration manually.
+If you want more ports to be opened, like application specific ports, use the aws console and modify the configuration manually.
 
 ## VPC ID
 
-We determine your default VPC ID at the start of a command.
+We determine your default vpc id at the start of a command.
 In some cases, either because your account does not have a default vpc, or you don't want to use the default one, you can specify a vpc with the `--amazonec2-vpc-id` flag.
 
 To find the VPC ID:
@@ -147,7 +141,7 @@ To find the VPC ID:
 
     For example, `us-east1-a` is in the `a` availability zone. If the `a` zone is not present, you can create a new subnet in that zone or specify a different zone when you create the machine.
 
-To create a machine with a non-default VPC-ID:
+To create a machine with a non-default vpc-id:
 
     $ docker-machine create --driver amazonec2 --amazonec2-access-key AKI******* --amazonec2-secret-key 8T93C********* --amazonec2-vpc-id vpc-****** aws02
 

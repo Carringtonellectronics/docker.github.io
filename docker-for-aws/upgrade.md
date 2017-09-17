@@ -1,10 +1,10 @@
 ---
 description: Upgrading your stack
 keywords: aws, amazon, iaas, tutorial
-title: Docker for AWS upgrades
+title: Docker for AWS Upgrades
 ---
 
-To upgrade, apply a new version of the AWS Cloudformation template that powers Docker for AWS. Depending on changes in the next version, an upgrade involves:
+To upgrade, apply a new version of the AWS Cloudformation template that powers Docker for Azure. Depending on changes in the next version, an upgrade involves:
 
  * Changing the AMI backing manager and worker nodes (the Docker engine ships in the AMI)
  * Upgrading service containers
@@ -19,11 +19,11 @@ To upgrade, apply a new version of the AWS Cloudformation template that powers D
 
 New releases are announced on [Release Notes](release-notes.md) page.
 
-To initiate an update, use either the AWS Console or the AWS cli to initiate a stack update. Use the S3 template URL for the new release and complete the update wizard. This will initiate a rolling upgrade of the Docker swarm, and service state will be maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade.
+To initiate an update, use either the AWS Console of the AWS cli to initiate a stack update. Use the S3 template URL for the new release and complete the update wizard. This will initiate a rolling upgrade of the Docker swarm, and service state will be maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade.
 
 ![Upgrade in AWS console](img/cloudformation_update.png)
 
-Note that single containers started (for example) with `docker run -d` are **not** preserved during an upgrade. This is because they're not Docker Swarm objects, but are known only to the individual Docker engines.
+Note that single containers started (for example) with `docker run -d` are **not** preserved during an upgrade. This is because the're not Docker Swarm objects, but are known only to the individual Docker engines.
 
 ## Changing instance sizes and other template parameters
 

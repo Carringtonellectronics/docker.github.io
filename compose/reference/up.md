@@ -2,11 +2,10 @@
 description: Builds, (re)creates, starts, and attaches to containers for a service.
 keywords: fig, composition, compose, docker, orchestration, cli,  up
 title: docker-compose up
-notoc: true
 ---
 
 ```
-Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
+Usage: up [options] [SERVICE...]
 
 Options:
     -d                         Detached mode: Run containers in the background,
@@ -28,10 +27,7 @@ Options:
                                running. (default: 10)
     --remove-orphans           Remove containers for services not defined in
                                the Compose file
-    --exit-code-from SERVICE   Return the exit code of the selected service container.
-                               Implies --abort-on-container-exit.
-    --scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the `scale`
-                               setting in the Compose file if present.
+
 ```
 
 Builds, (re)creates, starts, and attaches to containers for a service.
@@ -50,7 +46,3 @@ flag.
 
 If you want to force Compose to stop and recreate all containers, use the
 `--force-recreate` flag.
-
-If the process encounters an error, the exit code for this command is `1`.  
-If the process is interrupted using `SIGINT` (`ctrl` + `C`) or `SIGTERM`, the containers are stopped, and the exit code is `0`.  
-If `SIGINT` or `SIGTERM` is sent again during this shutdown phase, the running containers are killed, and the exit code is `2`.

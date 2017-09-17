@@ -2,22 +2,21 @@
 description: Inspect the application
 keywords: tutorial, cluster management, swarm mode
 title: Inspect a service on the swarm
-notoc: true
 ---
 
 When you have [deployed a service](deploy-service.md) to your swarm, you can use
 the Docker CLI to see details about the service running in the swarm.
 
-1.  If you haven't already, open a terminal and ssh into the machine where you
-    run your manager node. For example, the tutorial uses a machine named
-    `manager1`.
+1. If you haven't already, open a terminal and ssh into the machine where you
+run your manager node. For example, the tutorial uses a machine named
+`manager1`.
 
-2.  Run `docker service inspect --pretty <SERVICE-ID>` to display the details
-    about a service in an easily readable format.
+2. Run `docker service inspect --pretty <SERVICE-ID>` to display the details
+about a service in an easily readable format.
 
     To see the details on the `helloworld` service:
 
-    ```bash
+    ```
     $ docker service inspect --pretty helloworld
 
     ID:		9uk4639qpg7npwf3fn2aasksr
@@ -37,7 +36,7 @@ the Docker CLI to see details about the service running in the swarm.
     >**Tip**: To return the service details in json format, run the same command
     without the `--pretty` flag.
 
-    ```bash
+    ```
     $ docker service inspect helloworld
     [
     {
@@ -86,10 +85,10 @@ the Docker CLI to see details about the service running in the swarm.
     ]
     ```
 
-4.  Run `docker service ps <SERVICE-ID>` to see which nodes are running the
-    service:
+4. Run `docker service ps <SERVICE-ID>` to see which nodes are running the
+service:
 
-    ```bash
+    ```
     $ docker service ps helloworld
 
     NAME                                    IMAGE   NODE     DESIRED STATE  LAST STATE
@@ -104,8 +103,8 @@ the Docker CLI to see details about the service running in the swarm.
     task so you can see if tasks are running according to the service
     definition.
 
-4.  Run `docker ps` on the node where the task is running to see details about
-    the container for the task.
+4. Run `docker ps` on the node where the task is running to see details about
+the container for the task.
 
     >**Tip**: If `helloworld` is running on a node other than your manager node,
     you must ssh to that node.

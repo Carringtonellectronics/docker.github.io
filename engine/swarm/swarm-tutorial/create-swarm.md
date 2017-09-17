@@ -2,7 +2,6 @@
 description: Initialize the swarm
 keywords: tutorial, cluster management, swarm mode
 title: Create a swarm
-notoc: true
 ---
 
 After you complete the [tutorial setup](index.md) steps, you're ready
@@ -23,11 +22,11 @@ machines.
     docker swarm init --advertise-addr <MANAGER-IP>
     ```
 
-    >**Note**: If you are using Docker for Mac or Docker for Windows to test
+    >**Note:** If you are using Docker for Mac or Docker for Windows to test
 single-node swarm, simply run `docker swarm init` with no arguments. There is no
-need to specify `--advertise-addr` in this case. To learn more, see the topic
+need to specify ` --advertise-addr` in this case. To learn more, see the topic
 on how to [Use Docker for Mac or Docker for
-Windows](/engine/swarm/swarm-tutorial/index.md#use-docker-for-mac-or-docker-for-windows) with Swarm.
+Windows](index.md#use-docker-for-mac-or-docker-for-windows) with Swarm.
 
     In the tutorial, the following command creates a swarm on the `manager1`
     machine:
@@ -81,7 +80,7 @@ Windows](/engine/swarm/swarm-tutorial/index.md#use-docker-for-mac-or-docker-for-
 
     ```
 
-    The `*` next to the node ID indicates that you're currently connected on
+    The `*` next to the node id indicates that you're currently connected on
     this node.
 
     Docker Engine swarm mode automatically names the node for the machine host

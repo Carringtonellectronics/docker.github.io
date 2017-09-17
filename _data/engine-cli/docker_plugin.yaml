@@ -1,6 +1,6 @@
 command: docker plugin
 short: Manage plugins
-long: Manage plugins.
+long: Manage plugins
 usage: docker plugin
 pname: docker
 plink: docker.yaml
@@ -14,7 +14,6 @@ cname:
 - docker plugin push
 - docker plugin rm
 - docker plugin set
-- docker plugin upgrade
 clink:
 - docker_plugin_create.yaml
 - docker_plugin_disable.yaml
@@ -25,5 +24,3 @@ clink:
 - docker_plugin_push.yaml
 - docker_plugin_rm.yaml
 - docker_plugin_set.yaml
-- docker_plugin_upgrade.yaml
-

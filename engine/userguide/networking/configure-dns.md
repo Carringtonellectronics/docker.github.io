@@ -81,9 +81,8 @@ Various container options that affect container domain name services.
      The IP addresses passed via the <code>--dns</code> option is used by the embedded DNS
      server to forward the DNS query if embedded DNS server is unable to resolve a name
      resolution request from the containers.
-     These <code>--dns</code> IP addresses are managed by the embedded DNS server and
+     These  <code>--dns</code> IP addresses are managed by the embedded DNS server and
      will not be updated in the container's <code>/etc/resolv.conf</code> file.
-    </p></td>
   </tr>
   <tr>
     <td><p>
@@ -108,7 +107,7 @@ Various container options that affect container domain name services.
       DNS server and will not be updated in the container's <code>/etc/resolv.conf</code> file.
     </p>
     <p>
-    See documentation for <code>resolv.conf</code> for a list of valid options.
+    See documentation for <code>resolv.conf</code> for a list of valid options
     </p></td>
   </tr>
 </table>
@@ -131,5 +130,3 @@ IPv6 Google DNS nameservers will also be added (2001:4860:4860::8888 and
 > **Note**: If you need access to a host's localhost resolver, you must modify
 > your DNS service on the host to listen on a non-localhost address that is
 > reachable from within the container.
-
-> **Note**: The DNS server is always at `127.0.0.11`.

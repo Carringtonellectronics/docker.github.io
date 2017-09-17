@@ -12,10 +12,10 @@ organization account.
 
 Alternatively, if the source code for your Docker image is on GitHub or
 Bitbucket, you can use an "Automated build" repository, which is built by the
-Docker Hub services. See the [automated builds documentation](/docker-hub/builds.md) to read
+Docker Hub services. See the [automated builds documentation](builds.md) to read
 about the extra functionality provided by those services.
 
-![repositories](/docker-hub/images/repos.png)
+![repositories](images/repos.png)
 
 ## Searching for images
 
@@ -59,7 +59,7 @@ Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the Tar file created
 when you `docker save` an image.
 
-![images/busybox-image-tags.png](/docker-hub/images/busybox-image-tags.png)
+![images/busybox-image-tags.png](images/busybox-image-tags.png)
 
 ## Creating a new repository on Docker Hub
 
@@ -68,7 +68,7 @@ Docker Hub." screen, from which you can click directly into "Create Repository".
 You can also use the "Create &#x25BC;" menu to "Create Repository".
 
 When creating a new repository, you can choose to put it in your Docker ID
-namespace, or that of any [organization](/docker-hub/orgs.md) that you are in the "Owners"
+namespace, or that of any [organization](orgs.md) that you are in the "Owners"
 team. The Repository Name will need to be unique in that namespace, can be two
 to 255 characters, and can only contain lowercase letters, numbers or `-` and
 `_`.
@@ -88,13 +88,14 @@ In order to push a repository to the Docker Hub, you need to
 name your local image using your Docker Hub username, and the
 repository name that you created in the previous step.
 You can add multiple images to a repository, by adding a specific `:<tag>` to
-it (for example `docs/base:testing`). If it's not specified, the tag defaults to
+it (for example `docs/base:testing`). If its not specified, the tag defaults to
 `latest`.
 You can name your local images either when you build it, using
 `docker build -t <hub-user>/<repo-name>[:<tag>]`,
 by re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`,
 or by using `docker commit <exiting-container> <hub-user>/<repo-name>[:<tag>]` to commit
 changes.
+See [Working with Docker images](/engine/tutorials/dockerimages/) for a detailed description.
 
 Now you can push this repository to the registry designated by its name or tag.
 
@@ -123,13 +124,13 @@ designated, they can `push` and `pull` to your repositories. They will not be
 allowed to perform any administrative tasks such as deleting the repository or
 changing its status from private to public.
 
-> **Note**:
+> **Note:**
 > A collaborator cannot add other collaborators. Only the owner of
 > the repository has administrative access.
 
 You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
-see the [organizations documentation](/docker-hub/orgs.md).
+see the [organizations documentation](orgs.md).
 
 ## Private repositories
 
@@ -146,7 +147,7 @@ your [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
 Once the private repository is created, you can `push` and `pull` images to and
 from it using Docker.
 
-> **Note**: You need to be signed in and have access to work with a
+> *Note:* You need to be signed in and have access to work with a
 > private repository.
 
 Private repositories are just like public ones. However, it isn't possible to
@@ -157,8 +158,8 @@ It is possible to give access to a private repository to those whom you
 designate (i.e., collaborators) from its "Settings" page. From there, you can
 also switch repository status (*public* to *private*, or vice-versa). You will
 need to have an available private repository slot open before you can do such a
-switch. If you don't have any available, you can always upgrade your
-[Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
+switch. If you don't have any available, you can always upgrade your [Docker
+Hub](https://hub.docker.com/account/billing-plans/) plan.
 
 ## Webhooks
 
@@ -208,7 +209,7 @@ payload similar to the example shown below.
 
 <!-- TODO: does it tell you what tag was updated? -->
 
->**Note**: If you want to test your webhook, we recommend using a tool like
+>**Note:** If you want to test your webhook, we recommend using a tool like
 >[requestb.in](http://requestb.in/). Also note, the Docker Hub server can't be
 >filtered by IP address.
 
@@ -240,7 +241,7 @@ To help you debug or simply view the results of your webhook(s), view the
 
 The following parameters are recognized in callback data:
 
-* `state` (required): Accepted values are `success`, `failure`, and `error`.
+* `state` (required): Accepted values are `success`, `failure` and `error`.
   If the state isn't `success`, the webhook chain will be interrupted.
 * `description`: A string containing miscellaneous information that will be
   available on the Docker Hub. Maximum 255 characters.

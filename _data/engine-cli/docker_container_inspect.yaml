@@ -12,4 +12,3 @@ options:
   shorthand: s
   default_value: "false"
   description: Display total file sizes
-

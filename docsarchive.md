@@ -5,27 +5,24 @@ title: View the docs archives
 This page lists the various ways you can view the docs as they were when a
 prior version of Docker was shipped.
 
-{% for archive in site.data.docsarchive.archives %}
+## View the docs archives locally
 
-{% if archive.current %}
+The docs archive is published as a [Docker repository at docs/archive](https://hub.docker.com/r/docs/archive/tags/).
+To see any of these versions, run the following command, changing
+the tag from `v1.4` to any tag you see in [the repo](https://hub.docker.com/r/docs/archive/tags/):
 
-## {{ archive.name }} (current)
-
-Docs for {{ archive.name }} _(current)_ are accessible at [**https://docs.docker.com/**](/), or
-run:
-
+```shell
+docker run -p 4000:4000 docs/archive:v1.4
 ```
-docker run -ti -p 4000:4000 {{ archive.image }}
-```
-{% else %}
 
-## {{ archive.name }}
+The docs for `v1.4` will then be viewable at `http://localhost:4000`.
 
-Docs for {{ archive.name }} are accessible at [**https://docs.docker.com/{{ archive.name }}/**](/{{ archive.name }}/), or
-run:
+## View the docs archives online
 
-```
-docker run -ti -p 4000:4000 {{ archive.image }}
-```
-{% endif %}
+{% for item in site.data.docsarchive.docker-compose %}
+
+### {{ item[0] }}
+
+Docs for {{ item[0] }} are accessible at [/{{ item[0] }}/](/{{ item[0] }}/).
+
 {% endfor %}

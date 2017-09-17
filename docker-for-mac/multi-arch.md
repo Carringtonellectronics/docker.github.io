@@ -4,15 +4,14 @@ keywords: mac, Multi-CPU architecture support
 redirect_from:
 - /mackit/multi-arch/
 title: Leveraging multi-CPU architecture support
-notoc: true
 ---
 
 Docker for Mac provides `binfmt_misc` multi architecture support, so you can run
-containers for different Linux architectures, such as `arm`, `mips`, `ppc64le`,
+containers for different Linux architectures, such as `arm`, `mips`, `ppc64le`
 and even `s390x`.
 
 This should just work without any configuration, but the containers you run need
-to have the appropriate `qemu` binary inside before you can do
+to have the appropriate `qemu` binary inside the container before you can do
 this. (See <a href="http://wiki.qemu.org/" target="_blank">QEMU</a> for more
 information.)
 
@@ -35,5 +34,5 @@ these to do builds `FROM`, so you can build new Multi-CPU architecture packages.
 
 Alternatively, you can bind mount in the `qemu` static binaries to any
 cross-architecture package, such as the semi-official ones using a script like
-this one [https://github.com/justincormack/cross-docker](https://github.com/justincormack/cross-docker). (See the README at the
+this one https://github.com/justincormack/cross-docker. (See the README at the
 given link for details on how to use the script.)

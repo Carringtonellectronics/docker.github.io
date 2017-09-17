@@ -2,7 +2,6 @@
 description: Create creates containers for a service.
 keywords: fig, composition, compose, docker, orchestration, cli, create
 title: docker-compose create
-notoc: true
 ---
 
 ```

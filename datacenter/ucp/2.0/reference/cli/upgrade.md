@@ -10,7 +10,6 @@ Upgrade the UCP components on this node
 
 ```bash
 docker run -it --rm docker/ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
   upgrade [command options]
 
 ```

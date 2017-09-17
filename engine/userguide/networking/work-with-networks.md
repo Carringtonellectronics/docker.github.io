@@ -17,9 +17,9 @@ available through the Docker Engine CLI. These commands are:
 
 While not required, it is a good idea to read [Understanding Docker
 network](index.md) before trying the examples in this section. The
-examples use the default `bridge` network so that you can try them
-immediately. To experiment with an `overlay` network, check out
-the [Getting started with multi-host networks](get-started-overlay.md) guide instead.
+examples for the rely on a `bridge` network so that you can try them
+immediately.  If you would prefer to experiment with an `overlay` network see
+the [Getting started with multi-host networks](get-started-overlay.md) instead.
 
 ## Create networks
 
@@ -79,7 +79,7 @@ network by default. You can override this default and specify a subnetwork
 directly using the `--subnet` option. On a `bridge` network you can only
 specify a single subnet. An `overlay` network supports multiple subnets.
 
-> **Note**: It is highly recommended to use the `--subnet` option while creating
+> **Note** : It is highly recommended to use the `--subnet` option while creating
 > a network. If the `--subnet` is not specified, the docker daemon automatically
 > chooses and assigns a subnet for the network and it could overlap with another subnet
 > in your infrastructure that is not managed by docker. Such overlaps can cause
@@ -110,7 +110,7 @@ The `bridge` driver accepts the following options:
 |--------------------------------------------------|-------------|-------------------------------------------------------|
 | `com.docker.network.bridge.name`                 | -           | bridge name to be used when creating the Linux bridge |
 | `com.docker.network.bridge.enable_ip_masquerade` | `--ip-masq` | Enable IP masquerading                                |
-| `com.docker.network.bridge.enable_icc`           | `--icc`     | Enable or disable inter container connectivity        |
+| `com.docker.network.bridge.enable_icc`           | `--icc`     | Enable or Disable Inter Container Connectivity        |
 | `com.docker.network.bridge.host_binding_ipv4`    | `--ip`      | Default IP when binding container ports               |
 | `com.docker.network.driver.mtu`                  | `--mtu`     | Set the containers network MTU                        |
 
@@ -120,7 +120,7 @@ The following arguments can be passed to `docker network create` for any network
 
 | Argument     | Equivalent | Description                              |
 |--------------|------------|------------------------------------------|
-| `--internal` | -          | Restrict external access to the network |
+| `--internal` | -          | Restricts external access to the network |
 | `--ipv6`     | `--ipv6`   | Enable IPv6 networking                   |
 
 The following example uses `-o` to bind to a specific IP address when binding
@@ -258,7 +258,7 @@ needed.
 
     As long as the IP address you specify for the container is part of the
     network's subnet, you can assign an IPv4 or IPv6 address to a container
-    when connecting it to a network, by using the `--ip` or `--ip6` flag. When
+    when connecting it to a network, by using the `--ip` or `--ip6` flag. when
     you specify an IP address in this way while using a user-defined network,
     the configuration is preserved as part of the container's configuration and
     will be applied when the container is reloaded. Assigned IP addresses are
@@ -327,7 +327,7 @@ needed.
    }
    ```
 
-   Notice that `container2` belongs to two networks. It joined the default `bridge`
+   Notice that `container2` belongs to two networks.  It joined the default `bridge`
    network when you launched it and you connected it to the `isolated_nw` in
    step 3.
 
@@ -344,7 +344,7 @@ needed.
     $ docker attach container2
     ```
 
-    Use the `ifconfig` command to examine the container's networking stack. You
+    Use the `ifconfig` command to examine the container's networking stack. you
     should see two ethernet interfaces, one for the default `bridge` network,
     and the other for the `isolated_nw` network.
 
@@ -447,7 +447,7 @@ needed.
 >You can connect a container to a network even if the container is not running.
 However, `docker network inspect` only displays information on running containers.
 
-### Link containers without using user-defined networks
+### Linking containers without using user-defined networks
 
 After you complete the steps in
 [Basic container networking examples](#basic-container-networking-examples),
@@ -492,7 +492,7 @@ The following example briefly describes how to use `--link`.
     `container5` is created, `container4` will be able to resolve the name `c5` to
     `container5`'s IP address.
 
-    >**Note**: Any link between containers created with *legacy link* is static in
+    >**Note:** Any link between containers created with *legacy link* is static in
     nature and hard-binds the container with the alias. It does not tolerate
     linked container restarts. The new *link* functionality in user defined
     networks supports dynamic links between containers, and tolerates restarts and
@@ -513,7 +513,7 @@ The following example briefly describes how to use `--link`.
     ping: bad address 'c5'
 
     ```
-    Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
+    Detach from `container3` and leave it running using `CTRL-p CTRL-q`.
 
 2.  Create another container named `container5`, and link it to `container4`
     using the alias `c4`.
@@ -596,7 +596,7 @@ are not on the same network.
 
 The following example illustrates these points.
 
-1.  Create another network named `local_alias`:
+1.  Create another network named `local_alias`
 
     ```bash
     $ docker network create -d bridge --subnet 172.26.0.0/24 local_alias
@@ -611,7 +611,7 @@ The following example illustrates these points.
     $ docker network connect --link container4:bar local_alias container5
     ```
 
-3. Attach to `container4` and try to ping `container4` (yes, the same one) using alias `foo`, then
+3. Attach to `container3` and try to ping `container4` using alias `foo`, then
    try pinging container `container5` using alias `c5`:
 
     ```bash
@@ -648,7 +648,7 @@ The following example illustrates these points.
 4.  Disconnect `container5` from the `isolated_nw` network. Attach to `container4`
     and try pinging `c5` and `foo`.
 
-    ```bash
+    ```
     $ docker network disconnect isolated_nw container5
 
     $ docker attach container4
@@ -685,10 +685,10 @@ containers use, it does have some limitations.
 Environment variable injection is static in nature and environment variables
 cannot be changed after a container is started. The legacy `--link` flag shares
 all environment variables to the linked container, but the `docker network` command
-has no equivalent. When you connect a container to a network using `docker network`, no
-environment variables can be dynamically shared among containers.
+has no equivalent. When you connect to a network using `docker network`, no
+environment variables can be dynamically among containers.
 
-#### Use network-scoped aliases
+#### Understanding network-scoped aliases
 
 Legacy links provide outgoing name resolution that is isolated within the
 container in which the alias is configured. Network-scoped aliases do not allow
@@ -782,21 +782,10 @@ This shows that an alias is scoped to the network where it is defined, and only
 containers connected to that network can access the alias.
 
 
-#### Resolve multiple containers to a single alias
+#### Resolving multiple containers to a single alias
 
 Multiple containers can share the same network-scoped alias within the same
-network. This provides a sort of DNS round-robin high availability. This may not
-be reliable when using software such as Nginx, which caches clients by IP
-address.
-
-The following example illustrates how to set up and use network aliases.
-
-> **Note**: Those using network aliases for DNS round-robin high availability
-> should consider using swarm services instead. Swarm services
-> provide a similar load-balancing feature out of the box. If you connect to any
-> node, even a node that isn't participating in the service. Docker sends
-> the request to a random node which is participating in the service and
-> manages all the communication.
+network. This example illustrates how this works.
 
 1.  Launch `container7` in `isolated_nw` with the same alias as `container6`,
     which is `app`.
@@ -812,10 +801,10 @@ The following example illustrates how to set up and use network aliases.
     container with the alias will be resolved. This provides a sort of high
     availability within the cluster.
 
-    > **Note**: When the IP address is resolved, the container chosen to resolve
-    > it is not completely predictable. For that reason, in the exercises below,
-    > you may get different results in some steps. If the step assumes the result
-    > returned is `container6` but you get `container7`, this is why.
+    > When the IP address is resolved, the container chosen to resolve it is
+    random. For that reason, in the exercises below, you may get different
+    results in some steps. If the step assumes the result returned is `container6`
+    but you get `container7`, this is why.
 
 2.  Start a continuous ping from `container4` to the `app` alias.
 
@@ -884,7 +873,7 @@ The following example illustrates how to set up and use network aliases.
     Stop the ping with `CTRL+C`. Detach from `container4` and leave it running
     using `CTRL-p CTRL-q`.
 
-## Disconnect containers
+## Disconnecting containers
 
 You can disconnect a container from a network at any time using the `docker network
 disconnect` command.
@@ -994,21 +983,20 @@ disconnect` command.
     ```
 
 4.  Remove `container4`, `container5`, `container6`, and `container7`.
-
     ```bash
     $ docker stop container4 container5 container6 container7
 
     $ docker rm container4 container5 container6 container7
     ```
 
-### Handle stale network endpoints
+### Handling stale network endpoints
 
 In some scenarios, such as ungraceful docker daemon restarts in a
 multi-host network, the daemon cannot clean up stale connectivity endpoints.
 Such stale endpoints may cause an error if a new container is connected
 to that network with the same name as the stale endpoint:
 
-```none
+```no-highlight
 ERROR: Cannot start container bc0b19c089978f7845633027aa3435624ca3d12dd4f4f764b61eac4c0610f32e: container already connected to network multihost
 ```
 
@@ -1068,7 +1056,6 @@ remove a network. If a network has connected endpoints, an error occurs.
     ```
 
 3.  Remove the `isolated_nw` network.
-
     ```bash
     $ docker network rm isolated_nw
     ```

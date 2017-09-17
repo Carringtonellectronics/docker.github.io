@@ -2,8 +2,6 @@
 description: Sec
 keywords: seccomp, security, docker, documentation
 title: Secure Engine
-redirect_from:
-- /articles/security/
 ---
 
 This section discusses the security features you can configure and use within your Docker Engine installation.

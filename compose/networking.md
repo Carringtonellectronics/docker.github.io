@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers, netwo
 title: Networking in Compose
 ---
 
-> **Note**: This document only applies if you're using [version 2 or higher of the Compose file format](compose-file.md#versioning). Networking features are not supported for version 1 (legacy) Compose files.
+> **Note:** This document only applies if you're using [version 2 of the Compose file format](compose-file.md#versioning). Networking features are not supported for version 1 (legacy) Compose files.
 
 By default Compose sets up a single
 [network](/engine/reference/commandline/network_create/) for your app. Each
@@ -12,7 +12,7 @@ container for a service joins the default network and is both *reachable* by
 other containers on that network, and *discoverable* by them at a hostname
 identical to the container name.
 
-> **Note**: Your app's network is given a name based on the "project name",
+> **Note:** Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
 > project name with either the [`--project-name`
 > flag](reference/overview.md) or the [`COMPOSE_PROJECT_NAME` environment
@@ -20,7 +20,8 @@ identical to the container name.
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 
-    version: "3"
+    version: '2'
+
     services:
       web:
         build: .
@@ -28,8 +29,6 @@ For example, suppose your app is in a directory called `myapp`, and your `docker
           - "8000:8000"
       db:
         image: postgres
-        ports:
-          - "8001:5432"
 
 When you run `docker-compose up`, the following happens:
 
@@ -44,15 +43,7 @@ get back the appropriate container's IP address. For example, `web`'s
 application code could connect to the URL `postgres://db:5432` and start
 using the Postgres database.
 
-It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`.
-In the above example, for `db`, the `HOST_PORT` is `8001` and the container port is
-`5432` (postgres default). Networked service-to-service
-communication use the `CONTAINER_PORT`. When `HOST_PORT` is defined,
-the service is accessible outside the swarm as well.
-
-Within the `web` container, your connection string to `db` would look like
-`postgres://db:5432`, and from the host machine, the connection string would
-look like `postgres://{DOCKER_IP}:8001`.
+Because `web` explicitly maps a port, it's also accessible from the outside world via port 8000 on your Docker host's network interface.
 
 ## Updating containers
 
@@ -64,9 +55,8 @@ If any containers have connections open to the old container, they will be close
 
 Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate - by default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the hostnames `db` and `database`:
 
-    version: "3"
+    version: '2'
     services:
-      
       web:
         build: .
         links:
@@ -77,8 +67,6 @@ Links allow you to define extra aliases by which a service is reachable from ano
 See the [links reference](compose-file.md#links) for more information.
 
 ## Multi-host networking
-
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and will only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode consult the [Docker Stacks](/compose/bundles.md) documentation.
 
 When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
 
@@ -92,28 +80,28 @@ Each service can specify what networks to connect to with the *service-level* `n
 
 Here's an example Compose file defining two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common - only `app` can talk to both.
 
-    version: "3"
+    version: '2'
+
     services:
-      
       proxy:
         build: ./proxy
         networks:
-          - frontend
+          - front
       app:
         build: ./app
         networks:
-          - frontend
-          - backend
+          - front
+          - back
       db:
         image: postgres
         networks:
-          - backend
+          - back
 
     networks:
-      frontend:
+      front:
         # Use a custom driver
         driver: custom-driver-1
-      backend:
+      back:
         # Use a custom driver which takes special options
         driver: custom-driver-2
         driver_opts:
@@ -131,9 +119,9 @@ For full details of the network configuration options available, see the followi
 
 Instead of (or as well as) specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
 
-    version: "3"
+    version: '2'
+
     services:
-    
       web:
         build: .
         ports:

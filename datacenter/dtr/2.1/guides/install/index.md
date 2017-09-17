@@ -49,16 +49,7 @@ Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
 DTR. `--ucp-insecure-tls` tells the installer to trust the certificates used
 by UCP.
 
-By default the install command runs in interactive mode and prompts for
-additional information like:
-
-* DTR external url: the url clients use to read DTR. If you're using a load
-balancer for DTR, this is the IP address or DNS name of the load balancer
-* UCP url: the url clients use to reach UCP
-* UCP username and password: administrator credentials for UCP
-
-You can also provide this information to the installer command so that it
-runs without prompting.
+The install command has other flags for customizing DTR at install time.
 Check the [reference documentation to learn more](../../reference/cli/install.md).
 
 
@@ -81,7 +72,7 @@ browser, navigate to the address were you installed DTR.
 After installing DTR, you should configure:
 
   * The certificates used for TLS communication. [Learn more](../configure/index.md).
-  * The storage backend to store the Docker images. [Learn more](../configure/configure-storage.md).
+  * The storage backend to store the Docker images. [Lean more](../configure/configure-storage.md).
 
   To perform these configurations, navigate to the **Settings** page of DTR.
 

@@ -65,7 +65,7 @@ program code and documentation code.
 * Include documentation changes in the same commit so that a revert would
   remove all traces of the feature or fix.
 
-* Reference each issue in your pull request description (`#XXXX`).
+* Reference each issue in your pull request description (`#XXXX`)
 
 ## Respond to pull requests reviews
 
@@ -91,3 +91,6 @@ program code and documentation code.
 
 * After a merge, [a master build](https://master.dockerproject.org/) is
   available almost immediately.
+
+* If you made a documentation change, you can see it at
+  [docs.master.dockerproject.org](http://docs.master.dockerproject.org/).

@@ -11,7 +11,7 @@ option helps reduce container downtime due to daemon crashes, planned outages,
 or upgrades.
 
 > **Note**: Live restore is not supported on Windows containers, but it does work
-for Linux containers running on Docker for Windows.
+for Linux containers running on Windows.
 
 ## Enable the live restore option
 
@@ -47,7 +47,10 @@ The live restore feature supports restoring containers to the daemon for
 upgrades from one minor release to the next. For example from Docker Engine
 1.12.1 to 1.13.2.
 
-If you skip releases during an upgrade, the daemon may not restore its connection to the containers. If the daemon is unable to restore the connection, it ignores the running containers and you must manage them manually.
+If you skip releases during an upgrade, the daemon may not restore connection
+the containers. If the daemon is unable restore connection, it ignores the
+running containers and you must manage them manually. The daemon won't shut down
+the disconnected containers.
 
 ## Live restore upon restart
 

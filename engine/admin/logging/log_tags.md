@@ -32,7 +32,7 @@ Docker supports some special template markup you can use when specifying a tag's
 For example, specifying a {% raw %}`--log-opt tag="{{.ImageName}}/{{.Name}}/{{.ID}}"`{% endraw %} value yields `syslog` log lines like:
 
 ```none
-Aug  7 18:33:19 HOSTNAME hello-world/foobar/5790672ab6a0[9103]: Hello from Docker.
+Aug  7 18:33:19 HOSTNAME docker/hello-world/foobar/5790672ab6a0[9103]: Hello from Docker.
 ```
 
 At startup time, the system sets the `container_name` field and {% raw %}`{{.Name}}`{% endraw %} in
@@ -40,9 +40,9 @@ the tags. If you use `docker rename` to rename a container, the new name is not
 reflected in the log messages. Instead, these messages continue to use the
 original container name.
 
-For advanced usage, the generated tag's use
-[go templates](http://golang.org/pkg/text/template/) and the container's
-[logging context](https://github.com/moby/moby/blob/17.05.x/daemon/logger/loginfo.go).
+For advanced usage, the generated tag's use [go
+templates](http://golang.org/pkg/text/template/) and the container's [logging
+context](https://github.com/docker/docker/blob/master/daemon/logger/context.go).
 
 As an example of what is possible with the syslog logger, if you use the following
 command, you get the output that follows:
@@ -59,6 +59,6 @@ $ docker run -it --rm \
 ```
 
 ```none
-Apr  1 15:22:17 ip-10-27-39-73 logtester.1234[45499]: + exec app
-Apr  1 15:22:17 ip-10-27-39-73 logtester.1234[45499]: 2016-04-01 15:22:17.075416751 +0000 UTC stderr msg: 1
+Apr  1 15:22:17 ip-10-27-39-73 docker/logtester.1234[45499]: + exec app
+Apr  1 15:22:17 ip-10-27-39-73 docker/logtester.1234[45499]: 2016-04-01 15:22:17.075416751 +0000 UTC stderr msg: 1
 ```

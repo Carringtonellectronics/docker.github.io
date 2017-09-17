@@ -6,6 +6,8 @@ redirect_from:
 title: Logs and troubleshooting
 ---
 
+<!-- /TOC -->
+
 Here is information about how to diagnose and troubleshoot problems, send logs
 and communicate with the Docker for Mac team, use our forums and Knowledge Hub,
 browse and log issues on GitHub, and find workarounds for known problems.
@@ -22,8 +24,8 @@ GitHub](https://github.com/docker/for-mac/issues) already filed by other users,
 or on the [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac), we
 can help you troubleshoot the log data.
 
-Choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} -->
-**Diagnose & Feedback** from the menu bar.
+Choose <img src="../images/whale-x.png"> --> **Diagnose & Feedback** from the
+menu bar.
 
 ![Diagnose problems](images/settings-diagnose.png)
 
@@ -118,53 +120,22 @@ auto-generated reports on packages.
 
 ## Troubleshooting
 
-### Make sure certificates are set up correctly
-
-Docker for Mac will ignore certificates listed under insecure registries, and
-will not send client certificates to them. Commands like `docker run` that
-attempt to pull from the registry will produce error messages on the command
-line, like this:
-
-```bash
-Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
-```
-
-As well as on the registry. For example:
-
-```config
-2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
-2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
-```
-
-For more about using client and server side certificates, see [Adding
-TLS certificates](/docker-for-mac/index.md#adding-tls-certificates) in
-the Getting Started topic.
-
-### Docker for Mac will not start if Mac user account and home folder are renamed after installing the app
-
-If, after installing Docker for Mac, you [change the name of your macOS user
-account and home folder](https://support.apple.com/en-us/HT201548), Docker for
-Mac will fail to start. To solve this problem, uninstall then reinstall Docker for Mac under the new user account.
-
-See also, the discussion on the issue [docker/for-mac#1209](https://github.com/docker/for-mac/issues/1209) and [Do I need to reinstall Docker for Mac if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account) in the FAQs.
-
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, a volume mount is denied, or a service cannot
 start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
-need to enable [file sharing](/docker-for-mac/index.md#file-sharing).
+need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](/docker-for-mac/images/whale-x.png){:
-.inline} --> **Preferences** --> **File sharing** and share the drive that
-contains the Dockerfile and volume.
+`/Users` directory. Go to <img src="images/whale-x.png"> --> **Preferences** -->
+**File sharing** and share the drive that contains the Dockerfile and volume.
 
 ### Recreate or update your containers after Beta 18 upgrade
 
 Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to
-RC3. (For more information, see [https://github.com/moby/moby/issues/24343#issuecomment-230623542]
-(https://github.com/moby/moby/issues/24343#issuecomment-230623542).)
+RC3. (For more information, see
+https://github.com/docker/docker/issues/24343#issuecomment-230623542.)
 
 You may get the following error when you try to start a container created with
 pre-Beta 18 Docker for Mac applications.
@@ -212,7 +183,7 @@ To fix existing containers, follow these steps.
 
 3. Start Docker.
 
-	> **Note**: Be sure to quit and then restart Docker for Mac before attempting to start containers.
+	> **Note:**  Be sure to quit and then restart Docker for Mac before attempting to start containers.
 
 4. Try to start the container again:
 
@@ -233,11 +204,7 @@ in the Apple Hypervisor Framework documentation about supported hardware:
 To check if your Mac supports the Hypervisor framework, run this command in a
 terminal window.
 
-```bash
-sysctl kern.hv_support
-```
-
-If your Mac supports the Hypervisor Framework,
+``` sysctl kern.hv_support ``` If your Mac supports the Hypervisor Framework,
 the command will print `kern.hv_support: 1`.
 
 If not, the command will print `kern.hv_support: 0`.
@@ -245,7 +212,7 @@ If not, the command will print `kern.hv_support: 0`.
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
 in the Apple documentation, and Docker for Mac system requirements in [What to
-know before you install](install.md#what-to-know-before-you-install).
+know before you install](index.md#what-to-know-before-you-install).
 
 
 ### Workarounds for common problems
@@ -257,7 +224,7 @@ know before you install](install.md#what-to-know-before-you-install).
         Pulling repository docker.io/library/busybox
         Network timed out while trying to connect to https://index.docker.io/v1/repositories/library/busybox/images. You may want to check your internet connection or if you are behind a proxy.
 
-    Starting with v1.12.1, 2016-09016 on the stable channel, and Beta 24 on the beta channel, a workaround is provided that auto-filters out the IPv6 addresses in DNS server lists and enables successful network accesss. For example, `2001:4860:4860::8888` would become `8.8.8.8`. So, the only workaround action needed for users is to [upgrade to Docker for Mac stable v1.12.1 or newer, or Beta 24 or newer](/docker-for-mac/install.md#download-docker-for-mac).
+    Starting with v1.12.1, 2016-09016 on the stable channel, and Beta 24 on the beta channel, a workaround is provided that auto-filters out the IPv6 addresses in DNS server lists and enables successful network accesss. For example, `2001:4860:4860::8888` would become `8.8.8.8`. So, the only workaround action needed for users is to [upgrade to Docker for Mac stable v1.12.1 or newer, or Beta 24 or newer](index.md#download-docker-for-mac).
 
     On releases with the workaround included to filter out / truncate IPv6 addresses from the DNS list, the above command should run properly:
 
@@ -279,10 +246,7 @@ know before you install](install.md#what-to-know-before-you-install).
 
 * If Docker for Mac fails to install or start properly:
 
-  * Make sure you quit Docker for Mac before installing a new version
-  of the application ( ![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Quit Docker**). Otherwise, you will get an
-  "application in use" error when you try to copy the new app
-  from the `.dmg` to `/Applications`.
+  * Make sure you quit Docker for Mac before installing a new version of the application ( <img src="../images/whale-x.png"> --> **Quit Docker**). Otherwise, you will get an "application in use" error when you try to copy the new app from the `.dmg` to `/Applications`.
 
   * Restart your Mac to stop / discard any vestige of the daemon running from the previously installed version.
 
@@ -309,7 +273,7 @@ ${!DOCKER_*}` will unset existing `DOCKER` environment variables you have set.
 is showing in the menu bar, and that you run the Docker commands in a shell that
 is connected to the Docker for Mac Engine (not Engine from Toolbox). Otherwise,
 you might start the webserver container but get a "web page not available" error
-when you go to `localhost`. For more on distinguishing between the two
+when you go to `localhost`.  For more on distinguishing between the two
 environments, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
 <p></p>
@@ -341,20 +305,11 @@ Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DN
 
 <p></p>
 
-* Docker does not auto-start on login even when it is enabled in
-![whale menu](/docker-for-mac/images/whale-x.png){: .inline} --> **Preferences**. This is related to a set of issues with Docker
-helper, registration, and versioning.
+* Docker does not auto-start on login even when it is enabled in <img src="../images/whale-x.png"> --> **Preferences**. This is related to a set of issues with Docker helper, registration, and versioning.
 
 <p></p>
 
-* Docker for Mac uses the `HyperKit` hypervisor (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If you
-are developing with tools that have conflicts with `HyperKit`, such as [Intel
-Hardware Accelerated Execution Manager
-(HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/),
-the current workaround is not to run them at the same time. You can pause
-`HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This
-will allow you to continue work with the other tools and prevent `HyperKit` from
-interfering.
+* Docker for Mac uses the `HyperKit` hypervisor (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If you are developing with tools that have conflicts with `HyperKit`, such as [Intel Hardware Accelerated Execution Manager (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/), the current workaround is not to run them at the same time. You can pause `HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This will allow you to continue work with the other tools and prevent `HyperKit` from interfering.
 
 <p></p>
 
@@ -374,8 +329,8 @@ Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
 <a name="bind-mounted-dirs"></a>
 
 * There are a number of issues with the performance of directories
-  bind-mounted with `osxfs`. In particular, writes of small blocks, and
-  traversals of large directories are currently slow. Additionally,
+  bind-mounted with `osxfs`.  In particular, writes of small blocks, and
+  traversals of large directories are currently slow.  Additionally,
   containers that perform large numbers of directory operations, such as
   repeated scans of large directory trees, may suffer from poor
   performance. Applications that behave in this way include:

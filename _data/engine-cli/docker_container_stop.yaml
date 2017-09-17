@@ -9,4 +9,3 @@ options:
   shorthand: t
   default_value: "10"
   description: Seconds to wait for stop before killing it
-

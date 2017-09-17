@@ -28,7 +28,7 @@ specify an IPv6 subnet to pick the addresses from. Set the IPv6 subnet via the
 `--fixed-cidr-v6` parameter when starting Docker daemon:
 
 ```
-dockerd --ipv6 --fixed-cidr-v6=2001:db8:1::/64
+dockerd --ipv6 --fixed-cidr-v6="2001:db8:1::/64"
 ```
 
 The subnet for Docker containers should at least have a size of `/80`. This way
@@ -92,8 +92,8 @@ on the host:
 
 ![](images/ipv6_slash64_subnet_config.svg)
 
-In this setup the subnet `2001:db8:23:42::/64` with a range from
-`2001:db8:23:42:0:0:0:0` to `2001:db8:23:42:ffff:ffff:ffff:ffff` is attached to
+In this setup the subnet `2001:db8:23:42::/80` with a range from
+`2001:db8:23:42:0:0:0:0` to `2001:db8:23:42:0:ffff:ffff:ffff` is attached to
 `eth0`, with the host listening at `2001:db8:23:42::1`. The subnet
 `2001:db8:23:42:1::/80` with an address range from `2001:db8:23:42:1:0:0:0` to
 `2001:db8:23:42:1:ffff:ffff:ffff` is attached to `docker0` and will be used by
@@ -193,7 +193,7 @@ three routes configured:
 Host1 also acts as a router on OSI layer 3. When one of the network clients
 tries to contact a target that is specified in Host1's routing table Host1 will
 forward the traffic accordingly. It acts as a router for all networks it knows:
-`2001:db8::/64`, `2001:db8:1::/64`, and `2001:db8:2::/64`.
+`2001:db8::/64`, `2001:db8:1::/64` and `2001:db8:2::/64`.
 
 On Host2 we have nearly the same configuration. Host2's containers will get IPv6
 addresses from `2001:db8:2::/64`. Host2 has three routes configured:
@@ -203,7 +203,7 @@ addresses from `2001:db8:2::/64`. Host2 has three routes configured:
 - Route all traffic to `2001:db8:1::/64` via Host1 with IP `2001:db8:0::1`
 
 The difference to Host1 is that the network `2001:db8:2::/64` is directly
-attached to Host2 via its `docker0` interface whereas Host2 reaches
+attached to the host via its `docker0` interface whereas it reaches
 `2001:db8:1::/64` via Host1's IPv6 address `2001:db8::1`.
 
 This way every container is able to contact every other container. The
@@ -234,7 +234,7 @@ on every host.
 In this scenario containers of the same host can communicate directly with each
 other. The traffic between containers on different hosts will be routed via
 their hosts and the router. For example packet from `Container1-1` to
-`Container2-1` will be routed through `Host1`, `Router`, and `Host2` until it
+`Container2-1` will be routed through `Host1`, `Router` and `Host2` until it
 arrives at `Container2-1`.
 
 To keep the IPv6 addresses short in this example a `/48` network is assigned to
@@ -246,7 +246,7 @@ for Docker. When adding a third host you would add a route for the subnet
 Remember the subnet for Docker containers should at least have a size of `/80`.
 This way an IPv6 address can end with the container's MAC address and you
 prevent NDP neighbor cache invalidation issues in the Docker layer. So if you
-have a `/64` for your whole environment use `/76` subnets for the hosts and
+have a `/64` for your whole environment use `/78` subnets for the hosts and
 `/80` for the containers. This way you can use 4096 hosts with 16 `/80` subnets
 each.
 

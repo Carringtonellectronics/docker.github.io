@@ -8,7 +8,7 @@ title: Docker Engine frequently asked questions (FAQ)
 
 If you don't see your question here, feel free to submit new ones to
 <docs@docker.com>.  Or, you can fork [the
-repo](https://github.com/moby/moby) and contribute them yourself by editing
+repo](https://github.com/docker/docker) and contribute them yourself by editing
 the documentation sources.
 
 
@@ -19,58 +19,51 @@ Docker Engine is 100% free. It is open source, so you can use it without paying.
 ### What open source license are you using?
 
 We are using the Apache License Version 2.0, see it here:
-[https://github.com/moby/moby/blob/master/LICENSE](
-https://github.com/moby/moby/blob/master/LICENSE)
+[https://github.com/docker/docker/blob/master/LICENSE](
+https://github.com/docker/docker/blob/master/LICENSE)
 
-### Does Docker run on Linux, macOS, or Windows?
+### Does Docker run on macOS or Windows?
 
-The Docker Engine client runs natively on Linux, macOS, and Windows. By default,
-these clients connect to a local Docker daemon running in a virtual environment
-managed by Docker, which provides the required features to run Linux-based
-containers within OS X or Windows, and Windows-based containers on Windows.
+The Docker Engine client runs natively on Linux, macOS, and Windows. By default, these
+clients connect to a local Docker daemon running in a virtual environment managed
+by Docker, which provides the required features to run Linux-based containers within
+OS X or Windows, or Windows-based containers on Windows.
 
 If your version of macOS or Windows does not include the required virtualization
 technology, you can use Docker Machine to work around these limitations.
 
-You can run Windows-based **containers** on Windows Server 2016 and Windows 10.
-Windows-based containers require a Windows kernel to run, in the same way that
-Linux-based containers require a Linux kernel to run. You can even run
-Windows-based containers on a Windows virtual machine running on an macOS or
-Linux host. Docker Machine is not necessary if you run macOS 10.10.3 Yosemite,
-Windows Server 2016, or Windows 10.
-
-To learn more about Docker on Windows platforms, see the all the topics in
-[Install Docker for Windows](/docker-for-windows/install.md) and
-[Install Docker Enterprise Edition for Windows Server 2016](/engine/installation/windows/docker-ee.md).
+You can run Windows-based **containers** on Windows Server 2016 and
+Windows 10. Windows-based containers require a Windows kernel to run, in the same
+way that Linux-based containers require a Linux kernel to run. You can even run
+Windows-based containers on a Windows virtual machine running on an macOS or Linux
+host. Docker Machine is not necessary if you run macOS 10.10.3 Yosemite, Windows
+Server 2016, or Windows 10.
 
 ### How do containers compare to virtual machines?
 
-Containers and virtual machines (VMs) are complementary. VMs excel at providing
-extreme isolation (for example with hostile tenant applications where you need
-the ultimate break out prevention). Containers operate at the process level,
-which makes them very lightweight and perfect as a unit of software delivery.
-While VMs take minutes to boot, containers can often be started in less than a
-second.
+They are complementary. VMs are best used to allocate chunks of hardware
+resources. Containers operate at the process level, which makes them very
+lightweight and perfect as a unit of software delivery.
 
 ### What does Docker technology add to just plain LXC?
 
-Docker technology is not a replacement for [LXC](https://linuxcontainers.org/). "LXC" refers to capabilities of
+Docker technology is not a replacement for LXC. "LXC" refers to capabilities of
 the Linux kernel (specifically namespaces and control groups) which allow
 sandboxing processes from one another, and controlling their resource
 allocations. On top of this low-level foundation of kernel features, Docker
 offers a high-level tool with several powerful functionalities:
 
  - *Portable deployment across machines.* Docker defines a format for bundling
- an application and all its dependencies into a single object called a container. This container can be
- transferred to any Docker-enabled machine. The container can be executed there with the
+ an application and all its dependencies into a single object which can be
+ transferred to any Docker-enabled machine, and executed there with the
  guarantee that the execution environment exposed to the application will be the
- same in development, testing, and production. LXC implements process sandboxing, which is an important pre-requisite
- for portable deployment, but is not sufficient for portable deployment.
+ same. LXC implements process sandboxing, which is an important pre-requisite
+ for portable deployment, but that alone is not enough for portable deployment.
  If you sent me a copy of your application installed in a custom LXC
  configuration, it would almost certainly not run on my machine the way it does
- on yours. The app you sent me is tied to your machine's specific configuration:
- networking, storage, logging, etc. Docker defines an abstraction for
- these machine-specific settings. The exact same Docker container can
+ on yours, because it is tied to your machine's specific configuration:
+ networking, storage, logging, distro, etc. Docker defines an abstraction for
+ these machine-specific settings, so that the exact same Docker container can
  run - unchanged - on many different machines, with many different
  configurations.
 
@@ -96,7 +89,7 @@ offers a high-level tool with several powerful functionalities:
  uploads and downloads, similar to `git pull`, so new versions of a container
  can be transferred by only sending diffs.
 
- - *Component re-use.* Any container can be used as a [*"parent image"*](reference/glossary.md#image) to create more specialized components. This can
+ - *Component re-use.* Any container can be used as a [*"base image"*](reference/glossary.md#image) to create more specialized components. This can
  be done manually or as part of an automated build. For example you can prepare
  the ideal Python environment, and use it as a base for 10 different
  applications. Your ideal PostgreSQL setup can be re-used for all your future
@@ -148,10 +141,12 @@ pattern](admin/ambassador_pattern_linking.md).
 
 ### How do I run more than one process in a Docker container?
 
-This approach is discouraged for most use cases. For maximum efficiency and
-isolation, each container should address one specific area of concern. However,
-if you need to run multiple services within a single container, see
-[Run multiple services in a container](admin/multi-service_container.md).
+Any capable process supervisor such as [http://supervisord.org/](
+http://supervisord.org/), runit, s6, or daemontools can do the trick. Docker
+will start up the process management daemon which will then fork to run
+additional processes. As long as the processor manager daemon continues to run,
+the container will continue to as well. You can see a more substantial example
+[that uses supervisord here](admin/using_supervisord.md).
 
 ### What platforms does Docker run on?
 
@@ -163,7 +158,6 @@ Linux:
    [SuSE](installation/linux/suse.md), and many others.
 
 Microsoft Windows:
-
  - Windows Server 2016
  - Windows 10
 
@@ -290,7 +284,7 @@ You can find more answers on:
 - [Docker user mailinglist](https://groups.google.com/d/forum/docker-user)
 - [Docker developer mailinglist](https://groups.google.com/d/forum/docker-dev)
 - [IRC, docker on freenode](irc://chat.freenode.net#docker)
-- [GitHub](https://github.com/moby/moby)
+- [GitHub](https://github.com/docker/docker)
 - [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker)
 - [Join the conversation on Twitter](http://twitter.com/docker)
 

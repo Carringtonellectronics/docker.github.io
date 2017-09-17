@@ -114,15 +114,15 @@ certificates. You can also secure them with [HTTPS and
 certificates](https.md).
 
 The daemon is also potentially vulnerable to other inputs, such as image
-loading from either disk with `docker load`, or from the network with
-`docker pull`. As of Docker 1.3.2, images are now extracted in a chrooted
+loading from either disk with 'docker load', or from the network with
+'docker pull'. As of Docker 1.3.2, images are now extracted in a chrooted
 subprocess on Linux/Unix platforms, being the first-step in a wider effort
 toward privilege separation. As of Docker 1.10.0, all images are stored and
 accessed by the cryptographic checksums of their contents, limiting the
 possibility of an attacker causing a collision with an existing image.
 
 Eventually, it is expected that the Docker daemon will run restricted
-privileges, delegating operations to well-audited sub-processes,
+privileges, delegating operations well-audited sub-processes,
 each with its own (very limited) scope of Linux capabilities,
 virtual network setup, filesystem management, etc. That is, most likely,
 pieces of the Docker engine itself will run inside of containers.
@@ -191,7 +191,7 @@ to the host.
 This won't affect regular web apps; but malicious users will find that
 the arsenal at their disposal has shrunk considerably! By default Docker
 drops all capabilities except [those
-needed](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30),
+needed](https://github.com/docker/docker/blob/master/oci/defaults_linux.go#L62-L77),
 a whitelist instead of a blacklist approach. You can see a full list of
 available capabilities in [Linux
 manpages](http://man7.org/linux/man-pages/man7/capabilities.7.html).

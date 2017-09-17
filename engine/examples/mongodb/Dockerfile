@@ -3,6 +3,7 @@
 # http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 
 FROM       ubuntu:16.04
+MAINTAINER Docker
 
 # Installation:
 # Import MongoDB public GPG key AND create a MongoDB list file

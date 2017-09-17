@@ -1,6 +1,6 @@
 ---
 description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
-keywords: parent image, images, dockerfile, best practices, hub, official repo
+keywords: Examples, Usage, base image, docker, documentation, dockerfile, best practices, hub, official repo
 redirect_from:
 - /articles/dockerfile_best-practices/
 - /engine/articles/dockerfile_best-practices/
@@ -33,10 +33,7 @@ You can see many of these practices and recommendations in action in the [buildp
 The container produced by the image your `Dockerfile` defines should be as
 ephemeral as possible. By “ephemeral,” we mean that it can be stopped and
 destroyed and a new one built and put in place with an absolute minimum of
-set-up and configuration. You may want to take a look at the
-[Processes](https://12factor.net/processes) section of the 12 Factor app
-methodology to get a feel for the motivations of running containers in such a
-stateless fashion.
+set-up and configuration.
 
 ### Use a .dockerignore file
 
@@ -54,26 +51,12 @@ should avoid installing extra or unnecessary packages just because they
 might be “nice to have.” For example, you don’t need to include a text editor
 in a database image.
 
-### Each container should have only one concern
+### Run only one process per container
 
-Decoupling applications into multiple containers makes it much easier to scale
-horizontally and reuse containers. For instance, a web application stack might
-consist of three separate containers, each with its own unique image, to manage
-the web application, database, and an in-memory cache in a decoupled manner.
-
-You may have heard that there should be "one process per container". While this
-mantra has good intentions, it is not necessarily true that there should be only
-one operating system process per container. In addition to the fact that
-containers can now be [spawned with an init process](https://docs.docker.com/engine/reference/run/#/specifying-an-init-process),
-some programs might spawn additional processes of their own accord. For
-instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
-processes, or [Apache](https://httpd.apache.org/) might create a process per
-request. While "one process per container" is frequently a good rule of thumb,
-it is not a hard and fast rule. Use your best judgment to keep containers as
-clean and modular as possible.
-
-If containers depend on each other, you can use [Docker container networks](https://docs.docker.com/engine/userguide/networking/)
- to ensure that these containers can communicate.
+In almost all cases, you should only run a single process in a single
+container. Decoupling applications into multiple containers makes it much
+easier to scale horizontally and reuse containers. If that service depends on
+another service, make use of [container linking](../../userguide/networking/default_network/dockerlinks.md).
 
 ### Minimize the number of layers
 
@@ -110,7 +93,7 @@ However, if you do let Docker use its cache then it is very important to
 understand when it will, and will not, find a matching image. The basic rules
 that Docker will follow are outlined below:
 
-* Starting with a parent image that is already in the cache, the next
+* Starting with a base image that is already in the cache, the next
 instruction is compared against all child images derived from that base
 image to see if one of them was built using the exact same instruction. If
 not, the cache is invalidated.
@@ -163,7 +146,7 @@ are included inline.
 must be escaped. If your string contains inner quote characters (`"`), escape
 them as well.
 
-```conf
+```dockerfile
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor="ACME Incorporated"
@@ -201,8 +184,8 @@ Probably the most common use-case for `RUN` is an application of `apt-get`. The
 out for.
 
 You should avoid `RUN apt-get upgrade` or `dist-upgrade`, as many of the
-“essential” packages from the parent images won't upgrade inside an unprivileged
-container. If a package contained in the parent image is out-of-date, you should
+“essential” packages from the base images won't upgrade inside an unprivileged
+container. If a package contained in the base image is out-of-date, you should
 contact its maintainers.
 If you know there’s a particular package, `foo`, that needs to be updated, use
 `apt-get install -y foo` to update automatically.
@@ -270,51 +253,18 @@ recommendations.
         s3cmd=1.1.* \
      && rm -rf /var/lib/apt/lists/*
 
-The `s3cmd` instructions specifies a version `1.1.*`. If the image previously
+The `s3cmd` instructions specifies a version `1.1.0*`. If the image previously
 used an older version, specifying the new one causes a cache bust of `apt-get
 update` and ensure the installation of the new version. Listing packages on
 each line can also prevent mistakes in package duplication.
 
-In addition, when you clean up the apt cache by removing `/var/lib/apt/lists`
-reduces the image size, since the apt cache is not stored in a layer. Since the
-`RUN` statement starts with `apt-get update`, the package cache will always be
-refreshed prior to `apt-get install`.
+In addition, cleaning up the apt cache and removing `/var/lib/apt/lists` helps
+keep the image size down. Since the `RUN` statement starts with
+`apt-get update`, the package cache will always be refreshed prior to
+`apt-get install`.
 
-> **Note**: The official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105),
+> **Note**: The official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/docker/docker/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105),
 > so explicit invocation is not required.
-
-#### Using pipes
-
-Some `RUN` commands depend on the ability to pipe the output of one command into another, using the pipe character (`|`), as in the following example:
-
-```Dockerfile
-RUN wget -O - https://some.site | wc -l > /number
-```
-
-Docker executes these commands using the `/bin/sh -c` interpreter, which
-only evaluates the exit code of the last operation in the pipe to determine
-success. In the example above this build step succeeds and produces a new
-image so long as the `wc -l` command succeeds, even if the `wget` command
-fails.
-
-If you want the command to fail due to an error at any stage in the pipe,
-prepend `set -o pipefail &&` to ensure that an unexpected error prevents
-the build from inadvertently succeeding. For example:
-
-```Dockerfile
-RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
-```
-
-> **Note**: Not all shells support the `-o pipefail` option. In such
-> cases (such as the `dash` shell, which is the default shell on
-> Debian-based images), consider using the *exec* form of `RUN`
-> to explicitly choose a shell that does support the `pipefail` option.
-> For example:
->
-
-```Dockerfile
-RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
-```
 
 ### CMD
 
@@ -513,19 +463,11 @@ parts of your image.
 
 If a service can run without privileges, use `USER` to change to a non-root
 user. Start by creating the user and group in the `Dockerfile` with something
-like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`.
+like `RUN groupadd -r postgres && useradd -r -g postgres postgres`.
 
-> **Note**: Users and groups in an image get a non-deterministic
+> **Note:** Users and groups in an image get a non-deterministic
 > UID/GID in that the “next” UID/GID gets assigned regardless of image
 > rebuilds. So, if it’s critical, you should assign an explicit UID/GID.
-
-> **Note**: Due to an [unresolved bug](https://github.com/golang/go/issues/13548)
-> in the Go archive/tar package's handling of sparse files, attempting to
-> create a user with a sufficiently large UID inside a Docker container can
-> lead to disk exhaustion as `/var/log/faillog` in the container layer is
-> filled with NUL (\0) characters.  Passing the `--no-log-init` flag to
-> useradd works around this issue.  The Debian/Ubuntu `adduser` wrapper
-> does not support the `--no-log-init` flag and should be avoided.
 
 You should avoid installing or using `sudo` since it has unpredictable TTY and
 signal-forwarding behavior that can cause more problems than it solves. If
@@ -560,7 +502,7 @@ A Docker build executes `ONBUILD` commands before any command in a child
 `ONBUILD` is useful for images that are going to be built `FROM` a given
 image. For example, you would use `ONBUILD` for a language stack image that
 builds arbitrary user software written in that language within the
-`Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/master/2.4/jessie/onbuild/Dockerfile).
+`Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/master/2.1/onbuild/Dockerfile).
 
 Images built from `ONBUILD` should get a separate tag, for example:
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
@@ -577,7 +519,7 @@ These Official Repositories have exemplary `Dockerfile`s:
 * [Go](https://hub.docker.com/_/golang/)
 * [Perl](https://hub.docker.com/_/perl/)
 * [Hy](https://hub.docker.com/_/hylang/)
-* [Ruby](https://hub.docker.com/_/ruby/)
+* [Rails](https://hub.docker.com/_/rails)
 
 ## Additional resources:
 

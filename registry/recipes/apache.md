@@ -30,7 +30,7 @@ Furthermore, introducing an extra http layer in your communication pipeline will
 
 ## Setting things up
 
-Read again [the requirements](/registry/recipes/index.md#requirements).
+Read again [the requirements](index.md#requirements).
 
 Ready?
 
@@ -105,7 +105,7 @@ Listen 5043
   SSLCertificateFile /usr/local/apache2/conf/domain.crt
   SSLCertificateKeyFile /usr/local/apache2/conf/domain.key
 
-  ## SSL settings recommendation from: https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html
+  ## SSL settings recommandation from: https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html
   # Anti CRIME
   SSLCompression off
 
@@ -193,13 +193,13 @@ Now, start your stack:
 
     docker-compose up -d
 
-Log in with a "push" authorized user (using `testuserpush` and `testpasswordpush`), then tag and push your first image:
+Login with a "push" authorized user (using `testuserpush` and `testpasswordpush`), then tag and push your first image:
 
     docker login myregistrydomain.com:5043
     docker tag ubuntu myregistrydomain.com:5043/test
     docker push myregistrydomain.com:5043/test
 
-Now, log in with a "pull-only" user (using `testuser` and `testpassword`), then pull back the image:
+Now, login with a "pull-only" user (using `testuser` and `testpassword`), then pull back the image:
 
     docker login myregistrydomain.com:5043
     docker pull myregistrydomain.com:5043/test

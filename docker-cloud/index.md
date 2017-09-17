@@ -12,6 +12,27 @@ redirect_from:
 - /engine/installation/rackspace/
 - /engine/installation/joyent/
 ---
+<style type="text/css">
+.tg td {
+  width="50%";padding:10px 5px;border:none;overflow:hidden;word-break:normal; margin-bottom: .5rem;
+}
+#DocumentationText .bluebar {
+  width="50%";font-size:20px;font-weight:bold;background-color:#1488C6;color:#ffffff;text-align:center;vertical-align:top;
+}
+#DocumentationText .bluebar a{
+  color:#ffffff;font-weight:normal;text-decoration: underline;
+}
+#DocumentationText .plain p{
+  font-weight:normal;margin-bottom: 0.5rem
+}
+.plain p{
+  width="50%";vertical-align:top;
+}
+.whale a img
+{
+  float:right;
+}
+</style>
 
 <center>
 <div class="whale"><a href="https://cloud.docker.com/" target="_blank" class="_"><img src="images/Docker-Cloud-Blue.svg" height="150" width="150" fill="#1488C6" alt="Docker Cloud logo" title="Let's go! Click to go to Docker Cloud." float="right"></a></div>
@@ -27,23 +48,29 @@ Log in to Docker Cloud using your free [Docker ID](../docker-id/).
 
 <table class="tg">
   <tr>
-    <td class="bluebar" width="50%"><a href="builds/index.md"><b>Manage Builds and Images</b></a></td>
-    <td class="bluebar" width="50%"><a href="cloud-swarm/index.md"><b>Manage Swarms (Beta Swarm Mode)</b></a></td>
+    <td class="bluebar" width="50%"><a href="getting-started/index.md">Tutorial: Getting Started</a></td>
+    <td class="bluebar" width="50%"><a href="getting-started/deploy-app/index.md">Tutorial: Deploy an App</a></td>
   </tr>
   <tr>
-    <td class="plain" width="50%"><p>Build and test your code, and build Docker images. Link Cloud repositories to your source code provider to automate building images and pushing them to Cloud. </p></td>
-    <td class="plain" width="50%"><p>Provision swarms to popular cloud providers, register existing swarms, and use your Docker ID to authenticate and securely access personal or team swarms.</p></td>
+    <td class="plain" width="50%"><p>Start here! Deploy your first node and service in Docker Cloud.</p></td>
+    <td class="plain" width="50%"><p>For more advanced beginners: deploy a simple app in Docker Cloud.</p></td>
   </tr>
   <tr>
-    <td class="bluebar" width="50%"><a href="infrastructure/index.md"><b>Manage Infrastructure (Standard Mode)</b></a></td>
-    <td class="bluebar" colspan="2"><a href="standard/index.md"><b>Manage Nodes and Apps (Standard Mode)</b></a></td>
+    <td class="bluebar" width="50%"><a href="apps/index.md">Manage Applications</a></td>
+    <td class="bluebar" width="50%"><a href="builds/index.md">Manage Builds and Images</a></td>
   </tr>
   <tr>
-    <td class="plain" width="50%"><p>Link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ.</a></p></td>
-    <td class="plain" width="50%"><p>Deploy and manage nodes, services, and applications in Docker Cloud (Standard Mode).</p></td>
+    <td class="plain" width="50%"><p>Deploy services, stacks, and apps in Docker Cloud.</p></td>
+    <td class="plain" width="50%"><p>Build and test your code, build Docker images.</p></td>
   </tr>
   <tr>
-    <td class="bluebar" colspan="2"><b><a href="/apidocs/docker-cloud/">API Docs</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="docker-errors-faq.md">Frequently Asked Questions</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="https://forums.docker.com/c/docker-cloud/release-notes">Release Notes</a></b></td>
+    <td class="bluebar" colspan="2"><a href="infrastructure/index.md">Manage Infrastructure</a></td>
+  </tr>
+  <tr>
+    <td class="plain" colspan="2"><p>Learn how to link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ</a></p></td>
+  </tr>
+  <tr>
+    <td class="bluebar" colspan="2"> <a href="/apidocs/docker-cloud/">API Docs</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="docker-errors-faq.md">Frequently Asked Questions</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="https://forums.docker.com/c/docker-cloud/release-notes">Release Notes</a></td>
   </tr>
 </table>
 
@@ -59,17 +86,7 @@ them to a repository.
 
 ![](images/cloud-build.png)
 
-### Swarm Management (Beta Swarm Mode)
-
-With [Beta Swarm Mode](/docker-cloud/cloud-swarm/index.md), you can create new
-swarms from within Docker Cloud, register existing swarms to Docker Cloud, or
-provision swarms to your cloud providers. Your Docker ID authenticates and
-securely accesses personal or team swarms. Docker Cloud allows you to connect
-your local Docker Engine to any swarm you have access to in Docker Cloud.
-
-![](images//Beta-Swarm-Mode-List-View.png)
-
-### Infrastructure management (Standard Mode)
+### Infrastructure management
 
 Before you can do anything with your images, you need somewhere to run them.
 Docker Cloud allows you to link to your infrastructure or cloud services
@@ -78,7 +95,7 @@ up, you can deploy images directly from Docker Cloud repositories.
 
 ![](images/cloud-clusters.png)
 
-### Services, Stacks, and Applications (Standard Mode)
+### Services, Stacks, and Applications
 
 Images are just one layer in containerized applications. Once you've built an
 image, you can use it to deploy services (which are composed of one or more

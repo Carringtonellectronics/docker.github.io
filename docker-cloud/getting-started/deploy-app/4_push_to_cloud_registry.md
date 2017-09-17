@@ -5,7 +5,6 @@ redirect_from:
 - /docker-cloud/getting-started/python/4_push_to_cloud_registry/
 - /docker-cloud/getting-started/golang/4_push_to_cloud_registry/
 title: Push the image to Docker Cloud's registry
-notoc: true
 ---
 
 *Skip this step if you don't have Docker Engine installed locally.*
@@ -17,8 +16,8 @@ In step 2, you set your Docker Cloud username as an environment variable called 
 > **Note**: By default, the `docker-cloud` CLI uses your default user namespace,
 meaning the repositories, nodes, and services associated with your individual
 Docker ID account name. To use the CLI to interact with objects that belong to
-an [organization](/docker-cloud/orgs.md), prefix these commands with
-`DOCKERCLOUD_NAMESPACE=my-organization`. See the [CLI documentation](/docker-cloud/installing-cli.md#use-the-docker-cloud-cli-with-an-organization) for more information.
+an [organization](../../orgs.md), prefix these commands with
+`DOCKERCLOUD_NAMESPACE=my-organization`. See the [CLI documentation](../../installing-cli.md#use-the-docker-cloud-cli-with-an-organization) for more information.
 
 
 First tag the image. Tags in this case denote different builds of an image.
@@ -53,9 +52,7 @@ $ docker push $DOCKER_ID_USER/quickstart-go
 
 After the push command completes, verify that the image is now in Docker Cloud's
 registry. Do this by logging in to [Docker Cloud](https://cloud.docker.com) and
-clicking **Repositories** in the left navigation. Your image should appear in
+clicking  **Repositories** in the left navigation. Your image should appear in
 the repository list.
 
-## What's next?
-
-[Deploy the app as a Docker Cloud service](5_deploy_the_app_as_a_service.md).
+Next: [Deploy the app as a Docker Cloud service](5_deploy_the_app_as_a_service.md).

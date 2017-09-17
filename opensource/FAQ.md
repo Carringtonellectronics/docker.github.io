@@ -7,14 +7,14 @@ title: FAQ for contributors
 This section contains some frequently asked questions and tips for
 troubleshooting problems in your code contribution.
 
-- [How do I set my signature?](FAQ.md#how-do-i-set-my-signature)
-- [How do I track changes from the docker repo upstream?](FAQ.md#how-do-i-track-changes-from-the-docker-repo-upstream)
-- [How do I format my Go code?](FAQ.md#how-do-i-format-my-go-code)
-- [What is the pre-pull request checklist?](FAQ.md#what-is-the-pre-pull-request-checklist)
-- [How should I comment my code?](FAQ.md#how-should-i-comment-my-code)
-- [How do I rebase my feature branch?](FAQ.md#how-do-i-rebase-my-feature-branch)
+- [How do I set my signature?](FAQ.md#how-do-i-set-my-signature:cb7f612e17aad7eb26c06709ef92a867)
+- [How do I track changes from the docker repo upstream?](FAQ.md#how-do-i-track-changes-from-the-docker-repo-upstream:cb7f612e17aad7eb26c06709ef92a867)
+- [How do I format my Go code?](FAQ.md#how-do-i-format-my-go-code:cb7f612e17aad7eb26c06709ef92a867)
+- [What is the pre-pull request checklist?](FAQ.md#what-is-the-pre-pull-request-checklist:cb7f612e17aad7eb26c06709ef92a867)
+- [How should I comment my code?](FAQ.md#how-should-i-comment-my-code:cb7f612e17aad7eb26c06709ef92a867)
+- [How do I rebase my feature branch?](FAQ.md#how-do-i-rebase-my-feature-branch:cb7f612e17aad7eb26c06709ef92a867)
 
-## How do I set my signature
+## How do I set my signature {#how-do-i-set-my-signature}
 
 1.  Change to the root of your `docker-fork` repository.
 
@@ -44,16 +44,16 @@ Set your local repo to track changes upstream, on the `docker` repository.
     $ cd docker-fork
     ```
 
-2.  Add a remote called `upstream` that points to `docker/docker`.
+2.  Add a remote called `upstream` that points to `docker/docker`
 
     ```
-    $ git remote add upstream https://github.com/moby/moby.git
+    $ git remote add upstream https://github.com/docker/docker.git
     ```
 
 ## How do I format my Go code
 
 Run `gofmt -s -w filename.go` on each changed file before committing your changes.
-Most [editors have plug-ins](https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins) that do the formatting automatically.
+Most editors have plug-ins that do the formatting automatically.
 
 ## What is the pre-pull request checklist
 
@@ -63,7 +63,7 @@ Most [editors have plug-ins](https://github.com/golang/go/wiki/IDEsAndTextEditor
 * Squash your commits into logical units of work using
   `git rebase -i` and `git push -f`.
 
-* If your code requires a change to tests or documentation, include code, test,
+* If your code requires a change to tests or documentation, include code,test,
 and documentation changes in the same commit as your code; this ensures a
 revert would remove all traces of the feature or fix.
 
@@ -112,7 +112,7 @@ Always rebase and squash your commits before making a pull request.
     If you run into trouble, `git --rebase abort` removes any changes and gets you
 back to where you started.
 
-4.  Replace the `pick` keyword with `squash` on all but the first commit.
+4.  Squash the `pick` keyword with `squash` on all but the first commit.
 
     ```
     pick 1a79f55 Tweak some of images
@@ -135,19 +135,4 @@ force the previous change to be overwritten.
 
     ```
     $ git push -f origin my-keen-feature
-    ```
-
-## How do I update vendor package from upstream ?
-
-1.  If you are not using the development container, download the
-    [vndr](https://github.com/LK4D4/vndr) vendoring tool. The `vndr`
-    tool is included in the development container.
-    
-2.  Edit the package version in `vendor.conf` to use the package you want to use, such as
-    `github.com/gorilla/mux`.
-    
-3.  Run `vndr <package-name>`. For example:
-
-    ```bash
-    vndr github.com/gorilla/mux
     ```

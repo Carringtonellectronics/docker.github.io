@@ -4,28 +4,11 @@ keywords: docker, machine, cloud, aws
 title: Amazon Web Services (AWS) EC2 example
 ---
 
-> Try out Docker Cloud!
->
-> We suggest using [Docker Cloud](https://cloud.docker.com/) as the
-most up-to-date way to run Docker on your cloud providers. To get started, see
-[Docker Cloud docs home page](/docker-cloud/index.md), [Docker Cloud Settings
-and Docker ID](/docker-cloud/dockerid.md), [Swarms in Docker Cloud
-(Beta)](/docker-cloud/cloud-swarm/index.md), and [Link Amazon Web Services to
-Docker Cloud](/docker-cloud/cloud-swarm/link-aws-swarm.md). If you are running
-Edge channel Docker for Mac or Windows, you can access your Docker Cloud account
-from those Docker desktop applications. See Docker Cloud (Edge feature) on
-[Mac](/docker-for-mac/index.md#docker-cloud-edge-feature) or
-[Windows](/docker-for-windows/index.md#docker-cloud-edge-feature).
->
-> Docker Machine will still work as described here, but Docker Cloud
-supercedes Machine for this purpose.
-{: .important}
-
-Follow along with this example to create a Dockerized [Amazon Web Services (AWS)](https://aws.amazon.com/) EC2 instance.
+Follow along with this example to create a Dockerized <a href="https://aws.amazon.com/" target="_blank"> Amazon Web Services (AWS)</a> EC2 instance.
 
 ### Step 1. Sign up for AWS and configure credentials
 
-1. If you are not already an AWS user, sign up for [AWS](https://aws.amazon.com/) to create an account and get root access to EC2 cloud computers.
+1. If you are not already an AWS user, sign up for <a href="https://aws.amazon.com/" target="_blank"> AWS</a> to create an account and get root access to EC2 cloud computers.
 
     If you have an Amazon account, you can use it as your root user account.
 
@@ -39,7 +22,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
 
     * an AWS Secret Access Key
 
-    See the AWS documentation on [Setting Up with Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html). Follow the steps for "Create an IAM User" and "Create a Key Pair".
+    See the AWS documentation on <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html" target="_blank">Setting Up with Amazon EC2</a>. Follow the steps for "Create an IAM User" and "Create a Key Pair".
 
 ### Step 2. Use Machine to create the instance
 
@@ -87,7 +70,7 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
         default          -        virtualbox     Running   tcp://192.168.99.100:2376           v1.10.0-rc4
         aws-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v1.9.1
 
-    The new `aws-sandbox` instance is running, and it is the active host as indicated by the asterisk (\*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env aws-sandbox`, followed by `eval $(docker-machine env aws-sandbox)` to connect to it.
+    The new `aws-sandbox` instance is running, and it is the active host as indicated by the asterisk (*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env aws-sandbox`, followed by `eval $(docker-machine env aws-sandbox)` to connect to it.
 
 ### Step 3. Run Docker commands on the instance
 
@@ -109,8 +92,6 @@ Follow along with this example to create a Dockerized [Amazon Web Services (AWS)
 2. Verify Docker Engine is installed correctly by running `docker` commands.
 
     Start with something basic like `docker run hello-world`, or for a more interesting test, run a Dockerized webserver on your new remote machine.
-
-    **Note**: We are using port `8000` in this example and that port has been added to the AWS Security Group associated with docker-machine. If you want to run your container on another port, you will need to update the security group to reflect that.
 
     In this example, the `-p` option is used to expose port 80 from the `nginx` container and make it accessible on port `8000` of the `aws-sandbox` host.
 
